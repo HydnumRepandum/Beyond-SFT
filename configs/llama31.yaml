@@ -1,0 +1,146 @@
+project:
+  study_name: beyond_sft_superframe_alignment_ds3_task6_llama31_8b
+  data_root: data/processed
+  outputs_root: outputs/llama31_8b
+  results_root: results/llama31_8b
+
+tracking:
+  enabled: true
+  # Runtime support is currently Comet-only. This field is recorded in
+  # metadata, but changing it does not select another tracking backend.
+  provider: comet_ml
+  project_name: beyond_sft_superframe_alignment_ds3_task6_llama31_8b
+  workspace: null
+  mode: create
+  start_online: true
+  log_assets: true
+
+model:
+  base_family: Llama 3.1 8B Instruct
+  base_model_id: unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit
+  max_seq_length: 4096
+  load_in_4bit: true
+
+task:
+  name: superframe_classification_ds3_task6
+  data_mode: provided_subsets
+  samples_dir: data/raw_or_samples
+  external_train_pattern: ds_3__task_6_train_set_{train_size}.csv
+  external_test_filename: ds_3__task_6_eval_set.csv
+  mapping_path: dataset_task_mappings.csv
+  mapping_delimiter: ";"
+  mapping_encoding: cp1252
+  mapping_dataset_number: 3
+  mapping_task_number: 6
+  text_column: text
+  raw_label_column: superframe
+  id_column: status_id
+  timestamp_column: created_at
+  drop_missing_labels: true
+  split_seed: 1729
+  # In data_mode=provided_subsets, these are run seeds, not data-resampling
+  # seeds. The same provided subset rows are reused for each seed; the seed
+  # affects model initialization, trainer shuffling, allocation splitting, and
+  # random_wrong preference choices.
+  subset_seeds: [11, 22, 33]
+  requested_train_sizes: [50, 100, 250, 500]
+  provided_train_sizes: [50, 100, 250, 500]
+  full_train_source: 500
+  reference_train_size: 500
+
+format:
+  # Metadata label only. The active prompt text comes from mapping_path and the
+  # response prefix below; changing prompt_version alone does not alter prompts.
+  prompt_version: ds3_task6_superframes_v1
+  response_prefix: "\nAnswer:\n"
+
+peft:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: none
+  # Used by the language-model backend. Vision-backend configs use Unsloth's
+  # broad finetune_* flags instead of passing this list directly.
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  gradient_checkpointing: unsloth
+
+sft:
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 2
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  logging_steps: 5
+  evaluation_strategy: epoch
+  save_strategy: epoch
+  save_total_limit: 2
+  optim: adamw_8bit
+  packing: false
+
+dpo:
+  num_train_epochs: 2
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 5.0e-6
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  beta: 0.5
+  logging_steps: 5
+  evaluation_strategy: "no"
+  save_strategy: epoch
+  save_total_limit: 2
+  optim: adamw_8bit
+  max_prompt_length: 1024
+  max_length: 1152
+  loss_type: sigmoid
+  # Used only when data_allocation is sft25_dpo75.
+  split_allocation_sft_fraction: 0.25
+  data_allocation_variants:
+    - shared
+    - sft25_dpo75
+  # Reporting/default diagnostic choice. Training still receives the concrete
+  # DPO strategy from the CLI or orchestrator.
+  primary_preference_strategy: hard_negative
+  # train.py build-preferences creates these datasets. train.py full trains
+  # hard_negative by default; pass --include-random-wrong to train random_wrong.
+  strategies:
+    - random_wrong
+    - hard_negative
+
+kto:
+  # Only all_wrong is implemented. train.py kto rejects other values.
+  dataset_strategy: all_wrong
+  num_train_epochs: 2
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 5.0e-6
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  beta: 0.3
+  logging_steps: 5
+  evaluation_strategy: "no"
+  save_strategy: epoch
+  save_total_limit: 2
+  max_prompt_length: 1024
+  max_length: 1152
+  loss_type: kto
+  desirable_weight: 3.0
+  undesirable_weight: 1.0
+  disable_dropout: true
+  optim: adamw_8bit
+
+inference:
+  save_logprob_predictions: true
+
+difficulty:
+  primary:
+    margin_quantile: 0.25
