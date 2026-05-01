@@ -143,20 +143,19 @@ SFT is the first trainable stage. It is run once for every:
 - train size in `50, 100, 250, 500`
 - data allocation variant in `shared`, `sft25_dpo75`
 
-SFT trains on the selected train subset and uses the full `test` split for trainer-side monitoring.
+SFT trains on the selected train subset only. The held-out `test` split is not passed to the trainer and is used only for post-training scoring.
 
 SFT hyperparameters:
 
 - `num_train_epochs = 3`
 - `per_device_train_batch_size = 4`
-- `per_device_eval_batch_size = 4`
 - `gradient_accumulation_steps = 2`
 - effective train batch size: `8`
 - `learning_rate = 2e-4`
 - `warmup_ratio = 0.05`
 - `weight_decay = 0.01`
 - `logging_steps = 5`
-- `evaluation_strategy = epoch`
+- `evaluation_strategy = no`
 - `save_strategy = epoch`
 - `save_total_limit = 2`
 - `optim = adamw_8bit`

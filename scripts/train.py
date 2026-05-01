@@ -66,12 +66,12 @@ def _train_sft_stage(args: argparse.Namespace, config: dict) -> None:
     allocation_payload = allocate_training_rows(source_train_df, config, seed=args.seed, data_allocation=args.allocation)
     train_df = allocation_payload["sft_train"]
     preference_source_df = allocation_payload["preference_source"]
-    test_df = load_prepared_split(config, "test")
     write_json(run_dir / "data_allocation.json", allocation_payload["summary"])
     train_df.to_csv(run_dir / "sft_train_split.csv", index=False)
     preference_source_df.to_csv(run_dir / "preference_source_split.csv", index=False)
 
-    adapter_dir = train_sft(config, train_df, test_df, run_dir, seed=args.seed)
+    adapter_dir = train_sft(config, train_df, run_dir, seed=args.seed)
+    test_df = load_prepared_split(config, "test")
     model, tokenizer = load_model_with_adapter(config, adapter_dir, trainable=False)
     set_global_seed(args.seed)
 

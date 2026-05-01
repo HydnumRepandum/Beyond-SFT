@@ -395,11 +395,9 @@ def _sft_formatting_func(example: dict[str, Any]) -> list[str]:
 def train_sft(
     config: dict[str, Any],
     train_df: pd.DataFrame,
-    test_df: pd.DataFrame,
     run_dir: Path,
     seed: int,
 ) -> Path:
-    import torch
     from datasets import Dataset
     from transformers import TrainingArguments
     from trl import SFTTrainer
@@ -410,14 +408,12 @@ def train_sft(
     model = attach_new_lora_adapter(model, config, seed=seed)
 
     train_dataset = Dataset.from_pandas(train_df[["sft_text"]], preserve_index=False)
-    test_dataset = Dataset.from_pandas(test_df[["sft_text"]], preserve_index=False)
 
     sft_cfg = config["sft"]
     training_args = TrainingArguments(
         output_dir=str(ensure_dir(run_dir / "trainer")),
         num_train_epochs=float(sft_cfg["num_train_epochs"]),
         per_device_train_batch_size=int(sft_cfg["per_device_train_batch_size"]),
-        per_device_eval_batch_size=int(sft_cfg["per_device_eval_batch_size"]),
         gradient_accumulation_steps=int(sft_cfg["gradient_accumulation_steps"]),
         learning_rate=float(sft_cfg["learning_rate"]),
         warmup_ratio=float(sft_cfg["warmup_ratio"]),
@@ -442,7 +438,7 @@ def train_sft(
         "processing_class": tokenizer,
         "args": training_args,
         "train_dataset": train_dataset,
-        "eval_dataset": test_dataset,
+        "eval_dataset": None,
         "dataset_text_field": "sft_text",
         "formatting_func": _sft_formatting_func,
         "max_seq_length": int(config["model"]["max_seq_length"]),

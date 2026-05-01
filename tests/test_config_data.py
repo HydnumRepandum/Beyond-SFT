@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import inspect
 import shutil
 import unittest
 from pathlib import Path
 
 from topic_alignment.config import load_config
 from topic_alignment.data import make_splits_and_subsets, prepare_dataset_artifacts
+from topic_alignment.training import train_sft
 from topic_alignment.utils import resolve_path
 
 
@@ -16,6 +18,19 @@ class ConfigDataTests(unittest.TestCase):
                 config = load_config(config_path)
                 self.assertEqual(config["task"]["samples_dir"], "data/raw_or_samples")
                 self.assertTrue(resolve_path(config["task"]["samples_dir"]).exists())
+
+    def test_canonical_configs_do_not_use_test_split_for_trainer_eval(self) -> None:
+        for config_path in ["configs/llama31.yaml", "configs/gemma3.yaml"]:
+            with self.subTest(config_path=config_path):
+                config = load_config(config_path)
+                self.assertEqual(str(config["sft"]["evaluation_strategy"]), "no")
+                self.assertNotIn("per_device_eval_batch_size", config["sft"])
+                self.assertEqual(str(config["dpo"]["evaluation_strategy"]), "no")
+                self.assertEqual(str(config["kto"]["evaluation_strategy"]), "no")
+
+    def test_sft_training_api_does_not_accept_test_dataframe(self) -> None:
+        signature = inspect.signature(train_sft)
+        self.assertNotIn("test_df", signature.parameters)
 
     def test_provided_subset_mode_creates_train_and_test_only(self) -> None:
         config = load_config("configs/llama31.yaml")
