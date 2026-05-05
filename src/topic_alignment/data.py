@@ -8,7 +8,7 @@ from typing import Any
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from .config import canonical_label_ids, raw_to_canonical_map, reference_train_size
+from .config import canonical_label_ids, raw_to_canonical_map, reference_train_size, task_label_column
 from .prompting import build_prompt, build_sft_text, canonical_response
 from .utils import ensure_dir, resolve_path, set_global_seed, write_json, write_text
 
@@ -36,7 +36,7 @@ def _standardize_columns(dataframe: pd.DataFrame, config: dict[str, Any]) -> pd.
             config["task"]["id_column"]: "example_id",
             config["task"].get("timestamp_column", ""): "timestamp",
             config["task"]["text_column"]: "text_raw",
-            config["task"]["raw_label_column"]: "label_raw",
+            task_label_column(config): "label_raw",
         }
     ).copy()
     if "timestamp" not in renamed.columns:

@@ -14,9 +14,10 @@ DEFAULT_CONFIG = "configs/llama31.yaml"
 def main() -> None:
     parser = argparse.ArgumentParser(description="Prepare the configured classification dataset and train-size subsets.")
     parser.add_argument("--config", default=DEFAULT_CONFIG)
+    parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    config = load_config(args.config, task_key=args.task)
     manifest = prepare_dataset_artifacts(config)
     print(manifest)
 

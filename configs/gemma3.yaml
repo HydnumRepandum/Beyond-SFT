@@ -3,6 +3,7 @@ project:
   data_root: data/processed
   outputs_root: outputs/gemma3_12b
   results_root: results/gemma3_12b
+  task_scoped_outputs: true
 
 tracking:
   enabled: true
@@ -24,36 +25,80 @@ model:
   load_in_4bit: true
 
 task:
-  name: superframe_classification_ds3_task6
-  data_mode: provided_subsets
-  samples_dir: data/raw_or_samples
-  external_train_pattern: ds_3__task_6_train_set_{train_size}.csv
-  external_test_filename: ds_3__task_6_eval_set.csv
-  mapping_path: dataset_task_mappings.csv
-  mapping_delimiter: ";"
-  mapping_encoding: cp1252
-  mapping_dataset_number: 3
-  mapping_task_number: 6
-  text_column: text
-  raw_label_column: superframe
-  id_column: status_id
-  timestamp_column: created_at
-  drop_missing_labels: true
-  split_seed: 1729
-  # In data_mode=provided_subsets, these are run seeds, not data-resampling
-  # seeds. The same provided subset rows are reused for each seed; the seed
-  # affects model initialization, trainer shuffling, allocation splitting, and
-  # random_wrong preference choices.
-  subset_seeds: [11, 22, 33]
-  requested_train_sizes: [50, 100, 250, 500]
-  provided_train_sizes: [50, 100, 250, 500]
-  full_train_source: 500
-  reference_train_size: 500
+  selected_task: ds3_task6
+  task_registry:
+    ds3_task6:
+      name: superframe_classification_ds3_task6
+      data_mode: provided_subsets
+      samples_dir: data/raw_or_samples
+      external_train_pattern: ds_3__task_6_train_set_{train_size}.csv
+      external_test_filename: ds_3__task_6_eval_set.csv
+      mapping_path: dataset_task_mappings.csv
+      mapping_delimiter: ";"
+      mapping_encoding: cp1252
+      mapping_dataset_number: 3
+      mapping_task_number: 6
+      text_column: text
+      raw_label_column: superframe
+      id_column: status_id
+      timestamp_column: created_at
+      drop_missing_labels: true
+      split_seed: 1729
+      subset_seeds: [11, 22, 33]
+      requested_train_sizes: [50, 100, 250, 500]
+      provided_train_sizes: [50, 100, 250, 500]
+      full_train_source: 500
+      reference_train_size: 500
+    ds1_task6:
+      name: superframe_classification_ds1_task6
+      data_mode: provided_subsets
+      samples_dir: "/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final"
+      external_train_pattern: ds_1__task_6_train_set_{train_size}.csv
+      external_test_filename: ds_1__task_6_eval_set.csv
+      mapping_path: "/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv"
+      mapping_delimiter: ","
+      mapping_encoding: utf-8
+      mapping_dataset_number: 1
+      mapping_task_number: 6
+      text_column: text
+      id_column: status_id
+      timestamp_column: created_at
+      drop_missing_labels: true
+      split_seed: 1729
+      subset_seeds: [11, 22, 33]
+      requested_train_sizes: [50, 100, 250, 500]
+      provided_train_sizes: [50, 100, 250, 500]
+      full_train_source: 500
+      reference_train_size: 500
+    ds4_task2:
+      name: problem_solution_classification_ds4_task2
+      data_mode: provided_subsets
+      samples_dir: "/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final"
+      external_train_pattern: ds_4__task_2_train_set_{train_size}.csv
+      external_test_filename: ds_4__task_2_eval_set.csv
+      mapping_path: "/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv"
+      mapping_delimiter: ","
+      mapping_encoding: utf-8
+      mapping_dataset_number: 4
+      mapping_task_number: 2
+      text_column: text
+      id_column: id
+      timestamp_column: pubdatetime
+      drop_missing_labels: true
+      split_seed: 1729
+      subset_seeds: [11, 22, 33]
+      requested_train_sizes: [50, 100, 250, 500, 1000]
+      provided_train_sizes: [50, 100, 250, 500, 1000]
+      full_train_source: 1000
+      reference_train_size: 1000
+      label_aliases:
+        C: [Neither]
 
 format:
   # Metadata label only. The active prompt text comes from mapping_path and the
   # response prefix below; changing prompt_version alone does not alter prompts.
   prompt_version: ds3_task6_superframes_v1
+  prompt_source: zero_shot_prompt
   response_prefix: "\nAnswer:\n"
 
 peft:

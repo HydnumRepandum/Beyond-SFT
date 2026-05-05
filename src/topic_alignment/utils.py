@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 from pathlib import Path
 from typing import Any, Iterable
@@ -19,7 +20,7 @@ def ensure_dir(path: Path | str) -> Path:
 
 
 def resolve_path(path_like: str | Path, base_dir: Path | None = None) -> Path:
-    path = Path(path_like)
+    path = Path(os.path.expandvars(os.path.expanduser(str(path_like))))
     if path.is_absolute():
         return path
     root = repo_root() if base_dir is None else Path(base_dir)

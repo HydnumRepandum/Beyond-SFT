@@ -1,10 +1,11 @@
 # Beyond Supervised Fine-Tuning
 
-This repository now targets one task only:
+This repository supports a selected low-data annotation task from the configured task registry:
 
-- `ds_3 / task_6` political tweet superframe classification
-- four labels: `A`, `B`, `C`, `D`
-- label semantics loaded from `dataset_task_mappings.csv`
+- `ds3_task6`: Congress tweet political superframe classification
+- `ds1_task6`: content-moderation tweet superframe classification
+- `ds4_task2`: news-article problem / solution / neutral classification
+- label semantics and prompt text loaded from the selected task's mapping row
 - Llama 3.1 8B or Gemma 3 12B with Unsloth, SFT, DPO, SFT->DPO, KTO, and SFT->KTO
 - two SFT/DPO data-allocation variants:
   - `shared`
@@ -17,7 +18,7 @@ The canonical study configs are:
 
 ## Data layout
 
-The repo now uses the provided subset files directly:
+The default `ds3_task6` task uses the checked-in subset files directly:
 
 - [dataset_task_mappings.csv](dataset_task_mappings.csv)
 - [ds_3__task_6_train_set_50.csv](data/raw_or_samples/ds_3__task_6_train_set_50.csv)
@@ -26,9 +27,15 @@ The repo now uses the provided subset files directly:
 - [ds_3__task_6_train_set_500.csv](data/raw_or_samples/ds_3__task_6_train_set_500.csv)
 - [ds_3__task_6_eval_set.csv](data/raw_or_samples/ds_3__task_6_eval_set.csv), treated as the held-out test file
 
+The two additional tasks are configured from:
+
+- `/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv`
+- `/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final`
+- `/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final`
+
 The pipeline:
 
-- derives the prompt and canonical label set from the mapping row for dataset `3`, task `6`
+- derives the available prompt columns, active prompt, canonical label set, and label column from the selected mapping row
 - uses the provided train subsets as-is
 
 ## Repo structure
@@ -49,42 +56,42 @@ The pipeline:
 Prepare the dataset:
 
 ```bash
-python scripts/prepare_data.py --config configs/llama31.yaml
+python scripts/prepare_data.py --config configs/llama31.yaml --task ds1_task6
 ```
 
 Run the baseline:
 
 ```bash
-python scripts/score.py --config configs/llama31.yaml
+python scripts/score.py --config configs/llama31.yaml --task ds1_task6
 ```
 
 Run one SFT pilot and build the alignment datasets:
 
 ```bash
-python scripts/train.py sft --config configs/llama31.yaml --seed 11 --train-size 100
-python scripts/train.py tag-hard-cases --config configs/llama31.yaml --seed 11 --train-size 100
-python scripts/train.py build-preferences --config configs/llama31.yaml --seed 11 --train-size 100
+python scripts/train.py sft --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
+python scripts/train.py tag-hard-cases --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
+python scripts/train.py build-preferences --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
 ```
 
 Run DPO and KTO:
 
 ```bash
-python scripts/train.py dpo --config configs/llama31.yaml --seed 11 --train-size 100 --preference-strategy hard_negative --start-from base
-python scripts/train.py dpo --config configs/llama31.yaml --seed 11 --train-size 100 --preference-strategy hard_negative --start-from sft
-python scripts/train.py kto --config configs/llama31.yaml --seed 11 --train-size 100 --start-from base
-python scripts/train.py kto --config configs/llama31.yaml --seed 11 --train-size 100 --start-from sft
+python scripts/train.py dpo --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --preference-strategy hard_negative --start-from base
+python scripts/train.py dpo --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --preference-strategy hard_negative --start-from sft
+python scripts/train.py kto --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --start-from base
+python scripts/train.py kto --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --start-from sft
 ```
 
 Evaluate:
 
 ```bash
-python scripts/aggregate.py --config configs/llama31.yaml
+python scripts/aggregate.py --config configs/llama31.yaml --task ds1_task6
 ```
 
 Run the full grid:
 
 ```bash
-python scripts/train.py full --config configs/llama31.yaml --include-random-wrong
+python scripts/train.py full --config configs/llama31.yaml --task ds1_task6 --include-random-wrong
 ```
 
 ## DPO and KTO dataset construction

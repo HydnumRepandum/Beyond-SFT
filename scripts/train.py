@@ -381,6 +381,10 @@ def _run(script_name: str, *script_args: str) -> None:
     subprocess.run(command, check=True)
 
 
+def _selected_task_args(args: argparse.Namespace) -> list[str]:
+    return ["--task", str(args.task)] if getattr(args, "task", None) else []
+
+
 def _run_full(args: argparse.Namespace, config: dict) -> None:
     manifest = prepare_dataset_artifacts(config)
     available_sizes = manifest["available_train_sizes"]
@@ -388,8 +392,9 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
     if args.include_random_wrong:
         strategies.append("random_wrong")
 
-    _run("prepare_data.py", "--config", args.config)
-    _run("score.py", "--config", args.config)
+    task_args = _selected_task_args(args)
+    _run("prepare_data.py", "--config", args.config, *task_args)
+    _run("score.py", "--config", args.config, *task_args)
 
     for seed in config["task"]["subset_seeds"]:
         for train_size in available_sizes:
@@ -399,6 +404,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                     "sft",
                     "--config",
                     args.config,
+                    *task_args,
                     "--seed",
                     str(seed),
                     "--train-size",
@@ -411,6 +417,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                     "tag-hard-cases",
                     "--config",
                     args.config,
+                    *task_args,
                     "--seed",
                     str(seed),
                     "--train-size",
@@ -423,6 +430,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                     "build-preferences",
                     "--config",
                     args.config,
+                    *task_args,
                     "--seed",
                     str(seed),
                     "--train-size",
@@ -437,6 +445,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                             "dpo",
                             "--config",
                             args.config,
+                            *task_args,
                             "--seed",
                             str(seed),
                             "--train-size",
@@ -453,6 +462,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                         "dpo",
                         "--config",
                         args.config,
+                        *task_args,
                         "--seed",
                         str(seed),
                         "--train-size",
@@ -470,6 +480,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                         "kto",
                         "--config",
                         args.config,
+                        *task_args,
                         "--seed",
                         str(seed),
                         "--train-size",
@@ -484,6 +495,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                     "kto",
                     "--config",
                     args.config,
+                    *task_args,
                     "--seed",
                     str(seed),
                     "--train-size",
@@ -494,7 +506,7 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
                     allocation,
                 )
 
-    _run("aggregate.py", "--config", args.config)
+    _run("aggregate.py", "--config", args.config, *task_args)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -503,24 +515,28 @@ def build_parser() -> argparse.ArgumentParser:
 
     sft_parser = subparsers.add_parser("sft", description="Train one SFT run.")
     sft_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    sft_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     sft_parser.add_argument("--seed", type=int, required=True)
     sft_parser.add_argument("--train-size", required=True)
     sft_parser.add_argument("--allocation", default="shared")
 
     tag_parser = subparsers.add_parser("tag-hard-cases", description="Tag hard test cases from SFT predictions.")
     tag_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    tag_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     tag_parser.add_argument("--seed", type=int, required=True)
     tag_parser.add_argument("--train-size", required=True)
     tag_parser.add_argument("--allocation", default="shared")
 
     preference_parser = subparsers.add_parser("build-preferences", description="Build DPO/KTO datasets from SFT predictions.")
     preference_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    preference_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     preference_parser.add_argument("--seed", type=int, required=True)
     preference_parser.add_argument("--train-size", required=True)
     preference_parser.add_argument("--allocation", default="shared")
 
     dpo_parser = subparsers.add_parser("dpo", description="Train DPO or SFT->DPO.")
     dpo_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    dpo_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     dpo_parser.add_argument("--seed", type=int, required=True)
     dpo_parser.add_argument("--train-size", required=True)
     dpo_parser.add_argument("--preference-strategy", required=True, choices=["random_wrong", "hard_negative"])
@@ -529,6 +545,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     kto_parser = subparsers.add_parser("kto", description="Train KTO or SFT->KTO.")
     kto_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    kto_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     kto_parser.add_argument("--seed", type=int, required=True)
     kto_parser.add_argument("--train-size", required=True)
     kto_parser.add_argument("--dataset-strategy", default=None)
@@ -537,6 +554,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     full_parser = subparsers.add_parser("full", description="Run the full configured experiment grid.")
     full_parser.add_argument("--config", default=DEFAULT_CONFIG)
+    full_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     full_parser.add_argument("--include-random-wrong", action="store_true")
 
     return parser
@@ -545,7 +563,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> None:
     parser = build_parser()
     args = parser.parse_args(argv)
-    config = load_config(args.config)
+    config = load_config(args.config, task_key=getattr(args, "task", None))
 
     if args.command == "sft":
         _train_sft_stage(args, config)

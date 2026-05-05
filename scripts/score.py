@@ -18,9 +18,10 @@ DEFAULT_CONFIG = "configs/llama31.yaml"
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run pretrained baseline inference.")
     parser.add_argument("--config", default=DEFAULT_CONFIG)
+    parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    config = load_config(args.config, task_key=args.task)
     prepare_dataset_artifacts(config)
     run_dir = create_run_dir(config, "baseline")
     save_run_metadata(

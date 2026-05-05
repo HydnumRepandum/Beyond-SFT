@@ -10,15 +10,85 @@ import yaml
 
 from .utils import repo_root, resolve_path
 
+PROMPT_COLUMNS = [
+    "zero_shot_prompt",
+    "few_shot_prompt",
+    "few_shot_chain_of_thought_prompt",
+]
 
-def load_config(config_path: str | Path) -> dict[str, Any]:
+PROMPT_SOURCE_ALIASES = {
+    "zero_shot": "zero_shot_prompt",
+    "few_shot": "few_shot_prompt",
+    "few_shot_cot": "few_shot_chain_of_thought_prompt",
+    "chain_of_thought": "few_shot_chain_of_thought_prompt",
+}
+
+
+def load_config(config_path: str | Path, task_key: str | None = None) -> dict[str, Any]:
     path = resolve_path(config_path)
     with path.open("r", encoding="utf-8") as handle:
         config = yaml.safe_load(handle)
     config["_config_path"] = str(path)
     config["_repo_root"] = str(repo_root())
+    _apply_task_selection(config, task_key=task_key)
     config["_config_hash"] = config_hash(config)
     return config
+
+
+def _apply_task_selection(config: dict[str, Any], task_key: str | None = None) -> None:
+    task_cfg = dict(config.get("task", {}))
+    registry = task_cfg.get("task_registry") or {}
+    selected_task = task_key or task_cfg.get("selected_task")
+    if not registry:
+        if task_key is not None:
+            raise ValueError("This config does not define task_registry, so --task cannot be used.")
+        return
+    if not selected_task:
+        return
+    if selected_task not in registry:
+        raise ValueError(
+            f"Unknown task '{selected_task}'. Available tasks: {', '.join(sorted(registry))}"
+        )
+
+    base_task = {
+        key: value
+        for key, value in task_cfg.items()
+        if key not in {"task_registry", "selected_task"}
+    }
+    selected_task_cfg = dict(registry[selected_task])
+    merged_task = {**base_task, **selected_task_cfg}
+    merged_task["selected_task"] = selected_task
+    merged_task["available_tasks"] = sorted(registry)
+    config["task"] = merged_task
+
+    project_cfg = config.setdefault("project", {})
+    if project_cfg.get("study_name") and selected_task not in str(project_cfg["study_name"]):
+        project_cfg["study_name"] = f"{project_cfg['study_name']}_{selected_task}"
+    if bool(project_cfg.get("task_scoped_outputs", True)):
+        for root_key in ["outputs_root", "results_root"]:
+            root_value = project_cfg.get(root_key)
+            if root_value is None:
+                continue
+            root = Path(str(root_value))
+            if root.name != selected_task:
+                project_cfg[root_key] = str(root / selected_task)
+
+    tracking_cfg = config.get("tracking", {})
+    if tracking_cfg.get("project_name") and selected_task not in str(tracking_cfg["project_name"]):
+        tracking_cfg["project_name"] = f"{tracking_cfg['project_name']}_{selected_task}"
+
+    format_cfg = config.get("format", {})
+    if format_cfg.get("prompt_version") and selected_task not in str(format_cfg["prompt_version"]):
+        prompt_source = str(format_cfg.get("prompt_source", "zero_shot_prompt"))
+        format_cfg["prompt_version"] = f"{selected_task}_{prompt_source}"
+
+
+def available_task_keys(config: dict[str, Any]) -> list[str]:
+    task_cfg = config.get("task", {})
+    if task_cfg.get("available_tasks"):
+        return list(task_cfg["available_tasks"])
+    registry = task_cfg.get("task_registry") or {}
+    return sorted(registry)
 
 
 def _public_config_payload(value: Any) -> Any:
@@ -40,7 +110,7 @@ def config_hash(config: dict[str, Any]) -> str:
 
 
 def _clean_mapping_text(value: Any) -> str:
-    if value is None:
+    if value is None or pd.isna(value):
         return ""
     text = str(value)
     replacements = {
@@ -90,9 +160,15 @@ def task_metadata(config: dict[str, Any]) -> dict[str, Any]:
                 "Mapping file labelset and labelset_fullword lengths do not match: "
                 f"{len(label_ids)} vs {len(label_words)}"
             )
+        prompts = {
+            column: _clean_mapping_text(row[column])
+            for column in PROMPT_COLUMNS
+            if column in row and _clean_mapping_text(row[column])
+        }
         metadata = {
             "dataset_filename": str(row["dataset_filename"]).strip(),
-            "zero_shot_prompt": _clean_mapping_text(row["zero_shot_prompt"]),
+            "prompts": prompts,
+            "zero_shot_prompt": prompts.get("zero_shot_prompt", ""),
             "label_column": str(row.get("label_column", "")).strip() or None,
             "labels": [
                 {
@@ -112,11 +188,26 @@ def task_metadata(config: dict[str, Any]) -> dict[str, Any]:
 def task_labels(config: dict[str, Any]) -> list[dict[str, Any]]:
     configured = config["task"].get("labels")
     if configured:
-        return list(configured)
+        return _apply_label_aliases(config, list(configured))
     derived = task_metadata(config).get("labels")
     if derived:
-        return list(derived)
+        return _apply_label_aliases(config, list(derived))
     raise ValueError("No task labels configured and no labels could be derived from task metadata.")
+
+
+def _apply_label_aliases(config: dict[str, Any], labels: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    aliases = config.get("task", {}).get("label_aliases") or {}
+    normalized_labels: list[dict[str, Any]] = []
+    for label in labels:
+        copied = dict(label)
+        raw_values = list(copied.get("raw_values", []))
+        for alias in aliases.get(copied["id"], []):
+            alias_text = str(alias)
+            if alias_text not in raw_values:
+                raw_values.append(alias_text)
+        copied["raw_values"] = raw_values
+        normalized_labels.append(copied)
+    return normalized_labels
 
 
 def canonical_label_ids(config: dict[str, Any]) -> list[str]:
@@ -143,7 +234,28 @@ def task_instruction_text(config: dict[str, Any]) -> str | None:
     format_cfg = config.get("format", {})
     if format_cfg.get("instruction_text"):
         return str(format_cfg["instruction_text"]).strip()
-    return task_metadata(config).get("zero_shot_prompt")
+    metadata = task_metadata(config)
+    prompts = metadata.get("prompts", {})
+    prompt_source = str(format_cfg.get("prompt_source", "zero_shot_prompt"))
+    prompt_column = PROMPT_SOURCE_ALIASES.get(prompt_source, prompt_source)
+    if prompt_column in prompts:
+        return prompts[prompt_column]
+    if prompts:
+        raise ValueError(
+            f"Prompt source '{prompt_source}' is not available for this task. "
+            f"Available prompt sources: {', '.join(sorted(prompts))}"
+        )
+    return metadata.get("zero_shot_prompt")
+
+
+def task_label_column(config: dict[str, Any]) -> str:
+    configured = config["task"].get("raw_label_column")
+    if configured:
+        return str(configured)
+    derived = task_metadata(config).get("label_column")
+    if derived:
+        return str(derived)
+    raise ValueError("No raw_label_column configured and no label_column could be derived from task metadata.")
 
 
 def reference_train_size(config: dict[str, Any], available_train_sizes: list[int | str] | None = None) -> int | str:

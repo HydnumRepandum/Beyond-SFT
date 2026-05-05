@@ -5,13 +5,22 @@ import shutil
 import unittest
 from pathlib import Path
 
-from topic_alignment.config import load_config
+from topic_alignment.config import (
+    available_task_keys,
+    canonical_label_ids,
+    load_config,
+    raw_to_canonical_map,
+    task_instruction_text,
+    task_metadata,
+)
 from topic_alignment.data import make_splits_and_subsets, prepare_dataset_artifacts
 from topic_alignment.training import train_sft
 from topic_alignment.utils import resolve_path
 
 
 class ConfigDataTests(unittest.TestCase):
+    external_task_root = Path("/Users/ematheve/Desktop/dataset task RL")
+
     def test_canonical_configs_use_raw_or_sample_inputs(self) -> None:
         for config_path in ["configs/llama31.yaml", "configs/gemma3.yaml"]:
             with self.subTest(config_path=config_path):
@@ -31,6 +40,22 @@ class ConfigDataTests(unittest.TestCase):
     def test_sft_training_api_does_not_accept_test_dataframe(self) -> None:
         signature = inspect.signature(train_sft)
         self.assertNotIn("test_df", signature.parameters)
+
+    def test_task_registry_exposes_all_supported_tasks(self) -> None:
+        config = load_config("configs/llama31.yaml")
+        self.assertEqual(available_task_keys(config), ["ds1_task6", "ds3_task6", "ds4_task2"])
+
+    @unittest.skipUnless(external_task_root.exists(), "external task folder is not available")
+    def test_external_tasks_load_prompts_and_labels_from_mapping(self) -> None:
+        ds1_config = load_config("configs/llama31.yaml", task_key="ds1_task6")
+        self.assertEqual(canonical_label_ids(ds1_config), ["A", "B", "C", "D"])
+        self.assertIn("few_shot_prompt", task_metadata(ds1_config)["prompts"])
+        self.assertGreater(len(task_instruction_text(ds1_config) or ""), 1000)
+
+        ds4_config = load_config("configs/llama31.yaml", task_key="ds4_task2")
+        self.assertEqual(canonical_label_ids(ds4_config), ["A", "B", "C"])
+        self.assertIn("few_shot_chain_of_thought_prompt", task_metadata(ds4_config)["prompts"])
+        self.assertEqual(raw_to_canonical_map(ds4_config)["neither"], "C")
 
     def test_provided_subset_mode_creates_train_and_test_only(self) -> None:
         config = load_config("configs/llama31.yaml")

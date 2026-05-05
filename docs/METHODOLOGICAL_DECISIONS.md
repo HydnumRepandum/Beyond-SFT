@@ -2,48 +2,43 @@
 
 ## Scope of the study
 
-The study is intentionally narrow:
+The study is intentionally narrow but now task-selectable:
 
-- one task: `ds_3 / task_6`
+- three supported task keys: `ds3_task6`, `ds1_task6`, and `ds4_task2`
 - two configured base model families: Llama 3.1 8B Instruct and Gemma 3 12B
-- one prompt family: `ds3_task6_superframes_v1`
+- one active prompt source per run, selected by `format.prompt_source`
 - one test protocol
 - one PEFT setup
 - one SFT stage and two post-training families: DPO and KTO
 
-This is a 4-class political superframe classification task.
+The selected task is resolved from the config `task_registry` before data processing, training, scoring, or aggregation starts.
 
 ## Task metadata, prompt, and labels
 
-The task metadata comes from [dataset_task_mappings.csv](../dataset_task_mappings.csv) with:
+Task metadata comes from the selected task's mapping row. For the checked-in default task this is [dataset_task_mappings.csv](../dataset_task_mappings.csv); for `ds1_task6` and `ds4_task2` it is `/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv`.
 
-- `dataset_number = 3`
-- `task_number = 6`
-- mapping delimiter `;`
-- mapping encoding `cp1252`
+The selected task defines:
 
 The pipeline derives:
 
-- the prompt template from the mapping row
+- all available prompt columns from the mapping row
+- the active prompt from `format.prompt_source`
 - the canonical output key: `label`
 - the response prefix: `\nAnswer:\n`
-- the canonical label IDs: `A`, `B`, `C`, `D`
+- the canonical label IDs
+- the raw label column
 
-The label semantics are:
-
-- `A`: Policy and Regulation
-- `B`: Morality and Law
-- `C`: Economics
-- `D`: Other
+For `ds4_task2`, the mapping row calls the third label `NEUTRAL`, while the provided CSV uses `Neither`; the config records that alias so both values map to label `C`.
 
 The model is trained and evaluated as a closed-label JSON generation task. A canonical completion is a short JSON object such as `{"label":"C"}`.
 
 ## Data sources and split design
 
-The task uses the provided subset files directly from [data/raw_or_samples](../data/raw_or_samples):
+Each task uses provided subset files directly:
 
-- train subsets: `50`, `100`, `250`, `500`
-- one provided held-out file: `ds_3__task_6_eval_set.csv`, treated as the test file
+- `ds3_task6`: checked-in files under [data/raw_or_samples](../data/raw_or_samples), train sizes `50`, `100`, `250`, `500`
+- `ds1_task6`: external files under `/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final`, train sizes `50`, `100`, `250`, `500`
+- `ds4_task2`: external files under `/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final`, train sizes `50`, `100`, `250`, `500`, `1000`
 
 The current pipeline does not create any intermediate split. It keeps the provided held-out file intact as one `test` split.
 
@@ -51,11 +46,10 @@ The active split settings are:
 
 - `split_seed = 1729`
 - subset seeds for repeated runs: `11`, `22`, `33`
-- requested and provided train sizes: `50`, `100`, `250`, `500`
-- `full_train_source = 500`
-- `reference_train_size = 500`
+- requested and provided train sizes are task-specific
+- `full_train_source` and `reference_train_size` are task-specific
 
-The `500`-example training file is the reference train split used for the full-train reporting tables and figures.
+The configured `reference_train_size` is used for full-train reporting tables and figures.
 
 The run seeds capture initialization, adapter allocation, trainer shuffling, and seeded preference-choice variance. They are not independent data-resampling seeds, because the train subsets are fixed CSV files reused across runs.
 
@@ -66,7 +60,7 @@ The default Llama study configuration is:
 - base family: `Llama 3.1 8B Instruct`
 - `base_model_id = unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit`
 - `max_seq_length = 4096`
-- `load_in_4bit = false`
+- `load_in_4bit = true`
 
 Inference settings used for scoring are:
 
