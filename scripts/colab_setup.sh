@@ -25,13 +25,12 @@ python -m pip install --upgrade --no-cache-dir -c "${CONSTRAINTS_FILE}" -r requi
 # PyArrow after the other ML packages so datasets/parquet imports see one ABI.
 python -m pip install --upgrade --force-reinstall --no-cache-dir "pyarrow>=16.1.0" "datasets>=2.20.0"
 
-# This project does not use audio/video decoding. New sentence-transformers
-# releases can pull torchcodec, whose FFmpeg/PyTorch binary stack is fragile on
-# Colab. Remove it so Unsloth's optional sentence-transformers patch cannot
-# trip over an unused multimedia dependency.
-python -m pip uninstall -y torchcodec || true
-
 PIP_CONSTRAINT="${CONSTRAINTS_FILE}" python -m pip install -e .
+
+# This project uses bitsandbytes 4-bit loading, not TorchAO quantization or
+# audio/video decoding. These optional packages are fragile across Colab's
+# Torch/CUDA image changes and can break imports before any project code runs.
+python -m pip uninstall -y torchao torchcodec || true
 
 python - <<'PY'
 import datasets
