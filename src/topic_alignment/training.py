@@ -30,15 +30,11 @@ def _filtered_kwargs(callable_obj, kwargs: dict[str, Any]) -> dict[str, Any]:
 
 
 def _dataset_num_proc(config_section: dict[str, Any]) -> int | None:
-    value = config_section.get("dataset_num_proc")
-    if value is None:
-        return None
-    if isinstance(value, str) and value.strip().lower() in {"", "none", "null"}:
-        return None
-    parsed = int(value)
-    # HF Datasets still uses multiprocessing when num_proc=1, which pickles
-    # trainer-bound tokenization methods and fails with Unsloth/safetensors.
-    return parsed if parsed > 1 else None
+    _ = config_section
+    # TRL tokenizes DPO/KTO rows via trainer-bound methods. Any HF Datasets
+    # multiprocessing value, including num_proc=1, has to pickle those methods
+    # and fails with Unsloth/safetensors safe_open objects.
+    return None
 
 
 def _strategy_kwargs(args_class, evaluation_strategy: str, save_strategy: str) -> dict[str, Any]:
