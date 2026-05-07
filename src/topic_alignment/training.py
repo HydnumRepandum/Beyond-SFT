@@ -29,6 +29,18 @@ def _filtered_kwargs(callable_obj, kwargs: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in kwargs.items() if key in signature.parameters}
 
 
+def _dataset_num_proc(config_section: dict[str, Any]) -> int | None:
+    value = config_section.get("dataset_num_proc")
+    if value is None:
+        return None
+    if isinstance(value, str) and value.strip().lower() in {"", "none", "null"}:
+        return None
+    parsed = int(value)
+    # HF Datasets still uses multiprocessing when num_proc=1, which pickles
+    # trainer-bound tokenization methods and fails with Unsloth/safetensors.
+    return parsed if parsed > 1 else None
+
+
 def _strategy_kwargs(args_class, evaluation_strategy: str, save_strategy: str) -> dict[str, Any]:
     parameters = inspect.signature(args_class.__init__).parameters
     kwargs: dict[str, Any] = {}
@@ -555,7 +567,7 @@ def train_dpo(
         "tokenizer": tokenizer,
         "train_dataset": dataset,
         "eval_dataset": None,
-        "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
+        "dataset_num_proc": _dataset_num_proc(dpo_cfg),
     }
 
     if DPOConfig is not None:
@@ -564,7 +576,7 @@ def train_dpo(
             "loss_type": str(dpo_cfg["loss_type"]),
             "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
             "max_length": int(dpo_cfg["max_length"]),
-            "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
+            "dataset_num_proc": _dataset_num_proc(dpo_cfg),
             **_strategy_kwargs(
                 DPOConfig,
                 evaluation_strategy=str(dpo_cfg["evaluation_strategy"]),
@@ -589,7 +601,7 @@ def train_dpo(
             "loss_type": str(dpo_cfg["loss_type"]),
             "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
             "max_length": int(dpo_cfg["max_length"]),
-            "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
+            "dataset_num_proc": _dataset_num_proc(dpo_cfg),
         }
 
     with _force_text_only_trainer_path(config, policy_model, reference_model):
@@ -677,7 +689,7 @@ def train_kto(
         report_to=_trainer_report_to(config),
         run_name=_tracking_run_name(config, run_dir),
         remove_unused_columns=False,
-        dataset_num_proc=1,
+        dataset_num_proc=_dataset_num_proc(kto_cfg),
         **_strategy_kwargs(
             KTOConfig,
             evaluation_strategy=str(kto_cfg["evaluation_strategy"]),
