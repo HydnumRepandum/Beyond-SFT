@@ -24,6 +24,8 @@ from .utils import ensure_dir, resolve_path, set_global_seed, write_json
 
 def _filtered_kwargs(callable_obj, kwargs: dict[str, Any]) -> dict[str, Any]:
     signature = inspect.signature(callable_obj.__init__)
+    if any(parameter.kind == inspect.Parameter.VAR_KEYWORD for parameter in signature.parameters.values()):
+        return kwargs
     return {key: value for key, value in kwargs.items() if key in signature.parameters}
 
 
@@ -555,21 +557,24 @@ def train_dpo(
         "processing_class": tokenizer,
         "train_dataset": dataset,
         "eval_dataset": None,
+        "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
     }
 
     if DPOConfig is not None:
-        training_args = DPOConfig(
-            beta=float(dpo_cfg["beta"]),
-            loss_type=str(dpo_cfg["loss_type"]),
-            max_prompt_length=int(dpo_cfg["max_prompt_length"]),
-            max_length=int(dpo_cfg["max_length"]),
+        dpo_config_args = {
+            "beta": float(dpo_cfg["beta"]),
+            "loss_type": str(dpo_cfg["loss_type"]),
+            "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
+            "max_length": int(dpo_cfg["max_length"]),
+            "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
             **_strategy_kwargs(
                 DPOConfig,
                 evaluation_strategy=str(dpo_cfg["evaluation_strategy"]),
                 save_strategy=str(dpo_cfg["save_strategy"]),
             ),
             **common_args,
-        )
+        }
+        training_args = DPOConfig(**_filtered_kwargs(DPOConfig, dpo_config_args))
         trainer_kwargs = trainer_specific_kwargs | {"args": training_args}
     else:
         training_args = TrainingArguments(
@@ -586,6 +591,7 @@ def train_dpo(
             "loss_type": str(dpo_cfg["loss_type"]),
             "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
             "max_length": int(dpo_cfg["max_length"]),
+            "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
         }
 
     with _force_text_only_trainer_path(config, policy_model, reference_model):

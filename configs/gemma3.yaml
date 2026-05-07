@@ -148,6 +148,7 @@ dpo:
   optim: adamw_8bit
   max_prompt_length: 1024
   max_length: 1152
+  dataset_num_proc: 1
   loss_type: sigmoid
   # Used only when data_allocation is sft25_dpo75.
   split_allocation_sft_fraction: 0.25
