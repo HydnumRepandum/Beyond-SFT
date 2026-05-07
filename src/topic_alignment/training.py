@@ -440,7 +440,6 @@ def train_sft(
     trainer_kwargs = {
         "model": model,
         "tokenizer": tokenizer,
-        "processing_class": tokenizer,
         "args": training_args,
         "train_dataset": train_dataset,
         "eval_dataset": None,
@@ -554,7 +553,6 @@ def train_dpo(
         "model": policy_model,
         "ref_model": reference_model,
         "tokenizer": tokenizer,
-        "processing_class": tokenizer,
         "train_dataset": dataset,
         "eval_dataset": None,
         "dataset_num_proc": int(dpo_cfg.get("dataset_num_proc", 1)),
@@ -691,7 +689,6 @@ def train_kto(
         "model": policy_model,
         "ref_model": reference_model,
         "tokenizer": tokenizer,
-        "processing_class": tokenizer,
         "args": training_args,
         "train_dataset": dataset,
         "eval_dataset": None,
