@@ -420,11 +420,14 @@ def train_sft(
         weight_decay=float(sft_cfg["weight_decay"]),
         logging_steps=int(sft_cfg["logging_steps"]),
         save_total_limit=int(sft_cfg["save_total_limit"]),
+        overwrite_output_dir=True,
         optim=str(sft_cfg["optim"]),
         seed=seed,
         report_to=_trainer_report_to(config),
         run_name=_tracking_run_name(config, run_dir),
-        remove_unused_columns=False,
+        # Keep the raw text column for SFTTrainer preprocessing, but do not pass
+        # it through to the default torch collator after tokenization.
+        remove_unused_columns=True,
         **_strategy_kwargs(
             TrainingArguments,
             evaluation_strategy=str(sft_cfg["evaluation_strategy"]),
@@ -537,6 +540,7 @@ def train_dpo(
         "optim": str(dpo_cfg.get("optim", "adamw_torch")),
         "logging_steps": int(dpo_cfg["logging_steps"]),
         "save_total_limit": int(dpo_cfg["save_total_limit"]),
+        "overwrite_output_dir": True,
         "seed": seed,
         "report_to": _trainer_report_to(config),
         "run_name": _tracking_run_name(config, run_dir),
@@ -661,6 +665,7 @@ def train_kto(
         undesirable_weight=float(kto_cfg["undesirable_weight"]),
         logging_steps=int(kto_cfg["logging_steps"]),
         save_total_limit=int(kto_cfg["save_total_limit"]),
+        overwrite_output_dir=True,
         max_prompt_length=int(kto_cfg["max_prompt_length"]),
         max_length=int(kto_cfg["max_length"]),
         disable_dropout=bool(kto_cfg.get("disable_dropout", True)),
