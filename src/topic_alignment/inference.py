@@ -4,13 +4,16 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
-import torch
-import torch.nn.functional as F
 from tqdm.auto import tqdm
 
 from .config import canonical_label_ids
 from .modeling import model_device, prepare_for_inference
 from .prompting import candidate_responses
+
+# Keep Torch behind modeling so modeling's Unsloth import happens before
+# transformer/PEFT-related imports in notebook inference sessions.
+import torch
+import torch.nn.functional as F
 
 
 def _score_single_prompt_candidates(model, tokenizer, prompt: str, config: dict[str, Any]) -> dict[str, float]:
