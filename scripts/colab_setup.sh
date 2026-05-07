@@ -8,6 +8,7 @@ torch==2.5.1
 torchvision==0.20.1
 torchaudio==2.5.1
 sentence-transformers==3.4.1
+trl==0.9.6
 EOF
 
 python -m pip install --upgrade pip
