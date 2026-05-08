@@ -24,17 +24,7 @@ from .utils import ensure_dir, resolve_path, set_global_seed, write_json
 
 def _filtered_kwargs(callable_obj, kwargs: dict[str, Any]) -> dict[str, Any]:
     signature = inspect.signature(callable_obj.__init__)
-    if any(parameter.kind == inspect.Parameter.VAR_KEYWORD for parameter in signature.parameters.values()):
-        return kwargs
     return {key: value for key, value in kwargs.items() if key in signature.parameters}
-
-
-def _dataset_num_proc(config_section: dict[str, Any]) -> int | None:
-    _ = config_section
-    # TRL tokenizes DPO/KTO rows via trainer-bound methods. Any HF Datasets
-    # multiprocessing value, including num_proc=1, has to pickle those methods
-    # and fails with Unsloth/safetensors safe_open objects.
-    return None
 
 
 def _strategy_kwargs(args_class, evaluation_strategy: str, save_strategy: str) -> dict[str, Any]:
@@ -430,14 +420,11 @@ def train_sft(
         weight_decay=float(sft_cfg["weight_decay"]),
         logging_steps=int(sft_cfg["logging_steps"]),
         save_total_limit=int(sft_cfg["save_total_limit"]),
-        overwrite_output_dir=True,
         optim=str(sft_cfg["optim"]),
         seed=seed,
         report_to=_trainer_report_to(config),
         run_name=_tracking_run_name(config, run_dir),
-        # Keep the raw text column for SFTTrainer preprocessing, but do not pass
-        # it through to the default torch collator after tokenization.
-        remove_unused_columns=True,
+        remove_unused_columns=False,
         **_strategy_kwargs(
             TrainingArguments,
             evaluation_strategy=str(sft_cfg["evaluation_strategy"]),
@@ -448,6 +435,7 @@ def train_sft(
     trainer_kwargs = {
         "model": model,
         "tokenizer": tokenizer,
+        "processing_class": tokenizer,
         "args": training_args,
         "train_dataset": train_dataset,
         "eval_dataset": None,
@@ -549,7 +537,6 @@ def train_dpo(
         "optim": str(dpo_cfg.get("optim", "adamw_torch")),
         "logging_steps": int(dpo_cfg["logging_steps"]),
         "save_total_limit": int(dpo_cfg["save_total_limit"]),
-        "overwrite_output_dir": True,
         "seed": seed,
         "report_to": _trainer_report_to(config),
         "run_name": _tracking_run_name(config, run_dir),
@@ -561,26 +548,24 @@ def train_dpo(
         "model": policy_model,
         "ref_model": reference_model,
         "tokenizer": tokenizer,
+        "processing_class": tokenizer,
         "train_dataset": dataset,
         "eval_dataset": None,
-        "dataset_num_proc": _dataset_num_proc(dpo_cfg),
     }
 
     if DPOConfig is not None:
-        dpo_config_args = {
-            "beta": float(dpo_cfg["beta"]),
-            "loss_type": str(dpo_cfg["loss_type"]),
-            "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
-            "max_length": int(dpo_cfg["max_length"]),
-            "dataset_num_proc": _dataset_num_proc(dpo_cfg),
+        training_args = DPOConfig(
+            beta=float(dpo_cfg["beta"]),
+            loss_type=str(dpo_cfg["loss_type"]),
+            max_prompt_length=int(dpo_cfg["max_prompt_length"]),
+            max_length=int(dpo_cfg["max_length"]),
             **_strategy_kwargs(
                 DPOConfig,
                 evaluation_strategy=str(dpo_cfg["evaluation_strategy"]),
                 save_strategy=str(dpo_cfg["save_strategy"]),
             ),
             **common_args,
-        }
-        training_args = DPOConfig(**_filtered_kwargs(DPOConfig, dpo_config_args))
+        )
         trainer_kwargs = trainer_specific_kwargs | {"args": training_args}
     else:
         training_args = TrainingArguments(
@@ -597,7 +582,6 @@ def train_dpo(
             "loss_type": str(dpo_cfg["loss_type"]),
             "max_prompt_length": int(dpo_cfg["max_prompt_length"]),
             "max_length": int(dpo_cfg["max_length"]),
-            "dataset_num_proc": _dataset_num_proc(dpo_cfg),
         }
 
     with _force_text_only_trainer_path(config, policy_model, reference_model):
@@ -677,7 +661,6 @@ def train_kto(
         undesirable_weight=float(kto_cfg["undesirable_weight"]),
         logging_steps=int(kto_cfg["logging_steps"]),
         save_total_limit=int(kto_cfg["save_total_limit"]),
-        overwrite_output_dir=True,
         max_prompt_length=int(kto_cfg["max_prompt_length"]),
         max_length=int(kto_cfg["max_length"]),
         disable_dropout=bool(kto_cfg.get("disable_dropout", True)),
@@ -685,7 +668,7 @@ def train_kto(
         report_to=_trainer_report_to(config),
         run_name=_tracking_run_name(config, run_dir),
         remove_unused_columns=False,
-        dataset_num_proc=_dataset_num_proc(kto_cfg),
+        dataset_num_proc=1,
         **_strategy_kwargs(
             KTOConfig,
             evaluation_strategy=str(kto_cfg["evaluation_strategy"]),
@@ -697,6 +680,7 @@ def train_kto(
         "model": policy_model,
         "ref_model": reference_model,
         "tokenizer": tokenizer,
+        "processing_class": tokenizer,
         "args": training_args,
         "train_dataset": dataset,
         "eval_dataset": None,
