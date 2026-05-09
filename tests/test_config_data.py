@@ -45,6 +45,19 @@ class ConfigDataTests(unittest.TestCase):
         config = load_config("configs/llama31.yaml")
         self.assertEqual(available_task_keys(config), ["ds1_task6", "ds3_task6", "ds4_task2"])
 
+    def test_kto_desirable_weight_tracks_selected_task(self) -> None:
+        expected_weights = {
+            "ds3_task6": 3.0,
+            "ds1_task6": 3.0,
+            "ds4_task2": 2.0,
+        }
+        for config_path in ["configs/llama31.yaml", "configs/gemma3.yaml"]:
+            for task_key, expected_weight in expected_weights.items():
+                with self.subTest(config_path=config_path, task_key=task_key):
+                    config = load_config(config_path, task_key=task_key)
+                    self.assertEqual(float(config["kto"]["desirable_weight"]), expected_weight)
+                    self.assertEqual(float(config["kto"]["undesirable_weight"]), 1.0)
+
     @unittest.skipUnless(external_task_root.exists(), "external task folder is not available")
     def test_external_tasks_load_prompts_and_labels_from_mapping(self) -> None:
         ds1_config = load_config("configs/llama31.yaml", task_key="ds1_task6")

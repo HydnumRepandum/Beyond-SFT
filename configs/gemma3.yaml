@@ -185,6 +185,12 @@ kto:
   max_length: 1152
   loss_type: kto
   desirable_weight: 3.0
+  # There is one desirable completion and K-1 undesirable completions per
+  # prompt, so the desirable loss weight is K-1 for the active task.
+  desirable_weight_by_task:
+    ds3_task6: 3.0
+    ds1_task6: 3.0
+    ds4_task2: 2.0
   undesirable_weight: 1.0
   disable_dropout: true
   optim: adamw_8bit

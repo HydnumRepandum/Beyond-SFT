@@ -23,7 +23,6 @@ PROMPT_SOURCE_ALIASES = {
     "chain_of_thought": "few_shot_chain_of_thought_prompt",
 }
 
-
 def load_config(config_path: str | Path, task_key: str | None = None) -> dict[str, Any]:
     path = resolve_path(config_path)
     with path.open("r", encoding="utf-8") as handle:
@@ -60,6 +59,7 @@ def _apply_task_selection(config: dict[str, Any], task_key: str | None = None) -
     merged_task["selected_task"] = selected_task
     merged_task["available_tasks"] = sorted(registry)
     config["task"] = merged_task
+    _apply_task_dependent_kto_weights(config, selected_task)
 
     project_cfg = config.setdefault("project", {})
     if project_cfg.get("study_name") and selected_task not in str(project_cfg["study_name"]):
@@ -81,6 +81,15 @@ def _apply_task_selection(config: dict[str, Any], task_key: str | None = None) -
     if format_cfg.get("prompt_version") and selected_task not in str(format_cfg["prompt_version"]):
         prompt_source = str(format_cfg.get("prompt_source", "zero_shot_prompt"))
         format_cfg["prompt_version"] = f"{selected_task}_{prompt_source}"
+
+
+def _apply_task_dependent_kto_weights(config: dict[str, Any], selected_task: str) -> None:
+    kto_cfg = config.get("kto")
+    if not isinstance(kto_cfg, dict):
+        return
+    desirable_weight_by_task = dict(kto_cfg.get("desirable_weight_by_task") or {})
+    if selected_task in desirable_weight_by_task:
+        kto_cfg["desirable_weight"] = float(desirable_weight_by_task[selected_task])
 
 
 def available_task_keys(config: dict[str, Any]) -> list[str]:
