@@ -18,20 +18,11 @@ The canonical study configs are:
 
 ## Data layout
 
-The default `ds3_task6` task uses the checked-in subset files directly:
+The supported tasks use checked-in subset folders:
 
-- [dataset_task_mappings.csv](dataset_task_mappings.csv)
-- [ds_3__task_6_train_set_50.csv](data/raw_or_samples/ds_3__task_6_train_set_50.csv)
-- [ds_3__task_6_train_set_100.csv](data/raw_or_samples/ds_3__task_6_train_set_100.csv)
-- [ds_3__task_6_train_set_250.csv](data/raw_or_samples/ds_3__task_6_train_set_250.csv)
-- [ds_3__task_6_train_set_500.csv](data/raw_or_samples/ds_3__task_6_train_set_500.csv)
-- [ds_3__task_6_eval_set.csv](data/raw_or_samples/ds_3__task_6_eval_set.csv), treated as the held-out test file
-
-The two additional tasks are configured from:
-
-- `/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv`
-- `/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final`
-- `/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final`
+- `ds3_task6`: [data/raw_or_samples/ds_3__task_6](data/raw_or_samples/ds_3__task_6) and [dataset_task_mappings.csv](dataset_task_mappings.csv)
+- `ds1_task6`: [data/raw_or_samples/ds_1__task_6](data/raw_or_samples/ds_1__task_6), including its task-local `dataset_task_mappings.csv`
+- `ds4_task2`: [data/raw_or_samples/ds_4__task_2](data/raw_or_samples/ds_4__task_2), including its task-local `dataset_task_mappings.csv`
 
 The pipeline:
 
@@ -120,7 +111,7 @@ KTO is built as an all-label binary-desirability dataset:
 So each original training example yields:
 
 - one paired DPO row
-- four unpaired KTO rows in this 4-class task
+- one desirable KTO row plus one undesirable KTO row for every incorrect label
 
 The current KTO hyperparameters follow the conservative TRL recommendations for KTO rather than reusing the DPO learning rate:
 
@@ -129,7 +120,8 @@ The current KTO hyperparameters follow the conservative TRL recommendations for 
 - per-step batch size `4`
 - effective batch size `16`
 - `num_train_epochs = 2`
-- `desirable_weight = 3.0` and `undesirable_weight = 1.0` so the single positive row is not underweighted against the three negative rows
+- `desirable_weight` is task-dependent: `3.0` for the 4-label tasks and `2.0` for the 3-label task
+- `undesirable_weight = 1.0`
 
 Each trained adapter directory now also includes `model_metadata.json`, documenting:
 

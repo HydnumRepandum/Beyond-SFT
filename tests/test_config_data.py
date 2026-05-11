@@ -19,8 +19,6 @@ from topic_alignment.utils import resolve_path
 
 
 class ConfigDataTests(unittest.TestCase):
-    external_task_root = Path("/Users/ematheve/Desktop/dataset task RL")
-
     def test_canonical_configs_use_raw_or_sample_inputs(self) -> None:
         for config_path in ["configs/llama31.yaml", "configs/gemma3.yaml"]:
             with self.subTest(config_path=config_path):
@@ -68,9 +66,10 @@ class ConfigDataTests(unittest.TestCase):
         self.assertIn("few_shot_chain_of_thought_prompt", task_metadata(config)["prompts"])
         self.assertEqual(raw_to_canonical_map(config)["neither"], "C")
 
-    @unittest.skipUnless(external_task_root.exists(), "external task folder is not available")
-    def test_external_tasks_load_prompts_and_labels_from_mapping(self) -> None:
+    def test_ds1_task_uses_local_raw_or_sample_folder(self) -> None:
         ds1_config = load_config("configs/llama31.yaml", task_key="ds1_task6")
+        self.assertEqual(ds1_config["task"]["samples_dir"], "data/raw_or_samples/ds_1__task_6")
+        self.assertEqual(ds1_config["task"]["mapping_path"], "data/raw_or_samples/ds_1__task_6/dataset_task_mappings.csv")
         self.assertEqual(canonical_label_ids(ds1_config), ["A", "B", "C", "D"])
         self.assertIn("few_shot_prompt", task_metadata(ds1_config)["prompts"])
         self.assertGreater(len(task_instruction_text(ds1_config) or ""), 1000)

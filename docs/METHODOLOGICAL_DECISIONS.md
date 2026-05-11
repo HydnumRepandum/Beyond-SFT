@@ -15,7 +15,7 @@ The selected task is resolved from the config `task_registry` before data proces
 
 ## Task metadata, prompt, and labels
 
-Task metadata comes from the selected task's mapping row. For the checked-in default task this is [dataset_task_mappings.csv](../dataset_task_mappings.csv); for `ds1_task6` and `ds4_task2` it is `/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv`.
+Task metadata comes from the selected task's mapping row. For `ds3_task6`, this is [dataset_task_mappings.csv](../dataset_task_mappings.csv). For `ds1_task6` and `ds4_task2`, the mapping files live inside their checked-in task folders under [data/raw_or_samples](../data/raw_or_samples).
 
 The selected task defines:
 
@@ -36,9 +36,9 @@ The model is trained and evaluated as a closed-label JSON generation task. A can
 
 Each task uses provided subset files directly:
 
-- `ds3_task6`: checked-in files under [data/raw_or_samples](../data/raw_or_samples), train sizes `50`, `100`, `250`, `500`
-- `ds1_task6`: external files under `/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final`, train sizes `50`, `100`, `250`, `500`
-- `ds4_task2`: external files under `/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final`, train sizes `50`, `100`, `250`, `500`, `1000`
+- `ds3_task6`: checked-in files under [data/raw_or_samples/ds_3__task_6](../data/raw_or_samples/ds_3__task_6), train sizes `50`, `100`, `250`, `500`
+- `ds1_task6`: checked-in files under [data/raw_or_samples/ds_1__task_6](../data/raw_or_samples/ds_1__task_6), train sizes `50`, `100`, `250`, `500`
+- `ds4_task2`: checked-in files under [data/raw_or_samples/ds_4__task_2](../data/raw_or_samples/ds_4__task_2), train sizes `50`, `100`, `250`, `500`, `1000`
 
 The current pipeline does not create any intermediate split. It keeps the provided held-out file intact as one `test` split.
 

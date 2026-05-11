@@ -55,7 +55,7 @@ task:
       samples_dir: data/raw_or_samples/ds_1__task_6
       external_train_pattern: ds_1__task_6_train_set_{train_size}.csv
       external_test_filename: ds_1__task_6_eval_set.csv
-      mapping_path: "/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv"
+      mapping_path: data/raw_or_samples/ds_1__task_6/dataset_task_mappings.csv
       mapping_delimiter: ","
       mapping_encoding: utf-8
       mapping_dataset_number: 1
