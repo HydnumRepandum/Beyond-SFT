@@ -28,7 +28,7 @@ task:
     ds3_task6:
       name: superframe_classification_ds3_task6
       data_mode: provided_subsets
-      samples_dir: data/raw_or_samples
+      samples_dir: data/raw_or_samples/ds_3__task_6
       external_train_pattern: ds_3__task_6_train_set_{train_size}.csv
       external_test_filename: ds_3__task_6_eval_set.csv
       mapping_path: dataset_task_mappings.csv
@@ -50,7 +50,7 @@ task:
     ds1_task6:
       name: superframe_classification_ds1_task6
       data_mode: provided_subsets
-      samples_dir: "/Users/ematheve/Desktop/dataset task RL/ds_1__task_6__training_data_superframes_final"
+      samples_dir: data/raw_or_samples/ds_1__task_6
       external_train_pattern: ds_1__task_6_train_set_{train_size}.csv
       external_test_filename: ds_1__task_6_eval_set.csv
       mapping_path: "/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv"
@@ -71,12 +71,12 @@ task:
     ds4_task2:
       name: problem_solution_classification_ds4_task2
       data_mode: provided_subsets
-      samples_dir: "/Users/ematheve/Desktop/dataset task RL/ds_4__task_2__training_data_newsarticles_problem_solution_final"
+      samples_dir: data/raw_or_samples/ds_4__task_2
       external_train_pattern: ds_4__task_2_train_set_{train_size}.csv
       external_test_filename: ds_4__task_2_eval_set.csv
-      mapping_path: "/Users/ematheve/Desktop/dataset task RL/dataset_task_mappings.csv"
-      mapping_delimiter: ","
-      mapping_encoding: utf-8
+      mapping_path: data/raw_or_samples/ds_4__task_2/dataset_task_mappings.csv
+      mapping_delimiter: ";"
+      mapping_encoding: cp1252
       mapping_dataset_number: 4
       mapping_task_number: 2
       text_column: text
