@@ -185,7 +185,3 @@ The simplest way to think about it is:
 - `hard_negative_label`: the wrong answer the model likes most
 
 For post-training, the `hard_negative_label` is the key object because it tells DPO which plausible incorrect answer should be compared against the correct one.
-
-## Article-style methods paragraph
-
-In the post-SFT stage, we operationalize example difficulty using the model's own distribution over the closed label set. For each prompt, the SFT pilot scores every candidate label completion and records both the highest-scoring incorrect label and the margin between the top-ranked and second-ranked labels. We define a primary hard-case indicator as low confidence, implemented as test observations whose top-1 versus top-2 score margin falls below a threshold estimated from the SFT training predictions at the configured quantile. We define a secondary hard-case indicator as outright pilot error, implemented as cases where the predicted label differs from the gold label. This distinction separates uncertainty from misclassification: an example may be difficult because the model is unsure even when correct, or difficult because the model selects the wrong class. For preference optimization, we use the highest-scoring incorrect label as the `hard_negative`, thereby constructing DPO comparisons that ask the model to prefer the gold label over the wrong label it currently finds most plausible.
