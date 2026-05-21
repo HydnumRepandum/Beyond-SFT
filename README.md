@@ -1,5 +1,12 @@
 # Beyond Supervised Fine-Tuning
 
+########################### WARNING ############################
+When using the notebook there is one precaution to take
+
+Due to pyarrow function the session will crash after few minutes, it's normal, just restart the Python runtime
+
+########################### WARNING ############################
+
 This repository supports a selected low-data annotation task from the configured task registry:
 
 - `ds3_task6`: Congress tweet political superframe classification
@@ -39,8 +46,7 @@ The pipeline:
 - `scripts/score.py`: pretrained baseline inference
 - `scripts/train.py`: SFT, hard-case tagging, preference construction, DPO/KTO, and full-grid orchestration
 - `scripts/aggregate.py`: aggregated tables and plots
-- `notebooks/colab_topic_alignment.ipynb`: main Colab notebook
-- `notebooks/experimental/colab_train_once_infer_three_seeds.ipynb`: experimental notebook; keep outputs as exploratory only
+- `notebooks/main_colab_train+infer_three_seeds.ipynb`: main Colab notebook
 
 ## Quickstart
 
