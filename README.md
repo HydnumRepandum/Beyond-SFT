@@ -1,6 +1,6 @@
 # Beyond Supervised Fine-Tuning
 
-########################### WARNING ############################
+########################### WARNING ############################/n
 When using the notebook there is one precaution to take
 
 Due to pyarrow function the session will crash after few minutes, it's normal, just restart the Python runtime
