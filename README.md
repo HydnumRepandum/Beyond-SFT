@@ -10,6 +10,10 @@
 
 This repository provides a complete pipeline designed to systematically evaluate and compare **Supervised Fine-Tuning (SFT)** against **Preference Alignment (PA)** methods—specifically **Direct Preference Optimization (DPO)** and **Kahneman–Tversky Optimization (KTO)**—for complex, low-data political text classification tasks. 
 
+## Quickstart & Pipeline Invocations
+
+Run notebooks '/main_colab_train+infer_three_seeds.ipynb notebooks'
+
 ## ABSTRACT
 
 The complexity and inherent ambiguity of political text annotation tasks present a persistent challenge in social science research, particularly in low-data regimes where expert labels are scarce. While Supervised Fine-Tuning (SFT) is the prevailing post-training paradigm for Large Language Models (LLMs), the efficacy of Preference Alignment (PA) methods remains largely unexplored in this domain. This study addresses the critical question of whether PA strategies, such as Direct Preference Optimization (DPO) and Kahneman–Tversky Optimization (KTO), enhance classification performance over SFT alone in complex political text classification. Replicating a prior experimental design across three low-data political annotation tasks, we systematically compare SFT against standalone and sequential PA configurations using the Llama 3.1:8B and Gemma 3:12B models, employing a log-probability-based classification method. Our findings demonstrate that the sequential application of SFT followed by a PA method can improve performance in several data regimes, yielding F1-score improvements up to 8.2% compared to SFT alone. Conversely, standalone PA methods show generally a performance degradation. Specifically, the combined SFT+DPO configuration using a novel, model-based hard-negative preference construction strategy exhibits superior efficacy in most settings. This research provides practical guidelines and epistemological reflexivity for implementing PA in social science workflows, underscores the enhanced performance of smaller, fine-tuned models over proprietary baselines, and reinforces the conclusion that researchers must deliberately select a post-training strategy tailored to the specific conceptual and data constraints of their annotation task.
@@ -119,21 +123,6 @@ DPO-main/
 ```
 
 ---
-
-## 🚀 Quickstart & Pipeline Invocations
-
-Run notebooks/main_colab_train+infer_three_seeds.ipynb notebooks
----
-
-## 🛠️ Canonical Training Hyperparameters
-
-All configurations target parameter-efficient adapters using **LoRA (Rank = 16, Alpha = 32)** on all projection layers (`q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`). The models are trained in 4-bit precision via Unsloth.
-
-| Stage | Optimizer | Epochs | Batch Size (per device) | Learning Rate | Stage Parameters & Loss Types |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **SFT** | `adamw_8bit` | 3 | 4 (Grad Acc = 2) | $2 \times 10^{-4}$ | Weight Decay = 0.01, Warmup = 5% |
-| **DPO** | `adamw_8bit` | 2 | 4 (Grad Acc = 4) | $5 \times 10^{-6}$ | $\beta = 0.5$, Loss = `sigmoid` |
-| **KTO** | `adamw_8bit` | 2 | 4 (Grad Acc = 4) | $5 \times 10^{-6}$ | $\beta = 0.3$, Desirable Weight = Task-dependent ($K-1$) |
 
 ---
 
