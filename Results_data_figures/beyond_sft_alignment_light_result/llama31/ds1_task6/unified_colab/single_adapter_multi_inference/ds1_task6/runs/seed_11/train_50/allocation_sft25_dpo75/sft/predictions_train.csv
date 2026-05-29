@@ -1,0 +1,617 @@
+Unnamed: 0,example_id,user_id,screen_name,timestamp,text_raw,relevant,frame,notes,label_raw,source_example_id,text,label_raw_normalized,source_row_index,label,gold_response,prompt,sft_text,label_display,score__A,score__B,score__C,score__D,predicted_label,predicted_response,score_margin,hard_negative_label,is_correct
+14,968506851976536064,381152398,RepTerriSewell,2018-02-27T15:23:22Z,"Today in #BlackHistoryMonth I am honoring Birmingham native @CondoleezzaRice. In 2005, Rice was appointed as the first African American Woman Secretary of State. Also an educator, an avid pianist and figure skater, Condoleezza Rice is truly a renaissance woman. https://t.co/xJMKuhzbUF",1,cultural identity,,other,968506851976536064,"Today in #BlackHistoryMonth I am honoring Birmingham native @CondoleezzaRice. In 2005, Rice was appointed as the first African American Woman Secretary of State. Also an educator, an avid pianist and figure skater, Condoleezza Rice is truly a renaissance woman. https://t.co/xJMKuhzbUF",other,14,D,"{""label"":""D""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Today in #BlackHistoryMonth I am honoring Birmingham native @CondoleezzaRice. In 2005, Rice was appointed as the first African American Woman Secretary of State. Also an educator, an avid pianist and figure skater, Condoleezza Rice is truly a renaissance woman. https://t.co/xJMKuhzbUF
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Today in #BlackHistoryMonth I am honoring Birmingham native @CondoleezzaRice. In 2005, Rice was appointed as the first African American Woman Secretary of State. Also an educator, an avid pianist and figure skater, Condoleezza Rice is truly a renaissance woman. https://t.co/xJMKuhzbUF
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""D""}",D,-0.62109375,-0.5234375,-0.59375,-0.0869140625,D,"{""label"":""D""}",0.4365234375,B,True
+20,847103497090797570,122174004,repdinatitus,2017-03-29T15:09:46Z,"We need an independent investigation. Like other Trump allies, Nunes has proven that he cannot be impartial.  https://t.co/vzZb7pEKlT",1,"law and order, crime and justice",,morality and law,847103497090797570,"We need an independent investigation. Like other Trump allies, Nunes has proven that he cannot be impartial. https://t.co/vzZb7pEKlT",morality and law,20,B,"{""label"":""B""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We need an independent investigation. Like other Trump allies, Nunes has proven that he cannot be impartial. https://t.co/vzZb7pEKlT
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We need an independent investigation. Like other Trump allies, Nunes has proven that he cannot be impartial. https://t.co/vzZb7pEKlT
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.1708984375,-0.216796875,-0.76953125,-0.6796875,A,"{""label"":""A""}",0.0458984375,A,False
+40,955457932073799682,1045110018,RepDanKildee,2018-01-22T15:11:37Z,"We can't keep funding the government just weeks at a time. That's no way to run the corner grocery store, let alone the world's largest economy. The American people and our military deserve better.
+
+My interview with @FoxNews: https://t.co/qDXhK9ulTJ",1,capacity and resources,,economics,955457932073799682,"We can't keep funding the government just weeks at a time. That's no way to run the corner grocery store, let alone the world's largest economy. The American people and our military deserve better. My interview with @FoxNews: https://t.co/qDXhK9ulTJ",economics,40,C,"{""label"":""C""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We can't keep funding the government just weeks at a time. That's no way to run the corner grocery store, let alone the world's largest economy. The American people and our military deserve better. My interview with @FoxNews: https://t.co/qDXhK9ulTJ
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We can't keep funding the government just weeks at a time. That's no way to run the corner grocery store, let alone the world's largest economy. The American people and our military deserve better. My interview with @FoxNews: https://t.co/qDXhK9ulTJ
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.2060546875,-0.51953125,-0.3046875,-0.494140625,A,"{""label"":""A""}",0.0986328125,A,False
+36,827293258195800066,2968451607,RepBonnie,2017-02-02T23:10:57Z,"Since the signing of the #ExecutiveOrders and its implementation worldwide, staff members have fielded concerns...",1,policy prescription and evaluation,,policy and regulation,827293258195800066,"Since the signing of the #ExecutiveOrders and its implementation worldwide, staff members have fielded concerns...",policy and regulation,36,A,"{""label"":""A""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Since the signing of the #ExecutiveOrders and its implementation worldwide, staff members have fielded concerns...
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Since the signing of the #ExecutiveOrders and its implementation worldwide, staff members have fielded concerns...
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.37109375,-0.478515625,-0.5234375,-0.142578125,D,"{""label"":""D""}",0.228515625,D,False
+39,908021467278913537,23600262,EleanorNorton,2017-09-13T17:36:02Z,I'll be on the floor at aprox 2pm to defend DC anti-discrimination law and budget autonomy referendum from unaccountable Members #HandsOffDC https://t.co/O6edByQDdF,1,policy prescription and evaluation,,policy and regulation,908021467278913537,I'll be on the floor at aprox 2pm to defend DC anti-discrimination law and budget autonomy referendum from unaccountable Members #HandsOffDC https://t.co/O6edByQDdF,policy and regulation,39,A,"{""label"":""A""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+I'll be on the floor at aprox 2pm to defend DC anti-discrimination law and budget autonomy referendum from unaccountable Members #HandsOffDC https://t.co/O6edByQDdF
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+I'll be on the floor at aprox 2pm to defend DC anti-discrimination law and budget autonomy referendum from unaccountable Members #HandsOffDC https://t.co/O6edByQDdF
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.1455078125,-0.427734375,-0.59375,-0.5,A,"{""label"":""A""}",0.2822265625,B,True
+23,824687762993508352,1065995022,RepWalorski,2017-01-26T18:37:39Z,Great to hear from @POTUS about how we can work together for the American people and keep our nation safe! https://t.co/Kaqv4G1WcG,1,security and defense,,economics,824687762993508352,Great to hear from @POTUS about how we can work together for the American people and keep our nation safe! https://t.co/Kaqv4G1WcG,economics,23,C,"{""label"":""C""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Great to hear from @POTUS about how we can work together for the American people and keep our nation safe! https://t.co/Kaqv4G1WcG
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Great to hear from @POTUS about how we can work together for the American people and keep our nation safe! https://t.co/Kaqv4G1WcG
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.30078125,-0.55859375,-0.26953125,-0.27734375,C,"{""label"":""C""}",0.0078125,D,True
+26,979403230030585856,2970279814,RepDebDingell,2018-03-29T17:01:41Z,"Joined @BakerCollege-Allen Park &amp; the @Guidance_Center for a critical discussion about how we can work together to combat the #opioid epidemic, which is impacting too many MI families. My focus→solutions that will save lives while not stigmatizing those with real medical needs. https://t.co/BlhP212G2r",1,health and safety,,morality and law,979403230030585856,"Joined @BakerCollege-Allen Park &amp; the @Guidance_Center for a critical discussion about how we can work together to combat the #opioid epidemic, which is impacting too many MI families. My focus→solutions that will save lives while not stigmatizing those with real medical needs. https://t.co/BlhP212G2r",morality and law,26,B,"{""label"":""B""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Joined @BakerCollege-Allen Park &amp; the @Guidance_Center for a critical discussion about how we can work together to combat the #opioid epidemic, which is impacting too many MI families. My focus→solutions that will save lives while not stigmatizing those with real medical needs. https://t.co/BlhP212G2r
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Joined @BakerCollege-Allen Park &amp; the @Guidance_Center for a critical discussion about how we can work together to combat the #opioid epidemic, which is impacting too many MI families. My focus→solutions that will save lives while not stigmatizing those with real medical needs. https://t.co/BlhP212G2r
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.33203125,-0.28515625,-0.330078125,-0.390625,B,"{""label"":""B""}",0.044921875,C,True
+30,981263141802782720,30216513,BradSherman,2018-04-03T20:12:18Z,"Scott Pruitt should resign because he's attacking the environment, rather than protecting it. And he's violating a host of ethics rules. #BootPruitt 
+
+https://t.co/TRWJFQXacm",1,morality,,morality and law,981263141802782720,"Scott Pruitt should resign because he's attacking the environment, rather than protecting it. And he's violating a host of ethics rules. #BootPruitt https://t.co/TRWJFQXacm",morality and law,30,B,"{""label"":""B""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Scott Pruitt should resign because he's attacking the environment, rather than protecting it. And he's violating a host of ethics rules. #BootPruitt https://t.co/TRWJFQXacm
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+Scott Pruitt should resign because he's attacking the environment, rather than protecting it. And he's violating a host of ethics rules. #BootPruitt https://t.co/TRWJFQXacm
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.396484375,-0.08984375,-0.8671875,-0.83203125,B,"{""label"":""B""}",0.306640625,A,True
+9,1022115714629545985,21269970,RoyBlunt,2018-07-25T13:45:51Z,My colleagues and I are working to ensure access to affordable energy for @FortLeonardWood and the local community: https://t.co/CA3ghDyo7p,1,economic,,economics,1022115714629545985,My colleagues and I are working to ensure access to affordable energy for @FortLeonardWood and the local community: https://t.co/CA3ghDyo7p,economics,9,C,"{""label"":""C""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+My colleagues and I are working to ensure access to affordable energy for @FortLeonardWood and the local community: https://t.co/CA3ghDyo7p
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+My colleagues and I are working to ensure access to affordable energy for @FortLeonardWood and the local community: https://t.co/CA3ghDyo7p
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.181640625,-0.59375,-0.35546875,-0.384765625,A,"{""label"":""A""}",0.173828125,A,False
+25,952918646887731200,58928690,RepAdamSmith,2018-01-15T15:01:24Z,"For all the progress we have made, we risk falling back if we do not stand up to the new rise in white supremacist bigotry on display most notably in Charlottesville last year &amp; in far too many other places. We must unequivocally say that a diverse America is a stronger America.",1,cultural identity,morality,other,952918646887731200,"For all the progress we have made, we risk falling back if we do not stand up to the new rise in white supremacist bigotry on display most notably in Charlottesville last year &amp; in far too many other places. We must unequivocally say that a diverse America is a stronger America.",other,25,D,"{""label"":""D""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+For all the progress we have made, we risk falling back if we do not stand up to the new rise in white supremacist bigotry on display most notably in Charlottesville last year &amp; in far too many other places. We must unequivocally say that a diverse America is a stronger America.
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+For all the progress we have made, we risk falling back if we do not stand up to the new rise in white supremacist bigotry on display most notably in Charlottesville last year &amp; in far too many other places. We must unequivocally say that a diverse America is a stronger America.
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""D""}",D,-0.2109375,-0.25390625,-0.68359375,-0.6171875,A,"{""label"":""A""}",0.04296875,A,False
+46,1039846086033256448,72198806,SenGillibrand,2018-09-12T12:00:00Z,We’re on the verge of a historic election of women. We’re responding to a president who doesn’t value us. We’ve been building up to this since women dedicated a Saturday to march. And those same women are now helping elect other women or running for office. Change is coming.,1,fairness and equality,,morality and law,1039846086033256448,We’re on the verge of a historic election of women. We’re responding to a president who doesn’t value us. We’ve been building up to this since women dedicated a Saturday to march. And those same women are now helping elect other women or running for office. Change is coming.,morality and law,46,B,"{""label"":""B""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We’re on the verge of a historic election of women. We’re responding to a president who doesn’t value us. We’ve been building up to this since women dedicated a Saturday to march. And those same women are now helping elect other women or running for office. Change is coming.
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+We’re on the verge of a historic election of women. We’re responding to a president who doesn’t value us. We’ve been building up to this since women dedicated a Saturday to march. And those same women are now helping elect other women or running for office. Change is coming.
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.349609375,-0.376953125,-0.5546875,-0.220703125,D,"{""label"":""D""}",0.12890625,D,False
+10,1022220103390298114,60828944,SenatorTomUdall,2018-07-25T20:40:39Z,"WATCH LIVE: I'm questioning Secretary Pompeo in the Foreign Relations Committee. Last week, @POTUS shunned our allies, stood next to Putin and refused to defend the integrity of American democracy. Millions of Americans want to know why. https://t.co/lAl2jNY246",1,public opinion,,economics,1022220103390298114,"WATCH LIVE: I'm questioning Secretary Pompeo in the Foreign Relations Committee. Last week, @POTUS shunned our allies, stood next to Putin and refused to defend the integrity of American democracy. Millions of Americans want to know why. https://t.co/lAl2jNY246",economics,10,C,"{""label"":""C""}","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+WATCH LIVE: I'm questioning Secretary Pompeo in the Foreign Relations Committee. Last week, @POTUS shunned our allies, stood next to Putin and refused to defend the integrity of American democracy. Millions of Americans want to know why. https://t.co/lAl2jNY246
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","“Content moderation” refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as one of the super-frames defined below:
+
+A: POLICY AND REGULATION if the tweet is on the topics of POLICY PRESCRIPTION AND EVALUATION, POLITICAL or EXTERNAL REGULATION AND REPUTATION, where POLICY PRESCRIPTION AND EVALUATION refers to Particular policies proposed for addressing an identified problem, and figuring out if certain policies will work, or if existing policies are effective; POLITICAL refers to Any political considerations surrounding an issue. Issue actions or efforts or stances that are political, such as partisan filibusters, lobbyist involvement, bipartisan efforts, deal-making and vote trading, appealing to one's base, mentions of political maneuvering. Explicit statements that a policy issue is good or bad for a particular political party; EXTERNAL REGULATION AND REPUTATION: The United States’ external relations with another nation; the external relations of one state with another; or relations between groups. This includes trade agreements and outcomes, comparisons of policy outcomes or desired policy outcomes.
+
+B: MORALITY AND LAW if the tweet is on the topics of MORALITY, FAIRNESS AND EQUALITY, LAW AND ORDER CRIME AND JUSTICE, CONSTITUTIONALITY AND JURISPRUDENCE or HEALTH AND SAFETY, where MORALITY refers to Any perspective—or policy objective or action (including proposed action)that is compelled by religious doctrine or interpretation, duty, honor, righteousness or any other sense of ethics or social responsibility; FAIRNESS AND EQUALITY refers to Equality or inequality with which laws, punishment, rewards, and resources are applied or distributed among individuals or groups. Also the balance between the rights or interests of one individual or group compared to another individual or group; LAW AND ORDER CRIME AND JUSTICE refers to Specific policies in practice and their enforcement, incentives, and implications. Includes stories about enforcement and interpretation of laws by individuals and law enforcement, breaking laws, loopholes, fines, sentencing and punishment. Increases or reductions in crime; CONSTITUTIONALITY AND JURISPRUDENCE refers to The constraints imposed on or freedoms granted to individuals, government, and corporations via the Constitution, Bill of Rights and other amendments, or judicial interpretation. This deals specifically with the authority of government to regulate, and the authority of individuals/corporations to act independently of government.; HEALTH AND SAFETY refers to Health care access and effectiveness, illness, disease, sanitation, obesity, mental health effects, prevention of or perpetuation of gun violence, infrastructure and building safety.
+
+C: ECONOMICS if the tweet is on the topics of ECONOMY, PUBLIC OPINION, QUALITY OF LIFE, CAPACITY AND RESOURCES or SECURITY AND DEFENSE, where ECONOMY refers to The costs, benefits, or monetary/financial implications of the issue (to an individual, family, community, or to the economy as a whole); PUBLIC OPINION refers to References to general social attitudes, polling and demographic information, as well as implied or actual consequences of diverging from or getting ahead of public opinion or polls.; QUALITY OF LIFE refers to The effects of a policy on individuals’ wealth, mobility, access to resources, happiness, social structures, ease of day-to-day routines, quality of community life, etc.; CAPACITY AND RESOURCES refers to The lack of or availability of physical, geographical, spatial, human, and financial resources, or the capacity of existing systems and resources to implement or carry out policy goals. SECURITY AND DEFENSE refers to Security, threats to security, and protection of one’s person, family, in-group, nation, etc. Generally an action or a call to action that can be taken to protect the welfare of a person, group, nation sometimes from a not yet manifested threat.
+
+D OTHER for Any topic that does not fit into the above categories.
+
+Now, which of the bellow frames best fit the following tweet? Answer with only the option below that is most accurate and nothing else.
+
+A: POLICY AND REGULATION 
+B: MORALITY AND LAW
+C: ECONOMICS
+D: OTHER
+
+WATCH LIVE: I'm questioning Secretary Pompeo in the Foreign Relations Committee. Last week, @POTUS shunned our allies, stood next to Putin and refused to defend the integrity of American democracy. Millions of Americans want to know why. https://t.co/lAl2jNY246
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C, D
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.1142578125,-0.3671875,-0.734375,-0.62109375,A,"{""label"":""A""}",0.2529296875,A,False

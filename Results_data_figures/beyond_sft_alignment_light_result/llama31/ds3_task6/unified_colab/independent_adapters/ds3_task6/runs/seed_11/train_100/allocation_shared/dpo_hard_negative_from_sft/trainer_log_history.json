@@ -1,0 +1,41 @@
+[
+  {
+    "epoch": 0.8,
+    "grad_norm": 11.075082778930664,
+    "learning_rate": 3.846153846153847e-06,
+    "logits/chosen": 1.0818549394607544,
+    "logits/rejected": 1.0593584775924683,
+    "logps/chosen": -6.812176704406738,
+    "logps/rejected": -7.715577602386475,
+    "loss": 0.6758117198944091,
+    "rewards/accuracies": 0.612500011920929,
+    "rewards/chosen": -0.1038225069642067,
+    "rewards/margins": 0.05082914978265762,
+    "rewards/rejected": -0.15465165674686432,
+    "step": 5
+  },
+  {
+    "epoch": 1.48,
+    "grad_norm": 10.308061599731445,
+    "learning_rate": 1.9230769230769234e-06,
+    "logits/chosen": 1.1097077131271362,
+    "logits/rejected": 1.0811586380004883,
+    "logps/chosen": -6.752556324005127,
+    "logps/rejected": -8.855892181396484,
+    "loss": 0.5230133056640625,
+    "rewards/accuracies": 0.7647058963775635,
+    "rewards/chosen": -0.20678025484085083,
+    "rewards/margins": 0.517156183719635,
+    "rewards/rejected": -0.7239364385604858,
+    "step": 10
+  },
+  {
+    "epoch": 2.0,
+    "step": 14,
+    "total_flos": 0.0,
+    "train_loss": 0.6067735808236259,
+    "train_runtime": 108.1561,
+    "train_samples_per_second": 1.849,
+    "train_steps_per_second": 0.129
+  }
+]

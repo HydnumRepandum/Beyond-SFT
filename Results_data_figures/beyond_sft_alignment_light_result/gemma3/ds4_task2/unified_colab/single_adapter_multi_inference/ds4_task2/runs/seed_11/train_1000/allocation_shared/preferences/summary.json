@@ -1,0 +1,19 @@
+{
+  "hard_negative": {
+    "data_allocation": "shared",
+    "fallback_count": 0,
+    "row_count": 1000
+  },
+  "kto": {
+    "data_allocation": "shared",
+    "desirable_row_count": 1000,
+    "row_count": 3000,
+    "strategy": "all_wrong",
+    "undesirable_row_count": 2000
+  },
+  "random_wrong": {
+    "data_allocation": "shared",
+    "fallback_count": 0,
+    "row_count": 1000
+  }
+}

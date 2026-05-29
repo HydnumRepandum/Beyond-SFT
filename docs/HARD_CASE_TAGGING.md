@@ -175,13 +175,3 @@ Relevant files:
 
 - [train.py](../scripts/train.py) subcommand `build-preferences`
   This uses `hard_negative_label` to build the `hard_negative` DPO dataset.
-
-## Takeaway
-
-The simplest way to think about it is:
-
-- `is_hard_primary`: the model is uncertain on a test example
-- `is_hard_secondary`: the model is wrong on a test example
-- `hard_negative_label`: the wrong answer the model likes most
-
-For post-training, the `hard_negative_label` is the key object because it tells DPO which plausible incorrect answer should be compared against the correct one.

@@ -1,0 +1,12 @@
+{
+  "data_allocation": "shared",
+  "inference_seed": 22,
+  "method": "sft_dpo",
+  "preference_strategy": "hard_negative",
+  "seed": 22,
+  "seed_semantics": "seed folder stores inference_seed; adapter was trained once with training_seed",
+  "source_adapter": "/content/DPO-Llama3-1-main/outputs/llama31_8b/single_adapter_multi_inference/ds1_task6/runs/seed_11/train_50/allocation_shared/dpo_hard_negative_from_sft/adapter",
+  "start_from": "sft",
+  "train_size": 50,
+  "training_seed": 11
+}

@@ -1,0 +1,12 @@
+{
+  "data_allocation": "shared",
+  "inference_seed": 33,
+  "method": "sft_dpo",
+  "preference_strategy": "hard_negative",
+  "seed": 33,
+  "seed_semantics": "seed folder stores inference_seed; adapter was trained once with training_seed",
+  "source_adapter": "/content/Beyond-SFT/outputs/gemma3_12b/single_adapter_multi_inference/ds3_task6/runs/seed_11/train_250/allocation_shared/dpo_hard_negative_from_sft/adapter",
+  "start_from": "sft",
+  "train_size": 250,
+  "training_seed": 11
+}

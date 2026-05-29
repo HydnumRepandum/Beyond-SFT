@@ -1,0 +1,645 @@
+example_id,timestamp,publication_name,title_h1,text_200,label_raw,text_raw,source_example_id,text,label_raw_normalized,source_row_index,label,gold_response,prompt,sft_text,label_display,score__A,score__B,score__C,predicted_label,predicted_response,score_margin,hard_negative_label,is_correct
+799070,44352,WAMU88.5,"Silenced On Facebook And Twitter, Trump Is Set To Speak Out Again On Campaign Trail","A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely...
+
+A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a...
+
+A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely to be a spree of summer campaigning. It’s his first public speech since his address at the Conservative Political Action Conference in February. Trump called it “a great honor to be speaking” before the group. “I understand the place will be packed, all",Neither,"Silenced On Facebook And Twitter, Trump Is Set To Speak Out Again On Campaign Trail A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely...
+
+A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a...
+
+A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely to be a spree of summer campaigning. It’s his first public speech since his address at the Conservative Political Action Conference in February. Trump called it “a great honor to be speaking” before the group. “I understand the place will be packed, all",799070,"Silenced On Facebook And Twitter, Trump Is Set To Speak Out Again On Campaign Trail A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely to be a spree of summer campaigning. It’s his first public speech since his address at the Conservative Political Action Conference in February. Trump called it “a great honor to be speaking” before the group. “I understand the place will be packed, all",neither,9,C,"{""label"":""C""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Silenced On Facebook And Twitter, Trump Is Set To Speak Out Again On Campaign Trail A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely to be a spree of summer campaigning. It’s his first public speech since his address at the Conservative Political Action Conference in February. Trump called it “a great honor to be speaking” before the group. “I understand the place will be packed, all
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Silenced On Facebook And Twitter, Trump Is Set To Speak Out Again On Campaign Trail A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a... A day after being suspended from Facebook for another two years , former President Donald Trump returns to the political arena Saturday night, poised to get back into his comfort zone speaking from the kind of platform he seems to enjoy most. He’s making a speech before the North Carolina Republican Party convention, kicking off what’s likely to be a spree of summer campaigning. It’s his first public speech since his address at the Conservative Political Action Conference in February. Trump called it “a great honor to be speaking” before the group. “I understand the place will be packed, all
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.0211181640625,-1.015625,-0.49609375,A,"{""label"":""A""}",0.4749755859375,A,False
+762441,2021-06-12,Chatham Daily News,Twitter vaccine myths crackdown overdue,"When I was little, I was fond of a book called Girls Can Be Anything. It is about two friends. Adam insists only boys can be pilots and doctors, and Marina sets out to prove him wrong. When Adam's preposterous boast every U.S. president has been a man turns out to be true, Marina resolves to become the first female president.
+
+""This is the book that made me a feminist,"" begins a review on Goodreads.com, which captures my feelings.
+
+The cherished 1973 children's story by Norma Klein helped lay the foundation, but the book that cemented my identity as an unapologetic feminist was Naomi Wolf's The Beauty Myth. Her polemic awakened me to the crippling strictures of the male gaze, and its pervasive impact in the workforce and on campus. I developed strong opinions about high heels, and saying yes to dessert.
+
+The impact of her work was not isolated. The Beauty Myth was listed among the New York Times'70 most influential books of the 20th century. Wolf was celebrated as a pioneer of third-wave feminism.
+
+Any lingering feelings of hero worship crashed hard last week when Wolf was suspended by Twitter, after using the platform to spread misinformation about vaccines.
+
+It's become clear the",Neither,"Twitter vaccine myths crackdown overdue When I was little, I was fond of a book called Girls Can Be Anything. It is about two friends. Adam insists only boys can be pilots and doctors, and Marina sets out to prove him wrong. When Adam's preposterous boast every U.S. president has been a man turns out to be true, Marina resolves to become the first female president.
+
+""This is the book that made me a feminist,"" begins a review on Goodreads.com, which captures my feelings.
+
+The cherished 1973 children's story by Norma Klein helped lay the foundation, but the book that cemented my identity as an unapologetic feminist was Naomi Wolf's The Beauty Myth. Her polemic awakened me to the crippling strictures of the male gaze, and its pervasive impact in the workforce and on campus. I developed strong opinions about high heels, and saying yes to dessert.
+
+The impact of her work was not isolated. The Beauty Myth was listed among the New York Times'70 most influential books of the 20th century. Wolf was celebrated as a pioneer of third-wave feminism.
+
+Any lingering feelings of hero worship crashed hard last week when Wolf was suspended by Twitter, after using the platform to spread misinformation about vaccines.
+
+It's become clear the",762441,"Twitter vaccine myths crackdown overdue When I was little, I was fond of a book called Girls Can Be Anything. It is about two friends. Adam insists only boys can be pilots and doctors, and Marina sets out to prove him wrong. When Adam's preposterous boast every U.S. president has been a man turns out to be true, Marina resolves to become the first female president. ""This is the book that made me a feminist,"" begins a review on Goodreads.com, which captures my feelings. The cherished 1973 children's story by Norma Klein helped lay the foundation, but the book that cemented my identity as an unapologetic feminist was Naomi Wolf's The Beauty Myth. Her polemic awakened me to the crippling strictures of the male gaze, and its pervasive impact in the workforce and on campus. I developed strong opinions about high heels, and saying yes to dessert. The impact of her work was not isolated. The Beauty Myth was listed among the New York Times'70 most influential books of the 20th century. Wolf was celebrated as a pioneer of third-wave feminism. Any lingering feelings of hero worship crashed hard last week when Wolf was suspended by Twitter, after using the platform to spread misinformation about vaccines. It's become clear the",neither,3,C,"{""label"":""C""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Twitter vaccine myths crackdown overdue When I was little, I was fond of a book called Girls Can Be Anything. It is about two friends. Adam insists only boys can be pilots and doctors, and Marina sets out to prove him wrong. When Adam's preposterous boast every U.S. president has been a man turns out to be true, Marina resolves to become the first female president. ""This is the book that made me a feminist,"" begins a review on Goodreads.com, which captures my feelings. The cherished 1973 children's story by Norma Klein helped lay the foundation, but the book that cemented my identity as an unapologetic feminist was Naomi Wolf's The Beauty Myth. Her polemic awakened me to the crippling strictures of the male gaze, and its pervasive impact in the workforce and on campus. I developed strong opinions about high heels, and saying yes to dessert. The impact of her work was not isolated. The Beauty Myth was listed among the New York Times'70 most influential books of the 20th century. Wolf was celebrated as a pioneer of third-wave feminism. Any lingering feelings of hero worship crashed hard last week when Wolf was suspended by Twitter, after using the platform to spread misinformation about vaccines. It's become clear the
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Twitter vaccine myths crackdown overdue When I was little, I was fond of a book called Girls Can Be Anything. It is about two friends. Adam insists only boys can be pilots and doctors, and Marina sets out to prove him wrong. When Adam's preposterous boast every U.S. president has been a man turns out to be true, Marina resolves to become the first female president. ""This is the book that made me a feminist,"" begins a review on Goodreads.com, which captures my feelings. The cherished 1973 children's story by Norma Klein helped lay the foundation, but the book that cemented my identity as an unapologetic feminist was Naomi Wolf's The Beauty Myth. Her polemic awakened me to the crippling strictures of the male gaze, and its pervasive impact in the workforce and on campus. I developed strong opinions about high heels, and saying yes to dessert. The impact of her work was not isolated. The Beauty Myth was listed among the New York Times'70 most influential books of the 20th century. Wolf was celebrated as a pioneer of third-wave feminism. Any lingering feelings of hero worship crashed hard last week when Wolf was suspended by Twitter, after using the platform to spread misinformation about vaccines. It's become clear the
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.11962890625,-0.66796875,-0.1943359375,A,"{""label"":""A""}",0.07470703125,A,False
+292277,43958,Newstex Blogs,"Facebook names its Oversight Board, a 'supreme court' that can overrule Zuckerberg","May 07, 2020( TheNextWeb.com: http://thenextweb.com Delivered by Newstex) Facebook today revealed the first 20 members of its Oversight Board, an independent body that can pass judgement on Facebook's policies, assist in content moderation, and hear appeals on existing decisions. In theory, it's a committee that can help Facebook navigate difficult decisions of what's okay to have on the platform, and can overrule even CEO Mark Zuckerberg. Let's see what they actually do in practice. In case you don't remember— because it's been over a year since Zuckerberg first mentioned the plan — the idea behind this group is that it'll be able to overrule Facebook's upper management in policy decisions and content moderation.
+
+There will be 40 members in total, from a variety of different backgrounds, none of whom have any connection to Facebook itself. It'll also be funded by an independent $130 million trust. The board will hear cases in five-person panels and make final rulings, saying on its site[1] that 'Facebook must implement our decisions, unless implementation could violate the law.' Zuckerberg said in 2018[2] that the independent board would 'be focused only on our community,' adding: 'The purpose of this body would be to uphold the principle of",Neither,"Facebook names its Oversight Board, a 'supreme court' that can overrule Zuckerberg May 07, 2020( TheNextWeb.com: http://thenextweb.com Delivered by Newstex) Facebook today revealed the first 20 members of its Oversight Board, an independent body that can pass judgement on Facebook's policies, assist in content moderation, and hear appeals on existing decisions. In theory, it's a committee that can help Facebook navigate difficult decisions of what's okay to have on the platform, and can overrule even CEO Mark Zuckerberg. Let's see what they actually do in practice. In case you don't remember— because it's been over a year since Zuckerberg first mentioned the plan — the idea behind this group is that it'll be able to overrule Facebook's upper management in policy decisions and content moderation.
+
+There will be 40 members in total, from a variety of different backgrounds, none of whom have any connection to Facebook itself. It'll also be funded by an independent $130 million trust. The board will hear cases in five-person panels and make final rulings, saying on its site[1] that 'Facebook must implement our decisions, unless implementation could violate the law.' Zuckerberg said in 2018[2] that the independent board would 'be focused only on our community,' adding: 'The purpose of this body would be to uphold the principle of",292277,"Facebook names its Oversight Board, a 'supreme court' that can overrule Zuckerberg May 07, 2020( TheNextWeb.com: http://thenextweb.com Delivered by Newstex) Facebook today revealed the first 20 members of its Oversight Board, an independent body that can pass judgement on Facebook's policies, assist in content moderation, and hear appeals on existing decisions. In theory, it's a committee that can help Facebook navigate difficult decisions of what's okay to have on the platform, and can overrule even CEO Mark Zuckerberg. Let's see what they actually do in practice. In case you don't remember— because it's been over a year since Zuckerberg first mentioned the plan — the idea behind this group is that it'll be able to overrule Facebook's upper management in policy decisions and content moderation. There will be 40 members in total, from a variety of different backgrounds, none of whom have any connection to Facebook itself. It'll also be funded by an independent $130 million trust. The board will hear cases in five-person panels and make final rulings, saying on its site[1] that 'Facebook must implement our decisions, unless implementation could violate the law.' Zuckerberg said in 2018[2] that the independent board would 'be focused only on our community,' adding: 'The purpose of this body would be to uphold the principle of",neither,1,C,"{""label"":""C""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Facebook names its Oversight Board, a 'supreme court' that can overrule Zuckerberg May 07, 2020( TheNextWeb.com: http://thenextweb.com Delivered by Newstex) Facebook today revealed the first 20 members of its Oversight Board, an independent body that can pass judgement on Facebook's policies, assist in content moderation, and hear appeals on existing decisions. In theory, it's a committee that can help Facebook navigate difficult decisions of what's okay to have on the platform, and can overrule even CEO Mark Zuckerberg. Let's see what they actually do in practice. In case you don't remember— because it's been over a year since Zuckerberg first mentioned the plan — the idea behind this group is that it'll be able to overrule Facebook's upper management in policy decisions and content moderation. There will be 40 members in total, from a variety of different backgrounds, none of whom have any connection to Facebook itself. It'll also be funded by an independent $130 million trust. The board will hear cases in five-person panels and make final rulings, saying on its site[1] that 'Facebook must implement our decisions, unless implementation could violate the law.' Zuckerberg said in 2018[2] that the independent board would 'be focused only on our community,' adding: 'The purpose of this body would be to uphold the principle of
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Facebook names its Oversight Board, a 'supreme court' that can overrule Zuckerberg May 07, 2020( TheNextWeb.com: http://thenextweb.com Delivered by Newstex) Facebook today revealed the first 20 members of its Oversight Board, an independent body that can pass judgement on Facebook's policies, assist in content moderation, and hear appeals on existing decisions. In theory, it's a committee that can help Facebook navigate difficult decisions of what's okay to have on the platform, and can overrule even CEO Mark Zuckerberg. Let's see what they actually do in practice. In case you don't remember— because it's been over a year since Zuckerberg first mentioned the plan — the idea behind this group is that it'll be able to overrule Facebook's upper management in policy decisions and content moderation. There will be 40 members in total, from a variety of different backgrounds, none of whom have any connection to Facebook itself. It'll also be funded by an independent $130 million trust. The board will hear cases in five-person panels and make final rulings, saying on its site[1] that 'Facebook must implement our decisions, unless implementation could violate the law.' Zuckerberg said in 2018[2] that the independent board would 'be focused only on our community,' adding: 'The purpose of this body would be to uphold the principle of
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.73828125,-0.98828125,-0.0126953125,C,"{""label"":""C""}",0.7255859375,A,True
+1009601,44280,The Independent (United Kingdom),Zuckerberg says Facebook doesn't allow misinformation in ads - despite repeatedly allowing politicians to lie,"Facebook does not fact-check political adverts, thereby allowing misinformation to spread
+
+Facebook CEO Mark Zuckerberg has claimed that the social media company does not allow misinformation in adverts , despite Facebook continually allowing misinformation in adverts.
+
+Answering a question by Chair Schakowsky, who asked whetherFacebook thinks that when it ""take[s] money to run advertisements to promoted disinformation that [it is] exempt from liability"".
+
+Mr Zuckerberg responded: ""Congresswoman, I don't know the legal answer to that but we don't allow misinformation in our ads, and any ads that has been fact checked as false we do not allow to run as an ad.""
+
+Facebook does allow misinformation to run in ads, because the company does not fact-check political adverts.
+
+In a blog post from September 2019, former deputy prime minister and current Facebook VP of Global Affairs and Communications Nick Clegg wrote : ""We rely on third-party fact-checkers to help reduce the spread of false news and other types of viral misinformation, like memes or manipulated photos and videos.""
+
+""We don't believe, however, that it's an appropriate role for us to referee political debates and prevent a politician's speech from reaching its audience and being subject to public debate and scrutiny. That's why Facebook exempts politicians from",Solution,"Zuckerberg says Facebook doesn't allow misinformation in ads - despite repeatedly allowing politicians to lie Facebook does not fact-check political adverts, thereby allowing misinformation to spread
+
+Facebook CEO Mark Zuckerberg has claimed that the social media company does not allow misinformation in adverts , despite Facebook continually allowing misinformation in adverts.
+
+Answering a question by Chair Schakowsky, who asked whetherFacebook thinks that when it ""take[s] money to run advertisements to promoted disinformation that [it is] exempt from liability"".
+
+Mr Zuckerberg responded: ""Congresswoman, I don't know the legal answer to that but we don't allow misinformation in our ads, and any ads that has been fact checked as false we do not allow to run as an ad.""
+
+Facebook does allow misinformation to run in ads, because the company does not fact-check political adverts.
+
+In a blog post from September 2019, former deputy prime minister and current Facebook VP of Global Affairs and Communications Nick Clegg wrote : ""We rely on third-party fact-checkers to help reduce the spread of false news and other types of viral misinformation, like memes or manipulated photos and videos.""
+
+""We don't believe, however, that it's an appropriate role for us to referee political debates and prevent a politician's speech from reaching its audience and being subject to public debate and scrutiny. That's why Facebook exempts politicians from",1009601,"Zuckerberg says Facebook doesn't allow misinformation in ads - despite repeatedly allowing politicians to lie Facebook does not fact-check political adverts, thereby allowing misinformation to spread Facebook CEO Mark Zuckerberg has claimed that the social media company does not allow misinformation in adverts , despite Facebook continually allowing misinformation in adverts. Answering a question by Chair Schakowsky, who asked whetherFacebook thinks that when it ""take[s] money to run advertisements to promoted disinformation that [it is] exempt from liability"". Mr Zuckerberg responded: ""Congresswoman, I don't know the legal answer to that but we don't allow misinformation in our ads, and any ads that has been fact checked as false we do not allow to run as an ad."" Facebook does allow misinformation to run in ads, because the company does not fact-check political adverts. In a blog post from September 2019, former deputy prime minister and current Facebook VP of Global Affairs and Communications Nick Clegg wrote : ""We rely on third-party fact-checkers to help reduce the spread of false news and other types of viral misinformation, like memes or manipulated photos and videos."" ""We don't believe, however, that it's an appropriate role for us to referee political debates and prevent a politician's speech from reaching its audience and being subject to public debate and scrutiny. That's why Facebook exempts politicians from",solution,35,B,"{""label"":""B""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Zuckerberg says Facebook doesn't allow misinformation in ads - despite repeatedly allowing politicians to lie Facebook does not fact-check political adverts, thereby allowing misinformation to spread Facebook CEO Mark Zuckerberg has claimed that the social media company does not allow misinformation in adverts , despite Facebook continually allowing misinformation in adverts. Answering a question by Chair Schakowsky, who asked whetherFacebook thinks that when it ""take[s] money to run advertisements to promoted disinformation that [it is] exempt from liability"". Mr Zuckerberg responded: ""Congresswoman, I don't know the legal answer to that but we don't allow misinformation in our ads, and any ads that has been fact checked as false we do not allow to run as an ad."" Facebook does allow misinformation to run in ads, because the company does not fact-check political adverts. In a blog post from September 2019, former deputy prime minister and current Facebook VP of Global Affairs and Communications Nick Clegg wrote : ""We rely on third-party fact-checkers to help reduce the spread of false news and other types of viral misinformation, like memes or manipulated photos and videos."" ""We don't believe, however, that it's an appropriate role for us to referee political debates and prevent a politician's speech from reaching its audience and being subject to public debate and scrutiny. That's why Facebook exempts politicians from
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Zuckerberg says Facebook doesn't allow misinformation in ads - despite repeatedly allowing politicians to lie Facebook does not fact-check political adverts, thereby allowing misinformation to spread Facebook CEO Mark Zuckerberg has claimed that the social media company does not allow misinformation in adverts , despite Facebook continually allowing misinformation in adverts. Answering a question by Chair Schakowsky, who asked whetherFacebook thinks that when it ""take[s] money to run advertisements to promoted disinformation that [it is] exempt from liability"". Mr Zuckerberg responded: ""Congresswoman, I don't know the legal answer to that but we don't allow misinformation in our ads, and any ads that has been fact checked as false we do not allow to run as an ad."" Facebook does allow misinformation to run in ads, because the company does not fact-check political adverts. In a blog post from September 2019, former deputy prime minister and current Facebook VP of Global Affairs and Communications Nick Clegg wrote : ""We rely on third-party fact-checkers to help reduce the spread of false news and other types of viral misinformation, like memes or manipulated photos and videos."" ""We don't believe, however, that it's an appropriate role for us to referee political debates and prevent a politician's speech from reaching its audience and being subject to public debate and scrutiny. That's why Facebook exempts politicians from
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.0693359375,-0.84375,-0.26953125,A,"{""label"":""A""}",0.2001953125,A,False
+796358,44312,Economic Times (E-Paper Edition),Platforms Told to Block 100 Posts for Covid Misinfo,"Firms in talks with govt and conducting internal review to decide whether to keep posts blocked
+
+The government has directed social media platforms like Twitter to block close to 100 posts in order to “prevent obstructions” to the fight against the pandemic and escalation of crimes against public order, government officials told ET.
+
+They said certain people were using social media platforms to spread fake or misleading information and create panic about the situation in India by using “unrelated, old and out of the context” images or visuals, communally sensitive posts and misinformation about the Covid-19 protocols.
+
+The government welcomes criticism, genuine requests for help as well as suggestions in the collective fight against Covid-19, but it is necessary to take action against those users who are misusing social media during this grave humanitarian crisis for unethical purposes, one of the people said.
+
+The Ministry of Electronics and Information
+
+Technology (MeitY) ordered blocking of the posts on a recommendation from the Ministry of Home Affairs. On Saturday, it was reported that Twitter had removed around 50 tweets allegedly criticising the central government's handling of the Covid-19 pandemic on MeitY's instructions. These included tweets of Congress MP Revanth Reddy, West Bengal minister Moloy Ghatak, actor Vineet",Solution,"Platforms Told to Block 100 Posts for Covid Misinfo Firms in talks with govt and conducting internal review to decide whether to keep posts blocked
+
+The government has directed social media platforms like Twitter to block close to 100 posts in order to “prevent obstructions” to the fight against the pandemic and escalation of crimes against public order, government officials told ET.
+
+They said certain people were using social media platforms to spread fake or misleading information and create panic about the situation in India by using “unrelated, old and out of the context” images or visuals, communally sensitive posts and misinformation about the Covid-19 protocols.
+
+The government welcomes criticism, genuine requests for help as well as suggestions in the collective fight against Covid-19, but it is necessary to take action against those users who are misusing social media during this grave humanitarian crisis for unethical purposes, one of the people said.
+
+The Ministry of Electronics and Information
+
+Technology (MeitY) ordered blocking of the posts on a recommendation from the Ministry of Home Affairs. On Saturday, it was reported that Twitter had removed around 50 tweets allegedly criticising the central government's handling of the Covid-19 pandemic on MeitY's instructions. These included tweets of Congress MP Revanth Reddy, West Bengal minister Moloy Ghatak, actor Vineet",796358,"Platforms Told to Block 100 Posts for Covid Misinfo Firms in talks with govt and conducting internal review to decide whether to keep posts blocked The government has directed social media platforms like Twitter to block close to 100 posts in order to “prevent obstructions” to the fight against the pandemic and escalation of crimes against public order, government officials told ET. They said certain people were using social media platforms to spread fake or misleading information and create panic about the situation in India by using “unrelated, old and out of the context” images or visuals, communally sensitive posts and misinformation about the Covid-19 protocols. The government welcomes criticism, genuine requests for help as well as suggestions in the collective fight against Covid-19, but it is necessary to take action against those users who are misusing social media during this grave humanitarian crisis for unethical purposes, one of the people said. The Ministry of Electronics and Information Technology (MeitY) ordered blocking of the posts on a recommendation from the Ministry of Home Affairs. On Saturday, it was reported that Twitter had removed around 50 tweets allegedly criticising the central government's handling of the Covid-19 pandemic on MeitY's instructions. These included tweets of Congress MP Revanth Reddy, West Bengal minister Moloy Ghatak, actor Vineet",solution,41,B,"{""label"":""B""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Platforms Told to Block 100 Posts for Covid Misinfo Firms in talks with govt and conducting internal review to decide whether to keep posts blocked The government has directed social media platforms like Twitter to block close to 100 posts in order to “prevent obstructions” to the fight against the pandemic and escalation of crimes against public order, government officials told ET. They said certain people were using social media platforms to spread fake or misleading information and create panic about the situation in India by using “unrelated, old and out of the context” images or visuals, communally sensitive posts and misinformation about the Covid-19 protocols. The government welcomes criticism, genuine requests for help as well as suggestions in the collective fight against Covid-19, but it is necessary to take action against those users who are misusing social media during this grave humanitarian crisis for unethical purposes, one of the people said. The Ministry of Electronics and Information Technology (MeitY) ordered blocking of the posts on a recommendation from the Ministry of Home Affairs. On Saturday, it was reported that Twitter had removed around 50 tweets allegedly criticising the central government's handling of the Covid-19 pandemic on MeitY's instructions. These included tweets of Congress MP Revanth Reddy, West Bengal minister Moloy Ghatak, actor Vineet
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Platforms Told to Block 100 Posts for Covid Misinfo Firms in talks with govt and conducting internal review to decide whether to keep posts blocked The government has directed social media platforms like Twitter to block close to 100 posts in order to “prevent obstructions” to the fight against the pandemic and escalation of crimes against public order, government officials told ET. They said certain people were using social media platforms to spread fake or misleading information and create panic about the situation in India by using “unrelated, old and out of the context” images or visuals, communally sensitive posts and misinformation about the Covid-19 protocols. The government welcomes criticism, genuine requests for help as well as suggestions in the collective fight against Covid-19, but it is necessary to take action against those users who are misusing social media during this grave humanitarian crisis for unethical purposes, one of the people said. The Ministry of Electronics and Information Technology (MeitY) ordered blocking of the posts on a recommendation from the Ministry of Home Affairs. On Saturday, it was reported that Twitter had removed around 50 tweets allegedly criticising the central government's handling of the Covid-19 pandemic on MeitY's instructions. These included tweets of Congress MP Revanth Reddy, West Bengal minister Moloy Ghatak, actor Vineet
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.130859375,-0.37890625,-0.2294921875,A,"{""label"":""A""}",0.0986328125,A,False
+312432,2020-04-23,Newstex Blogs,FBI reportedly falsified documents in last presidential election,"Apr 23, 2020( The Geller Report: https://gellerreport.com Delivered by Newstex) ; No media coverage of the Obama administration's treason. FBI reportedly falsified documents in last presidential election: John Solomon [Fox Business Videos][embedded content] Fox Business VideosApril 17, 2020 FOX Business contributor and investigative journalist John Solomon argues the FBI allegedly conducted a misinformation campaign during the 2016 presidential election.Have a tip we should know? Your anonymity is NEVER compromised. Email tips@thegellerreport.com[1] The Truth Must be Told Your contribution supports independent journalism; Please take a moment to consider this.
+
+Now, more than ever, people are reading Geller Report for news they won't get anywhere else. But advertising revenues have all but disappeared. Google Adsense is the online advertising monopoly and they have banned us. Social media giants like Facebook and Twitter have blocked and shadow-banned our accounts. But we won't put up a paywall. Because never has the free world needed independent journalism more. Everyone who reads our reporting knows the Geller Report covers the news the media won't. We cannot do our ground-breaking report without your support. We must continue to report on the global jihad and the left's war on freedom. Our readers' contributions make that possible. Geller Report's independent,",Problem,"FBI reportedly falsified documents in last presidential election Apr 23, 2020( The Geller Report: https://gellerreport.com Delivered by Newstex) ; No media coverage of the Obama administration's treason. FBI reportedly falsified documents in last presidential election: John Solomon [Fox Business Videos][embedded content] Fox Business VideosApril 17, 2020 FOX Business contributor and investigative journalist John Solomon argues the FBI allegedly conducted a misinformation campaign during the 2016 presidential election.Have a tip we should know? Your anonymity is NEVER compromised. Email tips@thegellerreport.com[1] The Truth Must be Told Your contribution supports independent journalism; Please take a moment to consider this.
+
+Now, more than ever, people are reading Geller Report for news they won't get anywhere else. But advertising revenues have all but disappeared. Google Adsense is the online advertising monopoly and they have banned us. Social media giants like Facebook and Twitter have blocked and shadow-banned our accounts. But we won't put up a paywall. Because never has the free world needed independent journalism more. Everyone who reads our reporting knows the Geller Report covers the news the media won't. We cannot do our ground-breaking report without your support. We must continue to report on the global jihad and the left's war on freedom. Our readers' contributions make that possible. Geller Report's independent,",312432,"FBI reportedly falsified documents in last presidential election Apr 23, 2020( The Geller Report: https://gellerreport.com Delivered by Newstex) ; No media coverage of the Obama administration's treason. FBI reportedly falsified documents in last presidential election: John Solomon [Fox Business Videos][embedded content] Fox Business VideosApril 17, 2020 FOX Business contributor and investigative journalist John Solomon argues the FBI allegedly conducted a misinformation campaign during the 2016 presidential election.Have a tip we should know? Your anonymity is NEVER compromised. Email tips@thegellerreport.com[1] The Truth Must be Told Your contribution supports independent journalism; Please take a moment to consider this. Now, more than ever, people are reading Geller Report for news they won't get anywhere else. But advertising revenues have all but disappeared. Google Adsense is the online advertising monopoly and they have banned us. Social media giants like Facebook and Twitter have blocked and shadow-banned our accounts. But we won't put up a paywall. Because never has the free world needed independent journalism more. Everyone who reads our reporting knows the Geller Report covers the news the media won't. We cannot do our ground-breaking report without your support. We must continue to report on the global jihad and the left's war on freedom. Our readers' contributions make that possible. Geller Report's independent,",problem,17,A,"{""label"":""A""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+FBI reportedly falsified documents in last presidential election Apr 23, 2020( The Geller Report: https://gellerreport.com Delivered by Newstex) ; No media coverage of the Obama administration's treason. FBI reportedly falsified documents in last presidential election: John Solomon [Fox Business Videos][embedded content] Fox Business VideosApril 17, 2020 FOX Business contributor and investigative journalist John Solomon argues the FBI allegedly conducted a misinformation campaign during the 2016 presidential election.Have a tip we should know? Your anonymity is NEVER compromised. Email tips@thegellerreport.com[1] The Truth Must be Told Your contribution supports independent journalism; Please take a moment to consider this. Now, more than ever, people are reading Geller Report for news they won't get anywhere else. But advertising revenues have all but disappeared. Google Adsense is the online advertising monopoly and they have banned us. Social media giants like Facebook and Twitter have blocked and shadow-banned our accounts. But we won't put up a paywall. Because never has the free world needed independent journalism more. Everyone who reads our reporting knows the Geller Report covers the news the media won't. We cannot do our ground-breaking report without your support. We must continue to report on the global jihad and the left's war on freedom. Our readers' contributions make that possible. Geller Report's independent,
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+FBI reportedly falsified documents in last presidential election Apr 23, 2020( The Geller Report: https://gellerreport.com Delivered by Newstex) ; No media coverage of the Obama administration's treason. FBI reportedly falsified documents in last presidential election: John Solomon [Fox Business Videos][embedded content] Fox Business VideosApril 17, 2020 FOX Business contributor and investigative journalist John Solomon argues the FBI allegedly conducted a misinformation campaign during the 2016 presidential election.Have a tip we should know? Your anonymity is NEVER compromised. Email tips@thegellerreport.com[1] The Truth Must be Told Your contribution supports independent journalism; Please take a moment to consider this. Now, more than ever, people are reading Geller Report for news they won't get anywhere else. But advertising revenues have all but disappeared. Google Adsense is the online advertising monopoly and they have banned us. Social media giants like Facebook and Twitter have blocked and shadow-banned our accounts. But we won't put up a paywall. Because never has the free world needed independent journalism more. Everyone who reads our reporting knows the Geller Report covers the news the media won't. We cannot do our ground-breaking report without your support. We must continue to report on the global jihad and the left's war on freedom. Our readers' contributions make that possible. Geller Report's independent,
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.1162109375,-0.69140625,-0.19140625,A,"{""label"":""A""}",0.0751953125,C,True
+603820,2020-11-09,"CBS - 5 WKRG (Mobile, Alabama)",What is Parler? Here's why it's the top app after the election,"DALLAS (NEXSTAR) -- If you check out Apple's App Store on Monday, you'll notice Parler is the most popular app in the country.
+
+That has many wondering: What the heck is it?
+
+Parler is a social media app that bills itself as a place of ""free speech,"" and it's become particularly popular with conservatives following the presidential election -- particularly since Facebook and Twitter started flagging untrue posts by President Donald Trump.
+
+On Sunday, Parler owner Dan Bongino told the BBC his app was adding ""thousands to users per minute.""
+
+Newsweek reported the platform picked up about 2 million new users Sunday.
+
+Pres. Donald Trump fires Defense Secretary Mark Esper
+
+While Trump hasn't yet joined the social platform, it includes top conservative names like Sean Hannity, Mark Levin, and Texas Senator Ted Cruz. Each already has more than 2 million followers on the platform.
+
+Last week, Maria Bartiromo of Fox News said she planned to abandon Twitter and switch over to Parler after some of her updated were hidden.
+
+Additionally, Newt Gingrich has been using his Twitter account as a promotional tool to try and get people to follow him over to Parler.
+
+HUD Secretary Ben Carson tests positive for coronavirus
+
+While you may not be familiar with Parler, it's",Problem,"What is Parler? Here's why it's the top app after the election DALLAS (NEXSTAR) -- If you check out Apple's App Store on Monday, you'll notice Parler is the most popular app in the country.
+
+That has many wondering: What the heck is it?
+
+Parler is a social media app that bills itself as a place of ""free speech,"" and it's become particularly popular with conservatives following the presidential election -- particularly since Facebook and Twitter started flagging untrue posts by President Donald Trump.
+
+On Sunday, Parler owner Dan Bongino told the BBC his app was adding ""thousands to users per minute.""
+
+Newsweek reported the platform picked up about 2 million new users Sunday.
+
+Pres. Donald Trump fires Defense Secretary Mark Esper
+
+While Trump hasn't yet joined the social platform, it includes top conservative names like Sean Hannity, Mark Levin, and Texas Senator Ted Cruz. Each already has more than 2 million followers on the platform.
+
+Last week, Maria Bartiromo of Fox News said she planned to abandon Twitter and switch over to Parler after some of her updated were hidden.
+
+Additionally, Newt Gingrich has been using his Twitter account as a promotional tool to try and get people to follow him over to Parler.
+
+HUD Secretary Ben Carson tests positive for coronavirus
+
+While you may not be familiar with Parler, it's",603820,"What is Parler? Here's why it's the top app after the election DALLAS (NEXSTAR) -- If you check out Apple's App Store on Monday, you'll notice Parler is the most popular app in the country. That has many wondering: What the heck is it? Parler is a social media app that bills itself as a place of ""free speech,"" and it's become particularly popular with conservatives following the presidential election -- particularly since Facebook and Twitter started flagging untrue posts by President Donald Trump. On Sunday, Parler owner Dan Bongino told the BBC his app was adding ""thousands to users per minute."" Newsweek reported the platform picked up about 2 million new users Sunday. Pres. Donald Trump fires Defense Secretary Mark Esper While Trump hasn't yet joined the social platform, it includes top conservative names like Sean Hannity, Mark Levin, and Texas Senator Ted Cruz. Each already has more than 2 million followers on the platform. Last week, Maria Bartiromo of Fox News said she planned to abandon Twitter and switch over to Parler after some of her updated were hidden. Additionally, Newt Gingrich has been using his Twitter account as a promotional tool to try and get people to follow him over to Parler. HUD Secretary Ben Carson tests positive for coronavirus While you may not be familiar with Parler, it's",problem,23,A,"{""label"":""A""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+What is Parler? Here's why it's the top app after the election DALLAS (NEXSTAR) -- If you check out Apple's App Store on Monday, you'll notice Parler is the most popular app in the country. That has many wondering: What the heck is it? Parler is a social media app that bills itself as a place of ""free speech,"" and it's become particularly popular with conservatives following the presidential election -- particularly since Facebook and Twitter started flagging untrue posts by President Donald Trump. On Sunday, Parler owner Dan Bongino told the BBC his app was adding ""thousands to users per minute."" Newsweek reported the platform picked up about 2 million new users Sunday. Pres. Donald Trump fires Defense Secretary Mark Esper While Trump hasn't yet joined the social platform, it includes top conservative names like Sean Hannity, Mark Levin, and Texas Senator Ted Cruz. Each already has more than 2 million followers on the platform. Last week, Maria Bartiromo of Fox News said she planned to abandon Twitter and switch over to Parler after some of her updated were hidden. Additionally, Newt Gingrich has been using his Twitter account as a promotional tool to try and get people to follow him over to Parler. HUD Secretary Ben Carson tests positive for coronavirus While you may not be familiar with Parler, it's
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+What is Parler? Here's why it's the top app after the election DALLAS (NEXSTAR) -- If you check out Apple's App Store on Monday, you'll notice Parler is the most popular app in the country. That has many wondering: What the heck is it? Parler is a social media app that bills itself as a place of ""free speech,"" and it's become particularly popular with conservatives following the presidential election -- particularly since Facebook and Twitter started flagging untrue posts by President Donald Trump. On Sunday, Parler owner Dan Bongino told the BBC his app was adding ""thousands to users per minute."" Newsweek reported the platform picked up about 2 million new users Sunday. Pres. Donald Trump fires Defense Secretary Mark Esper While Trump hasn't yet joined the social platform, it includes top conservative names like Sean Hannity, Mark Levin, and Texas Senator Ted Cruz. Each already has more than 2 million followers on the platform. Last week, Maria Bartiromo of Fox News said she planned to abandon Twitter and switch over to Parler after some of her updated were hidden. Additionally, Newt Gingrich has been using his Twitter account as a promotional tool to try and get people to follow him over to Parler. HUD Secretary Ben Carson tests positive for coronavirus While you may not be familiar with Parler, it's
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.1171875,-0.64453125,-0.1923828125,A,"{""label"":""A""}",0.0751953125,C,True
+764364,44205,Variety,"Parler App Booted Off Google Store, Apple Also Threatens Ban After Pro-Trump Violence","Parler, the social-media app popular among Trump loyalists and right-wingers, was removed from the Google Play Store late Friday - with the internet giant alleging Parler failed to remove ""egregious content like posts that incite violence.""
+
+Also Friday, Apple warned Parler, which styles itself as a ""free speech"" alternative to Twitter or Facebook, that the app faces a ban from the App Store within 24 hours if it didn't remove content that ""encourages illegal activity."" Parler was the No. 1 trending app in Apple's App Store as of Saturday morning in the news category.
+
+The moves came as Twitter permanently banned Donald Trump, citing the potential risk that the aggrieved lame-duck president will foment additional violence among his supporters. Trump accounts on Facebook, Instagram, Snapchat, Twitch and other platforms also have been indefinitely or permanently blocked after his role in organizing and supporting the insurrectionist mob that occupied the U.S. Capitol on Jan. 6 in a deadly clash with police.
+
+In a statement, Google said that ""to protect user safety on Google Play, our longstanding policies require that apps displaying user-generated content have moderation policies and enforcement that removes egregious content like posts that incite violence."" It continued, ""We're aware of continued posting",Solution,"Parler App Booted Off Google Store, Apple Also Threatens Ban After Pro-Trump Violence Parler, the social-media app popular among Trump loyalists and right-wingers, was removed from the Google Play Store late Friday - with the internet giant alleging Parler failed to remove ""egregious content like posts that incite violence.""
+
+Also Friday, Apple warned Parler, which styles itself as a ""free speech"" alternative to Twitter or Facebook, that the app faces a ban from the App Store within 24 hours if it didn't remove content that ""encourages illegal activity."" Parler was the No. 1 trending app in Apple's App Store as of Saturday morning in the news category.
+
+The moves came as Twitter permanently banned Donald Trump, citing the potential risk that the aggrieved lame-duck president will foment additional violence among his supporters. Trump accounts on Facebook, Instagram, Snapchat, Twitch and other platforms also have been indefinitely or permanently blocked after his role in organizing and supporting the insurrectionist mob that occupied the U.S. Capitol on Jan. 6 in a deadly clash with police.
+
+In a statement, Google said that ""to protect user safety on Google Play, our longstanding policies require that apps displaying user-generated content have moderation policies and enforcement that removes egregious content like posts that incite violence."" It continued, ""We're aware of continued posting",764364,"Parler App Booted Off Google Store, Apple Also Threatens Ban After Pro-Trump Violence Parler, the social-media app popular among Trump loyalists and right-wingers, was removed from the Google Play Store late Friday - with the internet giant alleging Parler failed to remove ""egregious content like posts that incite violence."" Also Friday, Apple warned Parler, which styles itself as a ""free speech"" alternative to Twitter or Facebook, that the app faces a ban from the App Store within 24 hours if it didn't remove content that ""encourages illegal activity."" Parler was the No. 1 trending app in Apple's App Store as of Saturday morning in the news category. The moves came as Twitter permanently banned Donald Trump, citing the potential risk that the aggrieved lame-duck president will foment additional violence among his supporters. Trump accounts on Facebook, Instagram, Snapchat, Twitch and other platforms also have been indefinitely or permanently blocked after his role in organizing and supporting the insurrectionist mob that occupied the U.S. Capitol on Jan. 6 in a deadly clash with police. In a statement, Google said that ""to protect user safety on Google Play, our longstanding policies require that apps displaying user-generated content have moderation policies and enforcement that removes egregious content like posts that incite violence."" It continued, ""We're aware of continued posting",solution,36,B,"{""label"":""B""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Parler App Booted Off Google Store, Apple Also Threatens Ban After Pro-Trump Violence Parler, the social-media app popular among Trump loyalists and right-wingers, was removed from the Google Play Store late Friday - with the internet giant alleging Parler failed to remove ""egregious content like posts that incite violence."" Also Friday, Apple warned Parler, which styles itself as a ""free speech"" alternative to Twitter or Facebook, that the app faces a ban from the App Store within 24 hours if it didn't remove content that ""encourages illegal activity."" Parler was the No. 1 trending app in Apple's App Store as of Saturday morning in the news category. The moves came as Twitter permanently banned Donald Trump, citing the potential risk that the aggrieved lame-duck president will foment additional violence among his supporters. Trump accounts on Facebook, Instagram, Snapchat, Twitch and other platforms also have been indefinitely or permanently blocked after his role in organizing and supporting the insurrectionist mob that occupied the U.S. Capitol on Jan. 6 in a deadly clash with police. In a statement, Google said that ""to protect user safety on Google Play, our longstanding policies require that apps displaying user-generated content have moderation policies and enforcement that removes egregious content like posts that incite violence."" It continued, ""We're aware of continued posting
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Parler App Booted Off Google Store, Apple Also Threatens Ban After Pro-Trump Violence Parler, the social-media app popular among Trump loyalists and right-wingers, was removed from the Google Play Store late Friday - with the internet giant alleging Parler failed to remove ""egregious content like posts that incite violence."" Also Friday, Apple warned Parler, which styles itself as a ""free speech"" alternative to Twitter or Facebook, that the app faces a ban from the App Store within 24 hours if it didn't remove content that ""encourages illegal activity."" Parler was the No. 1 trending app in Apple's App Store as of Saturday morning in the news category. The moves came as Twitter permanently banned Donald Trump, citing the potential risk that the aggrieved lame-duck president will foment additional violence among his supporters. Trump accounts on Facebook, Instagram, Snapchat, Twitch and other platforms also have been indefinitely or permanently blocked after his role in organizing and supporting the insurrectionist mob that occupied the U.S. Capitol on Jan. 6 in a deadly clash with police. In a statement, Google said that ""to protect user safety on Google Play, our longstanding policies require that apps displaying user-generated content have moderation policies and enforcement that removes egregious content like posts that incite violence."" It continued, ""We're aware of continued posting
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.0267333984375,-0.62890625,-0.52734375,A,"{""label"":""A""}",0.5006103515625,A,False
+381169,43997,States News Service,SCHAKOWSKY AND BLUMENTHAL CALL ON FTC TO ASSERT POLITICAL INDEPENDENCE AS TRUMP ATTEMPTS TO HIJACK COMMISSION FOR POLITICAL RETALIATION,"The following information was released by the office of Illinois Rep. Jan Schakowsky:
+
+U.S. Representative Jan Schakowsky (D-IL), Chairwoman of the House Consumer Protection and Commerce Subcommittee, and, U.S. Senator Richard Blumenthal (D-CT), Ranking Member of the Senate Commerce Subcommittee on Manufacturing, Trade, and Consumer Protection, subcommittees responsible for oversight of the Federal Trade Commission (FTC), called on the agency to assert its political independence following President Trump's recent ""Executive Order on Preventing Online Censorship,"" which directs federal agencies to investigate and retaliate against online platforms over purported political bias.
+
+""The President's executive order is a transparently unconstitutional scheme to coerce private companies for political purposes, and has no interest in freedom of expression or consumer protection,"" wrote Schakowsky and Blumenthal in a letter to FTC Chairman Joseph Simons. ""We urge you to show leadership against the President's attempts to undermine its independence and act to defend the FTC's consumer protection and competition mission.""
+
+Schakowsky and Blumenthal expressed serious alarm over the President's order threatening the agency's ability to enforce the law, especially as Big Tech continues to pursue anticompetitive practices and action is needed. Since the onset of the COVID-19 pandemic, consumers have faced an onslaught of fraud, malware, and other financial",Problem,"SCHAKOWSKY AND BLUMENTHAL CALL ON FTC TO ASSERT POLITICAL INDEPENDENCE AS TRUMP ATTEMPTS TO HIJACK COMMISSION FOR POLITICAL RETALIATION The following information was released by the office of Illinois Rep. Jan Schakowsky:
+
+U.S. Representative Jan Schakowsky (D-IL), Chairwoman of the House Consumer Protection and Commerce Subcommittee, and, U.S. Senator Richard Blumenthal (D-CT), Ranking Member of the Senate Commerce Subcommittee on Manufacturing, Trade, and Consumer Protection, subcommittees responsible for oversight of the Federal Trade Commission (FTC), called on the agency to assert its political independence following President Trump's recent ""Executive Order on Preventing Online Censorship,"" which directs federal agencies to investigate and retaliate against online platforms over purported political bias.
+
+""The President's executive order is a transparently unconstitutional scheme to coerce private companies for political purposes, and has no interest in freedom of expression or consumer protection,"" wrote Schakowsky and Blumenthal in a letter to FTC Chairman Joseph Simons. ""We urge you to show leadership against the President's attempts to undermine its independence and act to defend the FTC's consumer protection and competition mission.""
+
+Schakowsky and Blumenthal expressed serious alarm over the President's order threatening the agency's ability to enforce the law, especially as Big Tech continues to pursue anticompetitive practices and action is needed. Since the onset of the COVID-19 pandemic, consumers have faced an onslaught of fraud, malware, and other financial",381169,"SCHAKOWSKY AND BLUMENTHAL CALL ON FTC TO ASSERT POLITICAL INDEPENDENCE AS TRUMP ATTEMPTS TO HIJACK COMMISSION FOR POLITICAL RETALIATION The following information was released by the office of Illinois Rep. Jan Schakowsky: U.S. Representative Jan Schakowsky (D-IL), Chairwoman of the House Consumer Protection and Commerce Subcommittee, and, U.S. Senator Richard Blumenthal (D-CT), Ranking Member of the Senate Commerce Subcommittee on Manufacturing, Trade, and Consumer Protection, subcommittees responsible for oversight of the Federal Trade Commission (FTC), called on the agency to assert its political independence following President Trump's recent ""Executive Order on Preventing Online Censorship,"" which directs federal agencies to investigate and retaliate against online platforms over purported political bias. ""The President's executive order is a transparently unconstitutional scheme to coerce private companies for political purposes, and has no interest in freedom of expression or consumer protection,"" wrote Schakowsky and Blumenthal in a letter to FTC Chairman Joseph Simons. ""We urge you to show leadership against the President's attempts to undermine its independence and act to defend the FTC's consumer protection and competition mission."" Schakowsky and Blumenthal expressed serious alarm over the President's order threatening the agency's ability to enforce the law, especially as Big Tech continues to pursue anticompetitive practices and action is needed. Since the onset of the COVID-19 pandemic, consumers have faced an onslaught of fraud, malware, and other financial",problem,20,A,"{""label"":""A""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+SCHAKOWSKY AND BLUMENTHAL CALL ON FTC TO ASSERT POLITICAL INDEPENDENCE AS TRUMP ATTEMPTS TO HIJACK COMMISSION FOR POLITICAL RETALIATION The following information was released by the office of Illinois Rep. Jan Schakowsky: U.S. Representative Jan Schakowsky (D-IL), Chairwoman of the House Consumer Protection and Commerce Subcommittee, and, U.S. Senator Richard Blumenthal (D-CT), Ranking Member of the Senate Commerce Subcommittee on Manufacturing, Trade, and Consumer Protection, subcommittees responsible for oversight of the Federal Trade Commission (FTC), called on the agency to assert its political independence following President Trump's recent ""Executive Order on Preventing Online Censorship,"" which directs federal agencies to investigate and retaliate against online platforms over purported political bias. ""The President's executive order is a transparently unconstitutional scheme to coerce private companies for political purposes, and has no interest in freedom of expression or consumer protection,"" wrote Schakowsky and Blumenthal in a letter to FTC Chairman Joseph Simons. ""We urge you to show leadership against the President's attempts to undermine its independence and act to defend the FTC's consumer protection and competition mission."" Schakowsky and Blumenthal expressed serious alarm over the President's order threatening the agency's ability to enforce the law, especially as Big Tech continues to pursue anticompetitive practices and action is needed. Since the onset of the COVID-19 pandemic, consumers have faced an onslaught of fraud, malware, and other financial
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+SCHAKOWSKY AND BLUMENTHAL CALL ON FTC TO ASSERT POLITICAL INDEPENDENCE AS TRUMP ATTEMPTS TO HIJACK COMMISSION FOR POLITICAL RETALIATION The following information was released by the office of Illinois Rep. Jan Schakowsky: U.S. Representative Jan Schakowsky (D-IL), Chairwoman of the House Consumer Protection and Commerce Subcommittee, and, U.S. Senator Richard Blumenthal (D-CT), Ranking Member of the Senate Commerce Subcommittee on Manufacturing, Trade, and Consumer Protection, subcommittees responsible for oversight of the Federal Trade Commission (FTC), called on the agency to assert its political independence following President Trump's recent ""Executive Order on Preventing Online Censorship,"" which directs federal agencies to investigate and retaliate against online platforms over purported political bias. ""The President's executive order is a transparently unconstitutional scheme to coerce private companies for political purposes, and has no interest in freedom of expression or consumer protection,"" wrote Schakowsky and Blumenthal in a letter to FTC Chairman Joseph Simons. ""We urge you to show leadership against the President's attempts to undermine its independence and act to defend the FTC's consumer protection and competition mission."" Schakowsky and Blumenthal expressed serious alarm over the President's order threatening the agency's ability to enforce the law, especially as Big Tech continues to pursue anticompetitive practices and action is needed. Since the onset of the COVID-19 pandemic, consumers have faced an onslaught of fraud, malware, and other financial
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.43359375,-0.90625,-0.03466796875,C,"{""label"":""C""}",0.39892578125,C,False
+745036,2021-03-24,The Key West Citizen (Florida),Report: Extremist groups thrive on Facebook amid bans,"A new outside report found that Facebook has allowed groups — many tied to QAnon, boogaloo and militia movements — to glorify violence during the 2020 election and in the weeks leading up to the deadly riots on the U.S. Capitol in January.
+
+Avaaz, a nonprofit advocacy group that says it seeks to protect democracies from misinformation, identified 267 pages and groups on Facebook that it says spread violence-glorifying material in the heat of the 2020 election to a combined following of 32 million users.
+
+More than two-thirds of the groups and pages had names that aligned with several domestic extremist movements, the report found. The first, boogaloo, promotes a second U.S. civil war and the breakdown of modern society. The second is the QAnon conspiracy, which claims that Donald Trump is waging a secret battle against the “deep state” and a sect of powerful Satanworshipping pedophiles who dominate Hollywood, big business, the media and government. The rest are various anti-government militias. All have been largely banned from Facebook since 2020.
+
+But despite what Avaaz called “clear violations” of Facebook’s policies, it found that 119 of these pages and groups were still active on the platform as of Feb. 24 and had just",Solution,"Report: Extremist groups thrive on Facebook amid bans A new outside report found that Facebook has allowed groups — many tied to QAnon, boogaloo and militia movements — to glorify violence during the 2020 election and in the weeks leading up to the deadly riots on the U.S. Capitol in January.
+
+Avaaz, a nonprofit advocacy group that says it seeks to protect democracies from misinformation, identified 267 pages and groups on Facebook that it says spread violence-glorifying material in the heat of the 2020 election to a combined following of 32 million users.
+
+More than two-thirds of the groups and pages had names that aligned with several domestic extremist movements, the report found. The first, boogaloo, promotes a second U.S. civil war and the breakdown of modern society. The second is the QAnon conspiracy, which claims that Donald Trump is waging a secret battle against the “deep state” and a sect of powerful Satanworshipping pedophiles who dominate Hollywood, big business, the media and government. The rest are various anti-government militias. All have been largely banned from Facebook since 2020.
+
+But despite what Avaaz called “clear violations” of Facebook’s policies, it found that 119 of these pages and groups were still active on the platform as of Feb. 24 and had just",745036,"Report: Extremist groups thrive on Facebook amid bans A new outside report found that Facebook has allowed groups — many tied to QAnon, boogaloo and militia movements — to glorify violence during the 2020 election and in the weeks leading up to the deadly riots on the U.S. Capitol in January. Avaaz, a nonprofit advocacy group that says it seeks to protect democracies from misinformation, identified 267 pages and groups on Facebook that it says spread violence-glorifying material in the heat of the 2020 election to a combined following of 32 million users. More than two-thirds of the groups and pages had names that aligned with several domestic extremist movements, the report found. The first, boogaloo, promotes a second U.S. civil war and the breakdown of modern society. The second is the QAnon conspiracy, which claims that Donald Trump is waging a secret battle against the “deep state” and a sect of powerful Satanworshipping pedophiles who dominate Hollywood, big business, the media and government. The rest are various anti-government militias. All have been largely banned from Facebook since 2020. But despite what Avaaz called “clear violations” of Facebook’s policies, it found that 119 of these pages and groups were still active on the platform as of Feb. 24 and had just",solution,39,B,"{""label"":""B""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Report: Extremist groups thrive on Facebook amid bans A new outside report found that Facebook has allowed groups — many tied to QAnon, boogaloo and militia movements — to glorify violence during the 2020 election and in the weeks leading up to the deadly riots on the U.S. Capitol in January. Avaaz, a nonprofit advocacy group that says it seeks to protect democracies from misinformation, identified 267 pages and groups on Facebook that it says spread violence-glorifying material in the heat of the 2020 election to a combined following of 32 million users. More than two-thirds of the groups and pages had names that aligned with several domestic extremist movements, the report found. The first, boogaloo, promotes a second U.S. civil war and the breakdown of modern society. The second is the QAnon conspiracy, which claims that Donald Trump is waging a secret battle against the “deep state” and a sect of powerful Satanworshipping pedophiles who dominate Hollywood, big business, the media and government. The rest are various anti-government militias. All have been largely banned from Facebook since 2020. But despite what Avaaz called “clear violations” of Facebook’s policies, it found that 119 of these pages and groups were still active on the platform as of Feb. 24 and had just
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Report: Extremist groups thrive on Facebook amid bans A new outside report found that Facebook has allowed groups — many tied to QAnon, boogaloo and militia movements — to glorify violence during the 2020 election and in the weeks leading up to the deadly riots on the U.S. Capitol in January. Avaaz, a nonprofit advocacy group that says it seeks to protect democracies from misinformation, identified 267 pages and groups on Facebook that it says spread violence-glorifying material in the heat of the 2020 election to a combined following of 32 million users. More than two-thirds of the groups and pages had names that aligned with several domestic extremist movements, the report found. The first, boogaloo, promotes a second U.S. civil war and the breakdown of modern society. The second is the QAnon conspiracy, which claims that Donald Trump is waging a secret battle against the “deep state” and a sect of powerful Satanworshipping pedophiles who dominate Hollywood, big business, the media and government. The rest are various anti-government militias. All have been largely banned from Facebook since 2020. But despite what Avaaz called “clear violations” of Facebook’s policies, it found that 119 of these pages and groups were still active on the platform as of Feb. 24 and had just
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""B""}",B,-0.023193359375,-0.49609375,-0.796875,A,"{""label"":""A""}",0.472900390625,A,False
+505520,2020-11-03,"CBS - 9 WNCT (Greenville, North Carolina)",Twitter flags President Trump's tweet about Supreme Court decision on Pennsylvania voting,"SAN FRANCISCO (NEXSTAR) – Twitter flagged a tweet by the president Monday evening after Trump warned of ""violence in the streets"" in regards to a Supreme Court decision about mailed ballots in Pennsylvania, and urged, ""Something must be done!""
+
+""Some or all of the content shared in this Tweet is disputed and might be misleading about an election or other civic process,"" the message from Twitter read, with an exclamation mark and a link to election fraud coverage from major media outlets.
+
+The warning also contains a link to Twitter's civic integrity policy, which states, ""You may not use Twitter's services for the purpose of manipulating or interfering in elections or other civic processes.
+
+President Donald Trump and his reelection campaign are signaling they will pursue an aggressive legal strategy to try to prevent Pennsylvania from counting mailed ballots that are received in the three days after the election.
+
+The matter could find its way to the Supreme Court, especially if those ballots could tip the outcome in the battleground state.
+
+The three-day extension was ordered by Pennsylvania's top court. The Supreme Court refused to block it, but several conservative justices have indicated they could revisit the issue after the election.
+
+FBI investigating incident where 'Trump",Neither,"Twitter flags President Trump's tweet about Supreme Court decision on Pennsylvania voting SAN FRANCISCO (NEXSTAR) – Twitter flagged a tweet by the president Monday evening after Trump warned of ""violence in the streets"" in regards to a Supreme Court decision about mailed ballots in Pennsylvania, and urged, ""Something must be done!""
+
+""Some or all of the content shared in this Tweet is disputed and might be misleading about an election or other civic process,"" the message from Twitter read, with an exclamation mark and a link to election fraud coverage from major media outlets.
+
+The warning also contains a link to Twitter's civic integrity policy, which states, ""You may not use Twitter's services for the purpose of manipulating or interfering in elections or other civic processes.
+
+President Donald Trump and his reelection campaign are signaling they will pursue an aggressive legal strategy to try to prevent Pennsylvania from counting mailed ballots that are received in the three days after the election.
+
+The matter could find its way to the Supreme Court, especially if those ballots could tip the outcome in the battleground state.
+
+The three-day extension was ordered by Pennsylvania's top court. The Supreme Court refused to block it, but several conservative justices have indicated they could revisit the issue after the election.
+
+FBI investigating incident where 'Trump",505520,"Twitter flags President Trump's tweet about Supreme Court decision on Pennsylvania voting SAN FRANCISCO (NEXSTAR) – Twitter flagged a tweet by the president Monday evening after Trump warned of ""violence in the streets"" in regards to a Supreme Court decision about mailed ballots in Pennsylvania, and urged, ""Something must be done!"" ""Some or all of the content shared in this Tweet is disputed and might be misleading about an election or other civic process,"" the message from Twitter read, with an exclamation mark and a link to election fraud coverage from major media outlets. The warning also contains a link to Twitter's civic integrity policy, which states, ""You may not use Twitter's services for the purpose of manipulating or interfering in elections or other civic processes. President Donald Trump and his reelection campaign are signaling they will pursue an aggressive legal strategy to try to prevent Pennsylvania from counting mailed ballots that are received in the three days after the election. The matter could find its way to the Supreme Court, especially if those ballots could tip the outcome in the battleground state. The three-day extension was ordered by Pennsylvania's top court. The Supreme Court refused to block it, but several conservative justices have indicated they could revisit the issue after the election. FBI investigating incident where 'Trump",neither,4,C,"{""label"":""C""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Twitter flags President Trump's tweet about Supreme Court decision on Pennsylvania voting SAN FRANCISCO (NEXSTAR) – Twitter flagged a tweet by the president Monday evening after Trump warned of ""violence in the streets"" in regards to a Supreme Court decision about mailed ballots in Pennsylvania, and urged, ""Something must be done!"" ""Some or all of the content shared in this Tweet is disputed and might be misleading about an election or other civic process,"" the message from Twitter read, with an exclamation mark and a link to election fraud coverage from major media outlets. The warning also contains a link to Twitter's civic integrity policy, which states, ""You may not use Twitter's services for the purpose of manipulating or interfering in elections or other civic processes. President Donald Trump and his reelection campaign are signaling they will pursue an aggressive legal strategy to try to prevent Pennsylvania from counting mailed ballots that are received in the three days after the election. The matter could find its way to the Supreme Court, especially if those ballots could tip the outcome in the battleground state. The three-day extension was ordered by Pennsylvania's top court. The Supreme Court refused to block it, but several conservative justices have indicated they could revisit the issue after the election. FBI investigating incident where 'Trump
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Twitter flags President Trump's tweet about Supreme Court decision on Pennsylvania voting SAN FRANCISCO (NEXSTAR) – Twitter flagged a tweet by the president Monday evening after Trump warned of ""violence in the streets"" in regards to a Supreme Court decision about mailed ballots in Pennsylvania, and urged, ""Something must be done!"" ""Some or all of the content shared in this Tweet is disputed and might be misleading about an election or other civic process,"" the message from Twitter read, with an exclamation mark and a link to election fraud coverage from major media outlets. The warning also contains a link to Twitter's civic integrity policy, which states, ""You may not use Twitter's services for the purpose of manipulating or interfering in elections or other civic processes. President Donald Trump and his reelection campaign are signaling they will pursue an aggressive legal strategy to try to prevent Pennsylvania from counting mailed ballots that are received in the three days after the election. The matter could find its way to the Supreme Court, especially if those ballots could tip the outcome in the battleground state. The three-day extension was ordered by Pennsylvania's top court. The Supreme Court refused to block it, but several conservative justices have indicated they could revisit the issue after the election. FBI investigating incident where 'Trump
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""C""}",C,-0.390625,-0.7421875,-0.04150390625,C,"{""label"":""C""}",0.34912109375,A,True
+747834,2021-06-04,National Post (f/k/a The Financial Post) (Canada),"Facebook suspends Trump for two years, shifts rules for world leaders","Facebook Inc on Friday suspended former U.S. President Donald Trump until at least January 2023 and announced changes to how it will treat world leaders who break the company's rules on postings on its site.
+
+Facebook had suspended Trump's account the day after the Jan. 6 Capitol Hill riot, determining he had incited violence. That suspension will last at least two years from the date of the initial block and would only be lifted if the risk to public safety has receded, Facebook said on Friday.
+
+Trump criticized the decision as a form of censorship and an insult to his voters.
+
+This new timeline denies Republican Trump a major social media megaphone ahead of the November 2022 congressional elections. However, it means he may be able to return to Facebook well before the next presidential election in late 2024.
+
+Trump has been permanently banned by Twitter and remains suspended by Alphabet's YouTube after the riot. Trump, who this week shut down his recently-launched blog, has teased plans to start his own platform.
+
+""Given the gravity of the circumstances that led to Mr. Trump's suspension, we believe his actions constituted a severe violation of our rules which merit the highest penalty available under the new enforcement",Problem,"Facebook suspends Trump for two years, shifts rules for world leaders Facebook Inc on Friday suspended former U.S. President Donald Trump until at least January 2023 and announced changes to how it will treat world leaders who break the company's rules on postings on its site.
+
+Facebook had suspended Trump's account the day after the Jan. 6 Capitol Hill riot, determining he had incited violence. That suspension will last at least two years from the date of the initial block and would only be lifted if the risk to public safety has receded, Facebook said on Friday.
+
+Trump criticized the decision as a form of censorship and an insult to his voters.
+
+This new timeline denies Republican Trump a major social media megaphone ahead of the November 2022 congressional elections. However, it means he may be able to return to Facebook well before the next presidential election in late 2024.
+
+Trump has been permanently banned by Twitter and remains suspended by Alphabet's YouTube after the riot. Trump, who this week shut down his recently-launched blog, has teased plans to start his own platform.
+
+""Given the gravity of the circumstances that led to Mr. Trump's suspension, we believe his actions constituted a severe violation of our rules which merit the highest penalty available under the new enforcement",747834,"Facebook suspends Trump for two years, shifts rules for world leaders Facebook Inc on Friday suspended former U.S. President Donald Trump until at least January 2023 and announced changes to how it will treat world leaders who break the company's rules on postings on its site. Facebook had suspended Trump's account the day after the Jan. 6 Capitol Hill riot, determining he had incited violence. That suspension will last at least two years from the date of the initial block and would only be lifted if the risk to public safety has receded, Facebook said on Friday. Trump criticized the decision as a form of censorship and an insult to his voters. This new timeline denies Republican Trump a major social media megaphone ahead of the November 2022 congressional elections. However, it means he may be able to return to Facebook well before the next presidential election in late 2024. Trump has been permanently banned by Twitter and remains suspended by Alphabet's YouTube after the riot. Trump, who this week shut down his recently-launched blog, has teased plans to start his own platform. ""Given the gravity of the circumstances that led to Mr. Trump's suspension, we believe his actions constituted a severe violation of our rules which merit the highest penalty available under the new enforcement",problem,19,A,"{""label"":""A""}","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Facebook suspends Trump for two years, shifts rules for world leaders Facebook Inc on Friday suspended former U.S. President Donald Trump until at least January 2023 and announced changes to how it will treat world leaders who break the company's rules on postings on its site. Facebook had suspended Trump's account the day after the Jan. 6 Capitol Hill riot, determining he had incited violence. That suspension will last at least two years from the date of the initial block and would only be lifted if the risk to public safety has receded, Facebook said on Friday. Trump criticized the decision as a form of censorship and an insult to his voters. This new timeline denies Republican Trump a major social media megaphone ahead of the November 2022 congressional elections. However, it means he may be able to return to Facebook well before the next presidential election in late 2024. Trump has been permanently banned by Twitter and remains suspended by Alphabet's YouTube after the riot. Trump, who this week shut down his recently-launched blog, has teased plans to start his own platform. ""Given the gravity of the circumstances that led to Mr. Trump's suspension, we believe his actions constituted a severe violation of our rules which merit the highest penalty available under the new enforcement
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+","""Content moderation"" refers to the practice of screening and monitoring content posted by users on social media sites to determine if the content should be published or not, based on specific rules and guidelines.
+
+I will ask you to classify a tweet as describing content moderation as a problem, as a solution, or neither:
+
+A: Text describes content moderation as a PROBLEM if they emphasize negative effects of it, such as restrictions to free speech, censorship, or the biases that can emerge from decisions regarding what users are allowed to post.
+
+B: Text describes content moderation as a SOLUTION if they emphasize positive effects of it, such as protecting users from harmful content such as hate speech, misinformation, illegal adult content, or spam. 
+
+C: Text describes content moderation as NEUTRAL if they do not emphasize negative or positive effects of content moderation. For example if they simply report on the content moderation activity of social media platforms without linking them to potential advantages or disadvantages for users or stakeholders.
+
+Now, is the following tweet describing content moderation as a PROBLEM, as a SOLUTION, or NEUTRAL?
+
+Facebook suspends Trump for two years, shifts rules for world leaders Facebook Inc on Friday suspended former U.S. President Donald Trump until at least January 2023 and announced changes to how it will treat world leaders who break the company's rules on postings on its site. Facebook had suspended Trump's account the day after the Jan. 6 Capitol Hill riot, determining he had incited violence. That suspension will last at least two years from the date of the initial block and would only be lifted if the risk to public safety has receded, Facebook said on Friday. Trump criticized the decision as a form of censorship and an insult to his voters. This new timeline denies Republican Trump a major social media megaphone ahead of the November 2022 congressional elections. However, it means he may be able to return to Facebook well before the next presidential election in late 2024. Trump has been permanently banned by Twitter and remains suspended by Alphabet's YouTube after the riot. Trump, who this week shut down his recently-launched blog, has teased plans to start his own platform. ""Given the gravity of the circumstances that led to Mr. Trump's suspension, we believe his actions constituted a severe violation of our rules which merit the highest penalty available under the new enforcement
+
+Return exactly one minified JSON object and nothing else.
+Allowed labels: A, B, C
+Required schema: {""label"":""<ONE_LABEL>""}
+Answer:
+{""label"":""A""}",A,-0.018798828125,-0.76953125,-0.5703125,A,"{""label"":""A""}",0.551513671875,C,True

@@ -1,0 +1,6 @@
+{
+  "data_allocation": "sft25_dpo75",
+  "method": "sft",
+  "seed": 11,
+  "train_size": "250"
+}

@@ -1,0 +1,12 @@
+{
+  "data_allocation": "shared",
+  "inference_seed": 33,
+  "method": "kto",
+  "preference_strategy": "all_wrong",
+  "seed": 33,
+  "seed_semantics": "seed folder stores inference_seed; adapter was trained once with training_seed",
+  "source_adapter": "/content/DPO-Llama3-1-main/outputs/llama31_8b/single_adapter_multi_inference/ds3_task6/runs/seed_11/train_500/allocation_shared/kto_all_wrong_from_base/adapter",
+  "start_from": "base",
+  "train_size": 500,
+  "training_seed": 11
+}

@@ -1,0 +1,6 @@
+{
+  "allocation": "shared",
+  "preference_source_row_count": 500,
+  "sft_train_row_count": 500,
+  "source_row_count": 500
+}

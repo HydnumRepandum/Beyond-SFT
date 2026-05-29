@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "data_allocation": "sft25_dpo75",
+    "inference_seed": 33,
+    "method": "sft_dpo",
+    "preference_strategy": "hard_negative",
+    "training_seed": 11
+  },
+  "test": {
+    "all_examples": {
+      "accuracy": 0.25,
+      "confusion_matrix": [
+        [
+          38,
+          0,
+          15
+        ],
+        [
+          97,
+          0,
+          25
+        ],
+        [
+          10,
+          0,
+          11
+        ]
+      ],
+      "invalid_prediction_count": 0,
+      "macro_auc": 0.6577490619494951,
+      "macro_f1": 0.2297979797979798,
+      "per_class_auc": {
+        "A": 0.5949333685182743,
+        "B": 0.7868852459016393,
+        "C": 0.5914285714285715
+      },
+      "per_class_f1": {
+        "A": 0.3838383838383838,
+        "B": 0.0,
+        "C": 0.3055555555555556
+      },
+      "row_count": 196
+    },
+    "hard_primary": {
+      "accuracy": 0.232,
+      "confusion_matrix": [
+        [
+          28,
+          0,
+          3
+        ],
+        [
+          78,
+          0,
+          5
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "invalid_prediction_count": 0,
+      "macro_auc": 0.6677590245223853,
+      "macro_f1": 0.1603174603174603,
+      "per_class_auc": {
+        "A": 0.7309540150995195,
+        "B": 0.8405048766494548,
+        "C": 0.4318181818181818
+      },
+      "per_class_f1": {
+        "A": 0.38095238095238093,
+        "B": 0.0,
+        "C": 0.1
+      },
+      "row_count": 125
+    },
+    "hard_secondary": {
+      "accuracy": 0.20809248554913296,
+      "confusion_matrix": [
+        [
+          36,
+          0,
+          15
+        ],
+        [
+          97,
+          0,
+          25
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "invalid_prediction_count": 0,
+      "macro_auc": 0.6856718097074894,
+      "macro_f1": 0.13043478260869565,
+      "per_class_auc": {
+        "A": 0.5700739312118289,
+        "B": 0.80126968820315,
+        "C": null
+      },
+      "per_class_f1": {
+        "A": 0.391304347826087,
+        "B": 0.0,
+        "C": 0.0
+      },
+      "row_count": 173
+    }
+  }
+}

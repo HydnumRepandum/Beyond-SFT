@@ -2,7 +2,6 @@
 
 ## Scope of the study
 
-The study is intentionally narrow but now task-selectable:
 
 - three supported task keys: `ds3_task6`, `ds1_task6`, and `ds4_task2`
 - two configured base model families: Llama 3.1 8B Instruct and Gemma 3 12B

@@ -1,0 +1,8 @@
+{
+  "data_allocation": "shared",
+  "method": "sft_dpo",
+  "preference_strategy": "random_wrong",
+  "seed": 33,
+  "start_from": "sft",
+  "train_size": "50"
+}

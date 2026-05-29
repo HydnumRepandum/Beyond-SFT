@@ -1,0 +1,71 @@
+[
+  {
+    "epoch": 0.425531914893617,
+    "grad_norm": 16.58133316040039,
+    "learning_rate": 4.5454545454545455e-06,
+    "logits/chosen": 0.8522262573242188,
+    "logits/rejected": 0.8526773452758789,
+    "logps/chosen": -6.0898051261901855,
+    "logps/rejected": -6.5430169105529785,
+    "loss": 0.7144217491149902,
+    "rewards/accuracies": 0.4375,
+    "rewards/chosen": 0.008326912298798561,
+    "rewards/margins": -0.013962805271148682,
+    "rewards/rejected": 0.022289717569947243,
+    "step": 5
+  },
+  {
+    "epoch": 0.851063829787234,
+    "grad_norm": 23.94524574279785,
+    "learning_rate": 3.409090909090909e-06,
+    "logits/chosen": 0.8798460960388184,
+    "logits/rejected": 0.8652836084365845,
+    "logps/chosen": -5.929895877838135,
+    "logps/rejected": -7.669391632080078,
+    "loss": 0.5761594772338867,
+    "rewards/accuracies": 0.75,
+    "rewards/chosen": 0.13286441564559937,
+    "rewards/margins": 0.45414167642593384,
+    "rewards/rejected": -0.3212772309780121,
+    "step": 10
+  },
+  {
+    "epoch": 1.2553191489361701,
+    "grad_norm": 8.698795318603516,
+    "learning_rate": 2.2727272727272728e-06,
+    "logits/chosen": 0.8774492144584656,
+    "logits/rejected": 0.8705641031265259,
+    "logps/chosen": -5.838669776916504,
+    "logps/rejected": -7.856708526611328,
+    "loss": 0.4952537059783936,
+    "rewards/accuracies": 0.7368420958518982,
+    "rewards/chosen": 0.17095577716827393,
+    "rewards/margins": 0.8454688191413879,
+    "rewards/rejected": -0.674513041973114,
+    "step": 15
+  },
+  {
+    "epoch": 1.6808510638297873,
+    "grad_norm": 19.749637603759766,
+    "learning_rate": 1.1363636363636364e-06,
+    "logits/chosen": 0.8681745529174805,
+    "logits/rejected": 0.844873309135437,
+    "logps/chosen": -5.827007293701172,
+    "logps/rejected": -8.628573417663574,
+    "loss": 0.4651956558227539,
+    "rewards/accuracies": 0.800000011920929,
+    "rewards/chosen": 0.17691925168037415,
+    "rewards/margins": 1.0759296417236328,
+    "rewards/rejected": -0.8990104794502258,
+    "step": 20
+  },
+  {
+    "epoch": 2.0,
+    "step": 24,
+    "total_flos": 0.0,
+    "train_loss": 0.5702973902225494,
+    "train_runtime": 200.1155,
+    "train_samples_per_second": 1.879,
+    "train_steps_per_second": 0.12
+  }
+]

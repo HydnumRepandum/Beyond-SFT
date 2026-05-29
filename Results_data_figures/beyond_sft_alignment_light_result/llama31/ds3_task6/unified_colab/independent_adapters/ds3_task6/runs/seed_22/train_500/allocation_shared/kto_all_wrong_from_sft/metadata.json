@@ -1,0 +1,8 @@
+{
+  "data_allocation": "shared",
+  "method": "sft_kto",
+  "preference_strategy": "all_wrong",
+  "seed": 22,
+  "start_from": "sft",
+  "train_size": "500"
+}

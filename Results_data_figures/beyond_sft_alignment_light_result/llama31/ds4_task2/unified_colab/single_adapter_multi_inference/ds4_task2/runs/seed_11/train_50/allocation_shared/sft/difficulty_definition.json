@@ -1,0 +1,7 @@
+{
+  "primary_method": "low_margin",
+  "secondary_method": "pilot_misclassified",
+  "threshold_quantile": 0.25,
+  "threshold_source": "sft train score_margin quantile",
+  "threshold_value": 0.025390625
+}

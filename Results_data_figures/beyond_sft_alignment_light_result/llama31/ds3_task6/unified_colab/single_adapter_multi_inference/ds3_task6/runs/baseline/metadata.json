@@ -1,0 +1,5 @@
+{
+  "config_hash": "0729745eab3b840f34a159e0b9ad91cc533c138cfae944eb6e967a6fa3a6fa00",
+  "method": "pretrained_baseline",
+  "model": "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
+}

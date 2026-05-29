@@ -1,0 +1,71 @@
+[
+  {
+    "epoch": 0.425531914893617,
+    "grad_norm": 7.7827372550964355,
+    "learning_rate": 4.5454545454545455e-06,
+    "logits/chosen": 0.8035567402839661,
+    "logits/rejected": 0.8067496418952942,
+    "logps/chosen": -6.081782341003418,
+    "logps/rejected": -6.175609111785889,
+    "loss": 0.6920629978179932,
+    "rewards/accuracies": 0.48750001192092896,
+    "rewards/chosen": -0.06281065940856934,
+    "rewards/margins": 0.025036925449967384,
+    "rewards/rejected": -0.08784758299589157,
+    "step": 5
+  },
+  {
+    "epoch": 0.851063829787234,
+    "grad_norm": 11.833032608032227,
+    "learning_rate": 3.409090909090909e-06,
+    "logits/chosen": 0.7980672121047974,
+    "logits/rejected": 0.7979380488395691,
+    "logps/chosen": -6.4741973876953125,
+    "logps/rejected": -6.534162998199463,
+    "loss": 0.7573773860931396,
+    "rewards/accuracies": 0.4749999940395355,
+    "rewards/chosen": -0.3341813385486603,
+    "rewards/margins": -0.012360960245132446,
+    "rewards/rejected": -0.3218204081058502,
+    "step": 10
+  },
+  {
+    "epoch": 1.2553191489361701,
+    "grad_norm": 9.299559593200684,
+    "learning_rate": 2.2727272727272728e-06,
+    "logits/chosen": 0.8278030753135681,
+    "logits/rejected": 0.8157155513763428,
+    "logps/chosen": -5.980740547180176,
+    "logps/rejected": -6.621030330657959,
+    "loss": 0.6598197937011718,
+    "rewards/accuracies": 0.6315789222717285,
+    "rewards/chosen": -0.03840817138552666,
+    "rewards/margins": 0.12605981528759003,
+    "rewards/rejected": -0.16446800529956818,
+    "step": 15
+  },
+  {
+    "epoch": 1.6808510638297873,
+    "grad_norm": 8.113475799560547,
+    "learning_rate": 1.1363636363636364e-06,
+    "logits/chosen": 0.8321284055709839,
+    "logits/rejected": 0.8336088061332703,
+    "logps/chosen": -6.063619613647461,
+    "logps/rejected": -6.064389228820801,
+    "loss": 0.6567306518554688,
+    "rewards/accuracies": 0.574999988079071,
+    "rewards/chosen": -0.007851416245102882,
+    "rewards/margins": 0.10199904441833496,
+    "rewards/rejected": -0.1098504513502121,
+    "step": 20
+  },
+  {
+    "epoch": 2.0,
+    "step": 24,
+    "total_flos": 0.0,
+    "train_loss": 0.6726149618625641,
+    "train_runtime": 198.7951,
+    "train_samples_per_second": 1.891,
+    "train_steps_per_second": 0.121
+  }
+]

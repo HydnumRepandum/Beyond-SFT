@@ -1,0 +1,5 @@
+{
+  "config_hash": "a410d1cd2045e81b5fed44da65c10e587ae89c14c11a3b7a438c90b47d7e17e6",
+  "method": "pretrained_baseline",
+  "model": "unsloth/gemma-3-12b-it-qat-unsloth-bnb-4bit"
+}

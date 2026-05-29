@@ -1,0 +1,8 @@
+{
+  "allocation": "sft25_dpo75",
+  "preference_fraction": 0.75,
+  "preference_source_row_count": 38,
+  "sft_fraction": 0.25,
+  "sft_train_row_count": 12,
+  "source_row_count": 50
+}

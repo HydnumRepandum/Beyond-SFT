@@ -1,0 +1,12 @@
+{
+  "data_allocation": "sft25_dpo75",
+  "inference_seed": 33,
+  "method": "sft",
+  "preference_strategy": "na",
+  "seed": 33,
+  "seed_semantics": "seed folder stores inference_seed; adapter was trained once with training_seed",
+  "source_adapter": "/content/Beyond-SFT/outputs/gemma3_12b/single_adapter_multi_inference/ds4_task2/runs/seed_11/train_1000/allocation_sft25_dpo75/sft/adapter",
+  "start_from": "sft",
+  "train_size": 1000,
+  "training_seed": 11
+}

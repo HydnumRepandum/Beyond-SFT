@@ -1,0 +1,19 @@
+{
+  "hard_negative": {
+    "data_allocation": "sft25_dpo75",
+    "fallback_count": 0,
+    "row_count": 375
+  },
+  "kto": {
+    "data_allocation": "sft25_dpo75",
+    "desirable_row_count": 375,
+    "row_count": 1125,
+    "strategy": "all_wrong",
+    "undesirable_row_count": 750
+  },
+  "random_wrong": {
+    "data_allocation": "sft25_dpo75",
+    "fallback_count": 0,
+    "row_count": 375
+  }
+}

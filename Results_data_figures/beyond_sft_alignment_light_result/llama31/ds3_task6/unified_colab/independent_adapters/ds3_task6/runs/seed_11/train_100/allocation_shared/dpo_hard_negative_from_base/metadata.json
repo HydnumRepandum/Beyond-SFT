@@ -1,0 +1,8 @@
+{
+  "data_allocation": "shared",
+  "method": "dpo",
+  "preference_strategy": "hard_negative",
+  "seed": 11,
+  "start_from": "base",
+  "train_size": "100"
+}

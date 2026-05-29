@@ -1,0 +1,6 @@
+{
+  "data_allocation": "shared",
+  "method": "sft",
+  "seed": 33,
+  "train_size": "500"
+}
