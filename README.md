@@ -1,145 +1,149 @@
 # Beyond Supervised Fine-Tuning
+> **Evaluating Preference-Based Post-Training Methods for Political Text Annotation with Large Language Models**
 
-########################### WARNING ############################/n
-When using the notebook there is one precaution to take
+---
 
-Due to pyarrow function the session will crash after few minutes, it's normal, just restart the Python runtime
+[![Computational Social Science](https://img.shields.io/badge/Domain-Computational%20Social%20Science-blue.svg)](#)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green.svg)](#)
+[![Unsloth](https://img.shields.io/badge/Backend-Unsloth%20%2F%20TRL-orange.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](#)
 
-########################### WARNING ############################
+This repository provides a complete pipeline designed to systematically evaluate and compare **Supervised Fine-Tuning (SFT)** against **Preference Alignment (PA)** methods—specifically **Direct Preference Optimization (DPO)** and **Kahneman–Tversky Optimization (KTO)**—for complex, low-data political text classification tasks. 
 
-This repository supports a selected low-data annotation task from the configured task registry:
+## ABSTRACT
 
-- `ds3_task6`: Congress tweet political superframe classification
-- `ds1_task6`: content-moderation tweet superframe classification
-- `ds4_task2`: news-article problem / solution / neutral classification
-- label semantics and prompt text loaded from the selected task's mapping row
-- Llama 3.1 8B or Gemma 3 12B with Unsloth, SFT, DPO, SFT->DPO, KTO, and SFT->KTO
-- two SFT/DPO data-allocation variants:
-  - `shared`
-  - `sft25_dpo75`
+The complexity and inherent ambiguity of political text annotation tasks present a persistent challenge in social science research, particularly in low-data regimes where expert labels are scarce. While Supervised Fine-Tuning (SFT) is the prevailing post-training paradigm for Large Language Models (LLMs), the efficacy of Preference Alignment (PA) methods remains largely unexplored in this domain. This study addresses the critical question of whether PA strategies, such as Direct Preference Optimization (DPO) and Kahneman–Tversky Optimization (KTO), enhance classification performance over SFT alone in complex political text classification. Replicating a prior experimental design across three low-data political annotation tasks, we systematically compare SFT against standalone and sequential PA configurations using the Llama 3.1:8B and Gemma 3:12B models, employing a log-probability-based classification method. Our findings demonstrate that the sequential application of SFT followed by a PA method can improve performance in several data regimes, yielding F1-score improvements up to 8.2% compared to SFT alone. Conversely, standalone PA methods show generally a performance degradation. Specifically, the combined SFT+DPO configuration using a novel, model-based hard-negative preference construction strategy exhibits superior efficacy in most settings. This research provides practical guidelines and epistemological reflexivity for implementing PA in social science workflows, underscores the enhanced performance of smaller, fine-tuned models over proprietary baselines, and reinforces the conclusion that researchers must deliberately select a post-training strategy tailored to the specific conceptual and data constraints of their annotation task.
 
-The canonical study configs are:
+> [!WARNING]
+> **Colab / Jupyter PyArrow Precaution:**  
+> When running the interactive training notebooks on Google Colab a crash will occur during the PyArrow data tokenization stage. This is a known issue. If the runtime terminates or crashes, simply **restart the Python runtime/kernel** and proceed; your progress is saved on disk.
 
-- [llama31.yaml](configs/llama31.yaml)
-- [gemma3.yaml](configs/gemma3.yaml)
+---
 
-## Data layout
+## 🗺️ Pipeline & Orchestration Architecture
 
-The supported tasks use checked-in subset folders:
-
-- `ds3_task6`: [data/raw_or_samples/ds_3__task_6](data/raw_or_samples/ds_3__task_6) and [dataset_task_mappings.csv](dataset_task_mappings.csv)
-- `ds1_task6`: [data/raw_or_samples/ds_1__task_6](data/raw_or_samples/ds_1__task_6), including its task-local `dataset_task_mappings.csv`
-- `ds4_task2`: [data/raw_or_samples/ds_4__task_2](data/raw_or_samples/ds_4__task_2), including its task-local `dataset_task_mappings.csv`
-
-The pipeline:
-
-- derives the available prompt columns, active prompt, canonical label set, and label column from the selected mapping row
-- uses the provided train subsets as-is
-
-## Repo structure
-
-- `configs/llama31.yaml`: Llama 3.1 8B study configuration
-- `configs/gemma3.yaml`: Gemma 3 12B study configuration
-- `data/raw_or_samples/`: checked-in raw/sample CSV inputs
-- `data/processed/`: generated preparation artifacts, ignored by Git
-- `scripts/prepare_data.py`: prepare processed train/test splits and train-size subsets
-- `scripts/score.py`: pretrained baseline inference
-- `scripts/train.py`: SFT, hard-case tagging, preference construction, DPO/KTO, and full-grid orchestration
-- `scripts/aggregate.py`: aggregated tables and plots
-- `notebooks/main_colab_train+infer_three_seeds.ipynb`: main Colab notebook
-
-## Quickstart
-
-Prepare the dataset:
-
-```bash
-python scripts/prepare_data.py --config configs/llama31.yaml --task ds1_task6
+```mermaid
+flowchart TD
+    RawData[Raw Datasets] --> PrepareData[prepare_data.py]
+    PrepareData --> TestSplit[Evaluation Split]
+    PrepareData --> TrainSubset[Training Subset: 50, 100, 250, 500, 1000]
+    
+    TrainSubset --> ScoreBase[score.py: Pretrained Baseline]
+    
+    TrainSubset --> TrainSFT[train.py sft: SFT Pilot Adapter]
+    TrainSFT --> SFTPreds[Train & Test Predictions]
+    
+    SFTPreds --> TagHard[train.py tag-hard-cases: Margin-Based & Misclassified Identification]
+    TagHard --> BuildPrefs[train.py build-preferences: Pairwise & KTO Datasets]
+    
+    BuildPrefs --> TrainDPO[train.py dpo: DPO Alignment]
+    BuildPrefs --> TrainKTO[train.py kto: KTO Alignment]
+    
+    ScoreBase --> Aggregate[aggregate.py: Comprehensive Tables & Figures]
+    TrainSFT --> Aggregate
+    TrainDPO --> Aggregate
+    TrainKTO --> Aggregate
 ```
 
-Run the baseline:
+The workflow executes in a modular, highly reproducible sequence:
+1. **Data Preprocessing (`prepare_data.py`)**: Stratifies datasets and generates standardized train-size subsets.
+2. **Pretrained Baseline (`score.py`)**: Runs zero-shot/few-shot evaluations on the base model using candidate log-probability scoring.
+3. **SFT Pilot Training (`train.py sft`)**: Trains a supervised adapter on the training subset using LoRA.
+4. **Hard Case Tagging (`train.py tag-hard-cases`)**: Scores the dataset and tags low-confidence (margin-based) and misclassified examples.
+5. **Preference Dataset Construction (`train.py build-preferences`)**: Generates pairwise DPO rows (`chosen` vs. `rejected`) and binary KTO rows (`desirable` vs. `undesirable`).
+6. **Preference Alignment (`train.py dpo` / `kto`)**: Optimizes the model starting from the base model or the SFT pilot adapter.
+7. **Aggregation & Reporting (`aggregate.py`)**: Generates comparative leaderboards, per-class breakdowns, training curves, and confusion matrices.
 
-```bash
-python scripts/score.py --config configs/llama31.yaml --task ds1_task6
+---
+
+## 📊 Supported Tasks & Data Registry
+
+The pipeline supports three low-performance, high-ambiguity annotation tasks derived from the computational social science study of Alizadeh et al. (2025). The settings are loaded dynamically using the registries configured in the canonical study files `configs/llama31.yaml` and `configs/gemma3.yaml`.
+
+| Task ID | Dataset Source | Target Concept | Admissible Classes | Eval Size | Training Regimes |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **`ds1_task6`** | Tweets (2020-2021) | Content Moderation Superframes | **A**: Policy, **B**: Morality/Law, **C**: Economics, **D**: Other | 843 | `[50, 100, 250, 500]` |
+| **`ds3_task6`** | Congress Tweets (2017-22) | Political Superframes | **A**: Policy, **B**: Morality/Law, **C**: Economics, **D**: Other | 341 | `[50, 100, 250, 500]` |
+| **`ds4_task2`** | News Articles | Problem / Solution / Neutral | **A**: Problem, **B**: Solution, **C**: Neutral | 196 | `[50, 100, 250, 500, 1000]` |
+
+---
+
+## 🧪 Alignment Strategies & Data Allocation
+
+### 1. DPO Preference Construction Strategies
+Unlike generative DPO, this repository frames preference alignment strictly over **closed-label choices** using two rejected-label sampling strategies:
+*   **`random_wrong`**: Samples the dispreferred/rejected response uniformly at random from the set of incorrect labels.
+*   **`hard_negative`**: Uses the SFT pilot adapter to score all incorrect label completions. The highest-scoring wrong completion is chosen as the rejected response, forcing the DPO loss to focus on the model's most competitive/plausible errors.
+
+### 2. KTO Dataset Construction
+KTO evaluates binary desirability rather than pairwise comparisons. The pipeline structures KTO as an all-label dataset:
+*   **1 Desirable Row**: `Prompt` + Gold JSON label completion (`label = True`).
+*   **K-1 Undesirable Rows**: `Prompt` + each incorrect JSON label completion (`label = False`).
+
+### 3. Data Allocation Regimes
+The pipeline supports two allocation regimes:
+*   **`shared`**: SFT and the preference optimization step both train on the full selected subset.
+*   **`sft25_dpo75`**: SFT is trained on a stratified 25% split of the training subset. The SFT pilot then generates hard negatives and builds preferences strictly on the remaining 75% of the subset, isolating the alignment step from SFT training rows.
+
+---
+
+## 📁 Repository Structure
+
+```directory
+DPO-main/
+├── configs/
+│   ├── llama31.yaml              # Hyperparameters & settings for Llama 3.1 8B Instruct
+│   └── gemma3.yaml               # Hyperparameters & settings for Gemma 3 12B IT
+├── data/
+│   └── raw_or_samples/           # Source CSVs & local registries partitioned by task ID
+├── scripts/
+│   ├── prepare_data.py           # Preprocessing and train-subset generation
+│   ├── score.py                  # Pretrained baseline evaluation script
+│   ├── train.py                  # CLI orchestrator for SFT, DPO, KTO, and full pipelines
+│   └── aggregate.py              # Aggregation & plot rendering script
+├── src/
+│   └── topic_alignment/          # Core python package modules
+│       ├── config.py             # Config schema loading & parameter overrides
+│       ├── data.py               # Allocation and processing functions
+│       ├── evaluation.py         # Macro-F1 and Accuracy calculators
+│       ├── inference.py          # Logprob calculation & prediction writers
+│       ├── modeling.py           # PEFT and adapter loaders (via Unsloth)
+│       ├── prompting.py          # Prompt schemas & KTO/DPO row formatters
+│       ├── reporting.py          # Report builders and matplotlib visualizers
+│       └── training.py           # TRL train wrappers (SFTTrainer, DPOTrainer, KTOTrainer)
+├── notebooks/
+│   └── main_colab_train+infer_three_seeds.ipynb  # Interactive orchestration notebook
+├── dataset_task_mappings.csv     # Central dataset registry metadata
+├── pyproject.toml                # Package structure definitions
+└── requirements.txt              # Pipeline dependencies
 ```
 
-Run one SFT pilot and build the alignment datasets:
+---
 
-```bash
-python scripts/train.py sft --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
-python scripts/train.py tag-hard-cases --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
-python scripts/train.py build-preferences --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100
-```
+## 🚀 Quickstart & Pipeline Invocations
 
-Run DPO and KTO:
+Run notebooks/main_colab_train+infer_three_seeds.ipynb notebooks
+---
 
-```bash
-python scripts/train.py dpo --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --preference-strategy hard_negative --start-from base
-python scripts/train.py dpo --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --preference-strategy hard_negative --start-from sft
-python scripts/train.py kto --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --start-from base
-python scripts/train.py kto --config configs/llama31.yaml --task ds1_task6 --seed 11 --train-size 100 --start-from sft
-```
+## 🛠️ Canonical Training Hyperparameters
 
-Evaluate:
+All configurations target parameter-efficient adapters using **LoRA (Rank = 16, Alpha = 32)** on all projection layers (`q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`). The models are trained in 4-bit precision via Unsloth.
 
-```bash
-python scripts/aggregate.py --config configs/llama31.yaml --task ds1_task6
-```
+| Stage | Optimizer | Epochs | Batch Size (per device) | Learning Rate | Stage Parameters & Loss Types |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **SFT** | `adamw_8bit` | 3 | 4 (Grad Acc = 2) | $2 \times 10^{-4}$ | Weight Decay = 0.01, Warmup = 5% |
+| **DPO** | `adamw_8bit` | 2 | 4 (Grad Acc = 4) | $5 \times 10^{-6}$ | $\beta = 0.5$, Loss = `sigmoid` |
+| **KTO** | `adamw_8bit` | 2 | 4 (Grad Acc = 4) | $5 \times 10^{-6}$ | $\beta = 0.3$, Desirable Weight = Task-dependent ($K-1$) |
 
-Run the full grid:
+---
 
-```bash
-python scripts/train.py full --config configs/llama31.yaml --task ds1_task6 --include-random-wrong
-```
+## 📈 Evaluation & Candidate Log-Probability Scoring
 
-## DPO and KTO dataset construction
+To bypass the stochasticity and formatting failures of auto-regressive generation, predictions are scored using a **closed-label candidate log-probability scoring** method:
+1. Admissible class labels are structured as short, canonical JSON completions (e.g., `{"label":"A"}`, `{"label":"B"}`).
+2. The pipeline calculates the exact conditional log-probability assigned by the model to each candidate completion.
+3. Class scores are normalized across candidates:
+   $$P(\text{Class } c) = \frac{\exp(\log P(c))}{\sum_{i} \exp(\log P(i))}$$
+4. The predicted class corresponds to the candidate obtaining the highest score. Score margins between the top two classes serve as a robust measure of model uncertainty.
 
-Each alignment example starts from the same fixed prompt and the same gold JSON answer:
-
-- `chosen`: the gold JSON label, for example `{"label":"B"}`
-- `rejected`: one incorrect JSON label under the same prompt
-
-Two rejected-label strategies are implemented:
-
-1. `random_wrong`
-- sample one of the other labels uniformly
-
-2. `hard_negative`
-- score all candidate JSON labels with the SFT pilot
-- choose the highest-scoring wrong label
-
-This makes DPO a strict preference task over alternative closed-label responses instead of free-form completions.
-
-KTO is built as an all-label binary-desirability dataset:
-
-- one desirable row: `prompt` + gold completion + `label = True`
-- one undesirable row for each wrong label: `prompt` + wrong completion + `label = False`
-
-So each original training example yields:
-
-- one paired DPO row
-- one desirable KTO row plus one undesirable KTO row for every incorrect label
-
-The current KTO hyperparameters follow the conservative TRL recommendations for KTO rather than reusing the DPO learning rate:
-
-- `learning_rate = 5e-6`
-- `beta = 0.3`
-- per-step batch size `4`
-- effective batch size `16`
-- `num_train_epochs = 2`
-- `desirable_weight` is task-dependent: `3.0` for the 4-label tasks and `2.0` for the 3-label task
-- `undesirable_weight = 1.0`
-
-Each trained adapter directory now also includes `model_metadata.json`, documenting:
-
-- base model IDs
-- adapter run path and run metadata
-- quantization mode
-- prompt format
-- a stable hash of the study config
-
-The default full pipeline also evaluates two stage-allocation regimes:
-
-- `shared`: SFT and DPO both use the full selected train subset
-- `sft25_dpo75`: SFT trains on a stratified 25% split of the selected train subset, and DPO/KTO preferences are built from the remaining 75%
-
-Base-started DPO/KTO are reported only for `shared`; the 25/75 allocation reports the SFT-started post-training variants.
+---
