@@ -100,6 +100,10 @@ DPO-main/
 │   └── gemma3.yaml               # Hyperparameters & settings for Gemma 3 12B IT
 ├── data/
 │   └── raw_or_samples/           # Source CSVs & local registries partitioned by task ID
+├── Results_data_figures/         # Aggregated experimental outputs, figures, and baselines
+│   ├── Code_for__figures.ipynb   # Jupyter notebook for generating all paper figures & tables
+│   ├── Result value accuracy Alizadeh et al.xlsx # Excel baseline values
+│   └── merged_tasks_*.png        # Rendered paper figures
 ├── scripts/
 │   ├── prepare_data.py           # Preprocessing and train-subset generation
 │   ├── score.py                  # Pretrained baseline evaluation script
