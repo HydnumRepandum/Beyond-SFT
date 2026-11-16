@@ -5,3 +5,4 @@ __pycache__/
 data/processed/
 outputs/
 results/
+data/processed_*/

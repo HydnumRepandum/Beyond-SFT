@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -25,13 +26,35 @@ PROMPT_SOURCE_ALIASES = {
 
 def load_config(config_path: str | Path, task_key: str | None = None) -> dict[str, Any]:
     path = resolve_path(config_path)
-    with path.open("r", encoding="utf-8") as handle:
-        config = yaml.safe_load(handle)
+    config = _load_yaml_with_extends(path)
     config["_config_path"] = str(path)
     config["_repo_root"] = str(repo_root())
     _apply_task_selection(config, task_key=task_key)
     config["_config_hash"] = config_hash(config)
     return config
+
+
+def _deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    merged = dict(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _deep_merge(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def _load_yaml_with_extends(path: Path) -> dict[str, Any]:
+    """Load a YAML config; an `extends: other.yaml` key deep-merges onto that file."""
+    with path.open("r", encoding="utf-8") as handle:
+        config = yaml.safe_load(handle) or {}
+    parent = config.pop("extends", None)
+    if parent is None:
+        return config
+    parent_path = Path(str(parent))
+    if not parent_path.is_absolute():
+        parent_path = path.parent / parent_path
+    return _deep_merge(_load_yaml_with_extends(parent_path), config)
 
 
 def _apply_task_selection(config: dict[str, Any], task_key: str | None = None) -> None:
@@ -58,6 +81,9 @@ def _apply_task_selection(config: dict[str, Any], task_key: str | None = None) -
     merged_task = {**base_task, **selected_task_cfg}
     merged_task["selected_task"] = selected_task
     merged_task["available_tasks"] = sorted(registry)
+    protocol_seeds = (config.get("protocol") or {}).get("seeds")
+    if protocol_seeds:
+        merged_task["subset_seeds"] = [int(seed) for seed in protocol_seeds]
     config["task"] = merged_task
     _apply_task_dependent_kto_weights(config, selected_task)
 
@@ -286,3 +312,80 @@ def data_allocation_variants(config: dict[str, Any]) -> list[str]:
     if not variants:
         return ["shared"]
     return [str(variant) for variant in variants]
+
+
+# ---------------------------------------------------------------------------
+# Revision protocol: budget matching, learning-rate grid, resampling, OOF negatives
+# ---------------------------------------------------------------------------
+
+DPO_STRATEGIES = ["random_wrong", "hard_negative", "hard_negative_oof", "all_wrong"]
+
+
+def protocol_config(config: dict[str, Any]) -> dict[str, Any]:
+    return dict(config.get("protocol") or {})
+
+
+def budget_config(config: dict[str, Any]) -> dict[str, Any]:
+    return dict(protocol_config(config).get("budget") or {})
+
+
+def budget_matched(config: dict[str, Any]) -> bool:
+    return bool(budget_config(config).get("matched", False))
+
+
+def resample_train_subsets(config: dict[str, Any]) -> bool:
+    return bool(protocol_config(config).get("resample_train_subsets", False))
+
+
+def post_learning_rates(config: dict[str, Any]) -> list[float | None]:
+    """Learning-rate grid for post-training stages. [None] means 'use the stage default'."""
+    rates = budget_config(config).get("learning_rates")
+    if not rates:
+        return [None]
+    return [float(rate) for rate in rates]
+
+
+def oof_config(config: dict[str, Any]) -> dict[str, Any]:
+    payload = dict(protocol_config(config).get("hard_negatives") or {})
+    return {
+        "out_of_fold": bool(payload.get("out_of_fold", False)),
+        "folds": int(payload.get("folds", 5)),
+    }
+
+
+def _steps(row_count: int, epochs: float, effective_batch: int) -> int:
+    return max(1, math.ceil(row_count * float(epochs) / effective_batch))
+
+
+def stage_budget(config: dict[str, Any], start_from: str, source_row_count: int) -> dict[str, int] | None:
+    """Optimizer-step budget for a DPO / KTO / continued-SFT stage.
+
+    Returns None in the legacy (epoch-based) protocol. Under `protocol.budget.matched`:
+
+    - stages that start from the SFT adapter all get the same number of optimizer steps
+      and the same effective batch size, derived from the number of *source examples*
+      (not preference rows), so SFT->SFT, SFT->DPO and SFT->KTO differ only in objective;
+    - stages that start from the base model get exactly the SFT stage's steps and batch
+      size, so standalone DPO/KTO are comparable with SFT.
+    """
+    if not budget_matched(config):
+        return None
+    budget = budget_config(config)
+    if start_from == "base":
+        sft_cfg = config["sft"]
+        batch = int(sft_cfg["per_device_train_batch_size"])
+        accumulation = int(sft_cfg["gradient_accumulation_steps"])
+        epochs = float(sft_cfg["num_train_epochs"])
+    else:
+        batch = int(budget.get("per_device_train_batch_size", 4))
+        accumulation = int(budget.get("gradient_accumulation_steps", 4))
+        epochs = float(budget.get("post_epochs", 2))
+    return {
+        "max_steps": _steps(int(source_row_count), epochs, batch * accumulation),
+        "per_device_train_batch_size": batch,
+        "gradient_accumulation_steps": accumulation,
+    }
+
+
+def learning_rate_tag(learning_rate: float | None) -> str:
+    return "" if learning_rate is None else f"__lr{float(learning_rate):.0e}".replace("e-0", "e-")

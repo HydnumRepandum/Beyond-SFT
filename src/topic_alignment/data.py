@@ -8,7 +8,13 @@ from typing import Any
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from .config import canonical_label_ids, raw_to_canonical_map, reference_train_size, task_label_column
+from .config import (
+    canonical_label_ids,
+    raw_to_canonical_map,
+    reference_train_size,
+    resample_train_subsets,
+    task_label_column,
+)
 from .prompting import build_prompt, build_sft_text, canonical_response
 from .utils import ensure_dir, resolve_path, set_global_seed, write_json, write_text
 
@@ -419,10 +425,15 @@ def prepare_dataset_artifacts(config: dict[str, Any]) -> dict[str, Any]:
     for split_name, split_df in split_map.items():
         split_df.to_csv(splits_dir / f"{split_name}.csv", index=False)
 
+    resample = resample_train_subsets(config)
     for seed in config["task"]["subset_seeds"]:
         seed_dir = ensure_dir(subsets_dir / f"seed_{seed}")
         for train_size in available_train_sizes:
             subset_df = prepared_subsets[train_size].copy().reset_index(drop=True)
+            if resample and str(train_size).isdigit() and int(train_size) < len(split_map["train"]):
+                # Revision protocol: every seed gets its own stratified draw from the
+                # largest provided train file, so seed variance includes data variance.
+                subset_df = _select_subset(split_map["train"], int(train_size), int(seed))
             size_tag = str(train_size).lower()
             subset_df.to_csv(seed_dir / f"train_{size_tag}.csv", index=False)
 
@@ -434,6 +445,7 @@ def prepare_dataset_artifacts(config: dict[str, Any]) -> dict[str, Any]:
         "available_train_sizes": available_train_sizes,
         "notes": {
             "data_mode": _task_mode(config),
+            "resampled_train_subsets": resample,
             "full_train_reference": reference_train_size(config, available_train_sizes),
         },
     }

@@ -1,0 +1,37 @@
+# Revision protocol for the resubmission. Inherits everything from gemma3.yaml and
+# changes only what is listed here. Outputs go to separate roots so the results of
+# the submitted manuscript are never overwritten or mixed with these.
+extends: gemma3.yaml
+
+project:
+  data_root: data/processed_revision
+  outputs_root: outputs/revision/gemma3_12b
+  results_root: results/revision/gemma3_12b
+
+protocol:
+  # Training seeds. Each seed also draws its own training subset (see below).
+  seeds: [11, 22, 33, 44, 55]
+  # Draw each seed's subset by stratified sampling from the largest provided train
+  # file instead of reusing the same fixed CSV. The largest size cannot be resampled.
+  resample_train_subsets: true
+  budget:
+    # Every stage after SFT gets the same optimizer steps and effective batch size.
+    matched: true
+    post_epochs: 2
+    per_device_train_batch_size: 4
+    gradient_accumulation_steps: 4
+    # Pre-specified grid, reported in full (no selection on the test set).
+    learning_rates: [5.0e-6, 2.0e-5, 1.0e-4]
+  hard_negatives:
+    # Hard negatives from SFT models that never saw the example (K-fold).
+    out_of_fold: true
+    folds: 5
+
+dpo:
+  data_allocation_variants:
+    - shared
+  strategies:
+    - random_wrong
+    - hard_negative
+    - hard_negative_oof
+    - all_wrong

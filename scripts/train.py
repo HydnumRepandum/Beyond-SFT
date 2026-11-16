@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import random
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -10,7 +11,16 @@ import pandas as pd
 
 import _bootstrap  # noqa: F401
 
-from topic_alignment.config import canonical_label_ids, data_allocation_variants, load_config
+from topic_alignment.config import (
+    DPO_STRATEGIES,
+    canonical_label_ids,
+    data_allocation_variants,
+    learning_rate_tag,
+    load_config,
+    oof_config,
+    post_learning_rates,
+    stage_budget,
+)
 from topic_alignment.data import (
     allocate_training_rows,
     load_prepared_split,
@@ -20,9 +30,10 @@ from topic_alignment.data import (
 from topic_alignment.evaluation import compute_metrics_bundle
 from topic_alignment.inference import score_dataframe, write_prediction_artifacts
 from topic_alignment.modeling import create_stage_run_dir, load_model_with_adapter, save_run_metadata
+from topic_alignment.preferences import oof_fold_assignments, rejected_label_agreement, select_rejected_labels
 from topic_alignment.prompting import build_kto_rows, build_preference_row, candidate_responses
-from topic_alignment.training import train_dpo, train_kto, train_sft
-from topic_alignment.utils import set_global_seed, write_json, write_jsonl
+from topic_alignment.training import stage_overrides, train_dpo, train_kto, train_sft
+from topic_alignment.utils import resolve_path, set_global_seed, write_json, write_jsonl
 
 
 DEFAULT_CONFIG = "configs/llama31.yaml"
@@ -186,44 +197,161 @@ def _build_preferences(args: argparse.Namespace, config: dict) -> None:
         "data_allocation": str(args.allocation),
     }
 
+    oof_path = sft_dir / "predictions_preference_source_oof.csv"
+    oof_records: dict = {}
+    if oof_path.exists():
+        oof_records = pd.read_csv(oof_path).set_index("example_id").to_dict("index")
+
+    tables: dict[str, pd.DataFrame] = {}
     for strategy in config["dpo"]["strategies"]:
+        if strategy == "hard_negative_oof" and not oof_records:
+            raise RuntimeError(f"Missing {oof_path}. Run `python scripts/train.py oof-score` first.")
         rows = []
-        fallback_count = 0
         for record in predictions_train.to_dict("records"):
             gold_label = record["label"]
-            other_labels = [label for label in labels if label != gold_label]
-            if strategy == "random_wrong":
-                rejected_label = rng.choice(other_labels)
-            elif strategy == "hard_negative":
-                rejected_label = record.get("hard_negative_label")
-                if rejected_label == gold_label or rejected_label not in other_labels:
-                    fallback_count += 1
-                    rejected_label = max(
-                        other_labels,
-                        key=lambda candidate: record[f"score__{candidate}"],
-                    )
-            else:
-                raise ValueError(f"Unsupported strategy: {strategy}")
-
-            preference_row = {
-                "example_id": record["example_id"],
-                "gold_label": gold_label,
-                "rejected_label": rejected_label,
-                "strategy": strategy,
-            }
-            preference_row.update(build_preference_row(record["text"], gold_label, rejected_label, config))
-            rows.append(preference_row)
+            rejected_labels = select_rejected_labels(
+                strategy,
+                gold_label,
+                labels,
+                rng,
+                in_sample_record=record,
+                oof_record=oof_records.get(record["example_id"]),
+            )
+            for rejected_label in rejected_labels:
+                preference_row = {
+                    "example_id": record["example_id"],
+                    "gold_label": gold_label,
+                    "rejected_label": rejected_label,
+                    "strategy": strategy,
+                }
+                preference_row.update(build_preference_row(record["text"], gold_label, rejected_label, config))
+                rows.append(preference_row)
 
         output_df = pd.DataFrame(rows)
+        tables[strategy] = output_df
         output_df.to_csv(preferences_dir / f"{strategy}.csv", index=False)
         write_jsonl(preferences_dir / f"{strategy}.jsonl", rows)
         summaries[strategy] = {
             "row_count": int(len(output_df)),
-            "fallback_count": int(fallback_count),
+            "source_example_count": int(output_df["example_id"].nunique()),
             "data_allocation": str(args.allocation),
         }
 
+    # How often each single-negative strategy picks the same label as the in-sample
+    # hard negative. Chance agreement for random_wrong is 1/(K-1).
+    summaries["rejected_label_agreement_with_hard_negative"] = rejected_label_agreement(tables, "hard_negative")
     write_json(preferences_dir / "summary.json", summaries)
+
+
+def _is_done(run_dir: Path) -> bool:
+    return (Path(run_dir) / "predictions_test.csv").exists()
+
+
+def _post_stage_settings(args: argparse.Namespace, config: dict, start_from: str, source_examples: int):
+    learning_rate = getattr(args, "learning_rate", None)
+    budget = stage_budget(config, start_from, source_examples)
+    return learning_rate, budget
+
+
+def _oof_score_stage(args: argparse.Namespace, config: dict) -> None:
+    """Score every preference-source example with an SFT model that did not train on it."""
+    sft_dir = create_stage_run_dir(config, args.seed, args.train_size, args.allocation, "sft")
+    output_path = sft_dir / "predictions_preference_source_oof.csv"
+    source_path = sft_dir / "preference_source_split.csv"
+    if not source_path.exists():
+        raise RuntimeError(f"Missing {source_path}. Run `python scripts/train.py sft` first.")
+
+    if args.allocation != "shared":
+        # The preference source is already disjoint from the SFT training rows.
+        shutil.copyfile(sft_dir / "predictions_preference_source.csv", output_path)
+        return
+
+    source_df = pd.read_csv(source_path)
+    fold_ids = oof_fold_assignments(source_df, oof_config(config)["folds"], args.seed)
+    scored_frames = []
+    for fold_id in sorted(fold_ids.unique()):
+        fold_dir = sft_dir / "oof" / f"fold_{fold_id}"
+        fold_dir.mkdir(parents=True, exist_ok=True)
+        train_part = source_df[fold_ids != fold_id].reset_index(drop=True)
+        held_out = source_df[fold_ids == fold_id].reset_index(drop=True)
+        adapter_dir = train_sft(config, train_part, fold_dir, seed=args.seed)
+        model, tokenizer = load_model_with_adapter(config, adapter_dir, trainable=False)
+        scored = score_dataframe(model, tokenizer, held_out, config, progress_label=f"oof-fold-{fold_id}")
+        scored["oof_fold"] = int(fold_id)
+        scored_frames.append(scored)
+        del model
+        # Fold adapters are only needed for scoring; drop them to save disk.
+        shutil.rmtree(fold_dir, ignore_errors=True)
+
+    pd.concat(scored_frames, ignore_index=True).to_csv(output_path, index=False)
+
+
+def _train_sft_continue_stage(args: argparse.Namespace, config: dict) -> None:
+    """Control arm: continue the SFT adapter with the SFT objective.
+
+    It uses the same rows, optimizer settings, learning rate and step budget as SFT->DPO,
+    so any gain of SFT->DPO/KTO over this arm is due to the preference objective and not
+    to extra training.
+    """
+    sft_dir, sft_adapter_dir, tagged_test_path = _sft_paths(config, args.seed, args.train_size, args.allocation)
+    source_path = sft_dir / "preference_source_split.csv"
+    if not sft_adapter_dir.exists() or not source_path.exists():
+        raise RuntimeError(f"Missing SFT outputs in {sft_dir}. Run `python scripts/train.py sft` first.")
+    if not tagged_test_path.exists():
+        raise RuntimeError(f"Missing {tagged_test_path}. Run `python scripts/train.py tag-hard-cases` first.")
+
+    source_df = pd.read_csv(source_path)
+    learning_rate, budget = _post_stage_settings(args, config, "sft", len(source_df))
+    run_dir = create_stage_run_dir(
+        config,
+        args.seed,
+        args.train_size,
+        args.allocation,
+        f"sft_continued_from_sft{learning_rate_tag(learning_rate)}",
+    )
+    save_run_metadata(
+        run_dir,
+        {
+            "method": "sft_sft",
+            "seed": args.seed,
+            "train_size": args.train_size,
+            "preference_strategy": "na",
+            "start_from": "sft",
+            "data_allocation": args.allocation,
+            "learning_rate_override": learning_rate,
+            "budget": budget,
+        },
+    )
+    dpo_cfg = config["dpo"]
+    shared_keys = [
+        "num_train_epochs",
+        "per_device_train_batch_size",
+        "gradient_accumulation_steps",
+        "learning_rate",
+        "warmup_ratio",
+        "weight_decay",
+        "optim",
+    ]
+    stage_cfg = stage_overrides({key: dpo_cfg[key] for key in shared_keys if key in dpo_cfg}, learning_rate, budget)
+    adapter_dir = train_sft(
+        config,
+        source_df,
+        run_dir,
+        seed=args.seed,
+        init_adapter_dir=sft_adapter_dir,
+        stage_cfg=stage_cfg,
+    )
+    _write_test_outputs(
+        config,
+        adapter_dir,
+        run_dir,
+        tagged_test_path,
+        args.seed,
+        progress_label="sft-continued-test",
+        method="sft_sft",
+        preference_strategy="na",
+        allocation=args.allocation,
+    )
 
 
 def _write_test_outputs(
@@ -263,12 +391,21 @@ def _write_test_outputs(
 
 def _train_dpo_stage(args: argparse.Namespace, config: dict) -> None:
     method = "dpo" if args.start_from == "base" else "sft_dpo"
+    preferences_dir = create_stage_run_dir(config, args.seed, args.train_size, args.allocation, "preferences")
+    preference_path = preferences_dir / f"{args.preference_strategy}.csv"
+    if not preference_path.exists():
+        raise RuntimeError(f"Missing {preference_path}. Run `python scripts/train.py build-preferences` first.")
+    preference_df = pd.read_csv(preference_path)
+    learning_rate, budget = _post_stage_settings(
+        args, config, args.start_from, int(preference_df["example_id"].nunique())
+    )
+
     run_dir = create_stage_run_dir(
         config,
         args.seed,
         args.train_size,
         args.allocation,
-        f"dpo_{args.preference_strategy}_from_{args.start_from}",
+        f"dpo_{args.preference_strategy}_from_{args.start_from}{learning_rate_tag(learning_rate)}",
     )
     save_run_metadata(
         run_dir,
@@ -279,14 +416,10 @@ def _train_dpo_stage(args: argparse.Namespace, config: dict) -> None:
             "preference_strategy": args.preference_strategy,
             "start_from": args.start_from,
             "data_allocation": args.allocation,
+            "learning_rate_override": learning_rate,
+            "budget": budget,
         },
     )
-
-    preferences_dir = create_stage_run_dir(config, args.seed, args.train_size, args.allocation, "preferences")
-    preference_path = preferences_dir / f"{args.preference_strategy}.csv"
-    if not preference_path.exists():
-        raise RuntimeError(f"Missing {preference_path}. Run `python scripts/train.py build-preferences` first.")
-    preference_df = pd.read_csv(preference_path)
 
     _, sft_adapter_dir, tagged_test_path = _sft_paths(config, args.seed, args.train_size, args.allocation)
     if args.start_from == "sft" and not sft_adapter_dir.exists():
@@ -301,6 +434,8 @@ def _train_dpo_stage(args: argparse.Namespace, config: dict) -> None:
         seed=args.seed,
         start_from=args.start_from,
         sft_adapter_dir=sft_adapter_dir if args.start_from == "sft" else None,
+        learning_rate=learning_rate,
+        budget=budget,
     )
     _write_test_outputs(
         config,
@@ -322,12 +457,19 @@ def _train_kto_stage(args: argparse.Namespace, config: dict) -> None:
         raise ValueError(f"Unsupported KTO dataset strategy: {dataset_strategy}. Expected {expected_strategy}.")
 
     method = "kto" if args.start_from == "base" else "sft_kto"
+    preferences_dir = create_stage_run_dir(config, args.seed, args.train_size, args.allocation, "preferences")
+    kto_path = preferences_dir / f"kto_{dataset_strategy}.csv"
+    if not kto_path.exists():
+        raise RuntimeError(f"Missing {kto_path}. Run `python scripts/train.py build-preferences` first.")
+    kto_df = pd.read_csv(kto_path)
+    learning_rate, budget = _post_stage_settings(args, config, args.start_from, int(kto_df["example_id"].nunique()))
+
     run_dir = create_stage_run_dir(
         config,
         args.seed,
         args.train_size,
         args.allocation,
-        f"kto_{dataset_strategy}_from_{args.start_from}",
+        f"kto_{dataset_strategy}_from_{args.start_from}{learning_rate_tag(learning_rate)}",
     )
     save_run_metadata(
         run_dir,
@@ -338,14 +480,10 @@ def _train_kto_stage(args: argparse.Namespace, config: dict) -> None:
             "preference_strategy": dataset_strategy,
             "start_from": args.start_from,
             "data_allocation": args.allocation,
+            "learning_rate_override": learning_rate,
+            "budget": budget,
         },
     )
-
-    preferences_dir = create_stage_run_dir(config, args.seed, args.train_size, args.allocation, "preferences")
-    kto_path = preferences_dir / f"kto_{dataset_strategy}.csv"
-    if not kto_path.exists():
-        raise RuntimeError(f"Missing {kto_path}. Run `python scripts/train.py build-preferences` first.")
-    kto_df = pd.read_csv(kto_path)
 
     _, sft_adapter_dir, tagged_test_path = _sft_paths(config, args.seed, args.train_size, args.allocation)
     if args.start_from == "sft" and not sft_adapter_dir.exists():
@@ -360,6 +498,8 @@ def _train_kto_stage(args: argparse.Namespace, config: dict) -> None:
         seed=args.seed,
         start_from=args.start_from,
         sft_adapter_dir=sft_adapter_dir if args.start_from == "sft" else None,
+        learning_rate=learning_rate,
+        budget=budget,
     )
     _write_test_outputs(
         config,
@@ -509,6 +649,70 @@ def _run_full(args: argparse.Namespace, config: dict) -> None:
     _run("aggregate.py", "--config", args.config, *task_args)
 
 
+def _run_protocol(args: argparse.Namespace, config: dict) -> None:
+    """Revision grid: seeds x train sizes x learning rates, with the continued-SFT control.
+
+    Every stage is skipped when its test predictions already exist, so the command can
+    be re-run across several Colab sessions.
+    """
+    manifest = prepare_dataset_artifacts(config)
+    task_args = _selected_task_args(args)
+    base = ["--config", args.config, *task_args]
+    baseline_dir = resolve_path(config["project"]["outputs_root"]) / "runs" / "baseline"
+    if not (baseline_dir / "predictions_test.csv").exists():
+        _run("score.py", *base)
+
+    seeds = args.seeds or config["task"]["subset_seeds"]
+    train_sizes = args.train_sizes or manifest["available_train_sizes"]
+    learning_rates = args.learning_rates or post_learning_rates(config)
+    kto_strategy = str(config.get("kto", {}).get("dataset_strategy", "all_wrong"))
+    use_oof = oof_config(config)["out_of_fold"]
+
+    for seed in seeds:
+        for train_size in train_sizes:
+            for allocation in data_allocation_variants(config):
+                cell = [*base, "--seed", str(seed), "--train-size", str(train_size), "--allocation", allocation]
+
+                def stage_dir(name: str) -> Path:
+                    return create_stage_run_dir(config, seed, train_size, allocation, name)
+
+                sft_dir = stage_dir("sft")
+                if not _is_done(sft_dir):
+                    _run("train.py", "sft", *cell)
+                _run("train.py", "tag-hard-cases", *cell)
+                if use_oof and not (sft_dir / "predictions_preference_source_oof.csv").exists():
+                    _run("train.py", "oof-score", *cell)
+                _run("train.py", "build-preferences", *cell)
+
+                for learning_rate in learning_rates:
+                    tag = learning_rate_tag(learning_rate)
+                    lr_args = [] if learning_rate is None else ["--learning-rate", str(learning_rate)]
+
+                    if not _is_done(stage_dir(f"sft_continued_from_sft{tag}")):
+                        _run("train.py", "sft-continue", *cell, *lr_args)
+
+                    dpo_runs = [(strategy, "sft") for strategy in config["dpo"]["strategies"]]
+                    if allocation == "shared" and not args.skip_base_start:
+                        dpo_runs.append(("random_wrong", "base"))
+                    for strategy, start_from in dpo_runs:
+                        if _is_done(stage_dir(f"dpo_{strategy}_from_{start_from}{tag}")):
+                            continue
+                        _run(
+                            "train.py", "dpo", *cell, *lr_args,
+                            "--preference-strategy", strategy, "--start-from", start_from,
+                        )
+
+                    kto_starts = ["sft"]
+                    if allocation == "shared" and not args.skip_base_start:
+                        kto_starts.append("base")
+                    for start_from in kto_starts:
+                        if _is_done(stage_dir(f"kto_{kto_strategy}_from_{start_from}{tag}")):
+                            continue
+                        _run("train.py", "kto", *cell, *lr_args, "--start-from", start_from)
+
+    _run("stats.py", *base)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train and orchestrate SFT, DPO, and KTO experiments.")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -539,9 +743,10 @@ def build_parser() -> argparse.ArgumentParser:
     dpo_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
     dpo_parser.add_argument("--seed", type=int, required=True)
     dpo_parser.add_argument("--train-size", required=True)
-    dpo_parser.add_argument("--preference-strategy", required=True, choices=["random_wrong", "hard_negative"])
+    dpo_parser.add_argument("--preference-strategy", required=True, choices=DPO_STRATEGIES)
     dpo_parser.add_argument("--start-from", required=True, choices=["base", "sft"])
     dpo_parser.add_argument("--allocation", default="shared")
+    dpo_parser.add_argument("--learning-rate", type=float, default=None)
 
     kto_parser = subparsers.add_parser("kto", description="Train KTO or SFT->KTO.")
     kto_parser.add_argument("--config", default=DEFAULT_CONFIG)
@@ -551,6 +756,28 @@ def build_parser() -> argparse.ArgumentParser:
     kto_parser.add_argument("--dataset-strategy", default=None)
     kto_parser.add_argument("--start-from", required=True, choices=["base", "sft"])
     kto_parser.add_argument("--allocation", default="shared")
+    kto_parser.add_argument("--learning-rate", type=float, default=None)
+
+    for name, description in [
+        ("oof-score", "Score preference-source rows with out-of-fold SFT models."),
+        ("sft-continue", "Control arm: continue SFT with the post-training budget."),
+    ]:
+        extra_parser = subparsers.add_parser(name, description=description)
+        extra_parser.add_argument("--config", default=DEFAULT_CONFIG)
+        extra_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
+        extra_parser.add_argument("--seed", type=int, required=True)
+        extra_parser.add_argument("--train-size", required=True)
+        extra_parser.add_argument("--allocation", default="shared")
+        if name == "sft-continue":
+            extra_parser.add_argument("--learning-rate", type=float, default=None)
+
+    protocol_parser = subparsers.add_parser("protocol", description="Run the revision experiment grid.")
+    protocol_parser.add_argument("--config", default="configs/llama31_revision.yaml")
+    protocol_parser.add_argument("--task", default=None, help="Task key from the config task_registry.")
+    protocol_parser.add_argument("--seeds", type=int, nargs="*", default=None, help="Subset of seeds to run.")
+    protocol_parser.add_argument("--train-sizes", nargs="*", default=None, help="Subset of train sizes to run.")
+    protocol_parser.add_argument("--learning-rates", type=float, nargs="*", default=None)
+    protocol_parser.add_argument("--skip-base-start", action="store_true", help="Skip DPO/KTO without prior SFT.")
 
     full_parser = subparsers.add_parser("full", description="Run the full configured experiment grid.")
     full_parser.add_argument("--config", default=DEFAULT_CONFIG)
@@ -575,8 +802,14 @@ def main(argv: list[str] | None = None) -> None:
         _train_dpo_stage(args, config)
     elif args.command == "kto":
         _train_kto_stage(args, config)
+    elif args.command == "oof-score":
+        _oof_score_stage(args, config)
+    elif args.command == "sft-continue":
+        _train_sft_continue_stage(args, config)
     elif args.command == "full":
         _run_full(args, config)
+    elif args.command == "protocol":
+        _run_protocol(args, config)
     else:
         raise ValueError(f"Unsupported train command: {args.command}")
 

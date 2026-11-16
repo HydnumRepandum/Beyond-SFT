@@ -385,6 +385,39 @@ def _save_training_summary(run_dir: Path, result_metrics: dict[str, Any], traine
     write_json(run_dir / "trainer_log_history.json", history)
 
 
+def stage_overrides(
+    stage_cfg: dict[str, Any],
+    learning_rate: float | None,
+    budget: dict[str, int] | None,
+) -> dict[str, Any]:
+    """Apply a learning-rate override and a step budget on top of a stage config.
+
+    With a budget, `max_steps` takes precedence over `num_train_epochs` in the trainer.
+    """
+    resolved = dict(stage_cfg)
+    resolved["max_steps"] = -1
+    if budget:
+        resolved.update(budget)
+    if learning_rate is not None:
+        resolved["learning_rate"] = float(learning_rate)
+    return resolved
+
+
+def _write_stage_hyperparameters(run_dir: Path, stage_cfg: dict[str, Any]) -> None:
+    keys = [
+        "max_steps",
+        "num_train_epochs",
+        "per_device_train_batch_size",
+        "gradient_accumulation_steps",
+        "learning_rate",
+        "warmup_ratio",
+        "weight_decay",
+        "optim",
+        "beta",
+    ]
+    write_json(run_dir / "stage_hyperparameters.json", {key: stage_cfg[key] for key in keys if key in stage_cfg})
+
+
 def _sft_formatting_func(example: dict[str, Any]) -> list[str]:
     text = example["sft_text"]
     if isinstance(text, list):
@@ -397,22 +430,35 @@ def train_sft(
     train_df: pd.DataFrame,
     run_dir: Path,
     seed: int,
+    init_adapter_dir: str | Path | None = None,
+    stage_cfg: dict[str, Any] | None = None,
 ) -> Path:
+    """Train with the SFT objective.
+
+    By default this trains a fresh adapter with `config["sft"]`. Passing
+    `init_adapter_dir` continues training an existing adapter instead, and `stage_cfg`
+    replaces the hyperparameters; together they give the continued-SFT control arm.
+    """
     from datasets import Dataset
     from transformers import TrainingArguments
     from trl import SFTTrainer
 
     set_global_seed(seed)
     _configure_tracking_environment(config)
-    model, tokenizer = load_base_model(config)
-    model = attach_new_lora_adapter(model, config, seed=seed)
+    if init_adapter_dir is None:
+        model, tokenizer = load_base_model(config)
+        model = attach_new_lora_adapter(model, config, seed=seed)
+    else:
+        model, tokenizer = load_model_with_adapter(config, init_adapter_dir, trainable=True)
 
     train_dataset = Dataset.from_pandas(train_df[["sft_text"]], preserve_index=False)
 
-    sft_cfg = config["sft"]
+    sft_cfg = {"max_steps": -1, **config["sft"], **(stage_cfg or {})}
+    _write_stage_hyperparameters(run_dir, sft_cfg)
     training_args = TrainingArguments(
         output_dir=str(ensure_dir(run_dir / "trainer")),
         num_train_epochs=float(sft_cfg["num_train_epochs"]),
+        max_steps=int(sft_cfg["max_steps"]),
         per_device_train_batch_size=int(sft_cfg["per_device_train_batch_size"]),
         gradient_accumulation_steps=int(sft_cfg["gradient_accumulation_steps"]),
         learning_rate=float(sft_cfg["learning_rate"]),
@@ -465,6 +511,8 @@ def train_dpo(
     seed: int,
     start_from: str,
     sft_adapter_dir: str | Path | None = None,
+    learning_rate: float | None = None,
+    budget: dict[str, int] | None = None,
 ) -> Path:
     from datasets import Dataset
     from transformers import TrainingArguments
@@ -504,7 +552,8 @@ def train_dpo(
         pass
 
     set_global_seed(seed)
-    dpo_cfg = config["dpo"]
+    dpo_cfg = stage_overrides(config["dpo"], learning_rate, budget)
+    _write_stage_hyperparameters(run_dir, dpo_cfg)
     _configure_tracking_environment(config)
 
     if start_from == "base":
@@ -529,6 +578,7 @@ def train_dpo(
     common_args = {
         "output_dir": str(ensure_dir(run_dir / "trainer")),
         "num_train_epochs": float(dpo_cfg["num_train_epochs"]),
+        "max_steps": int(dpo_cfg["max_steps"]),
         "per_device_train_batch_size": int(dpo_cfg["per_device_train_batch_size"]),
         "gradient_accumulation_steps": int(dpo_cfg["gradient_accumulation_steps"]),
         "learning_rate": float(dpo_cfg["learning_rate"]),
@@ -605,6 +655,8 @@ def train_kto(
     seed: int,
     start_from: str,
     sft_adapter_dir: str | Path | None = None,
+    learning_rate: float | None = None,
+    budget: dict[str, int] | None = None,
 ) -> Path:
     from datasets import Dataset
 
@@ -625,7 +677,8 @@ def train_kto(
 
     set_global_seed(seed)
     _configure_tracking_environment(config)
-    kto_cfg = config["kto"]
+    kto_cfg = stage_overrides(config["kto"], learning_rate, budget)
+    _write_stage_hyperparameters(run_dir, kto_cfg)
 
     if start_from == "base":
         policy_model, tokenizer = load_base_model(config)
@@ -649,6 +702,7 @@ def train_kto(
     training_args = KTOConfig(
         output_dir=str(ensure_dir(run_dir / "trainer")),
         num_train_epochs=float(kto_cfg["num_train_epochs"]),
+        max_steps=int(kto_cfg["max_steps"]),
         per_device_train_batch_size=int(kto_cfg["per_device_train_batch_size"]),
         gradient_accumulation_steps=int(kto_cfg["gradient_accumulation_steps"]),
         learning_rate=float(kto_cfg["learning_rate"]),
